@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<base href="<?php echo Request::root(); ?>/">
+<?php
+if(isset($title)) {
+?>
+		<title><?php echo $title; ?> / Kplatform</title>
+<?php
+} else {
+?>
+		<title>Kplatform</title>
+<?php
+}
+?>
+		<meta name="author" content="Moxar">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="shortcut icon" href="css/favicon.png" type="image/x-icon" />
+					
+<?php
+if(isset($scripts) && !empty($scripts))
+{
+	foreach($scripts as $script)
+	{
+?>	
+		<script type="text/javascript" src="<?php echo $script; ?>"></script>
+<?php
+	}
+}
+?>
+	</head>
+	<body>
+		<header>
+		</header>
+		<section>
+			<?php echo $content; ?>
+		</section>
+	</body>
+</html>
+
