@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', 'UsersController@login');
-Route::post('/', 'UsersController@singin');
+Route::get('/', 'UsersController@getLogin');
+Route::get('home', 'UsersController@getLogin');
+
+Route::get('signin', 'UsersController@getSignin');
+Route::post('signin', 'UsersController@postSignin');
+Route::get('login', 'UsersController@getLogin');
+Route::post('login', 'UsersController@postLogin');
 Route::post('logout', 'UsersController@singout');
+
+Route::get('secure/isValidUserName', 'UsersController@isValidUserName');
+Route::get('secure/isValidPassword', 'UsersController@isValidPassword');
+Route::get('secure/isValidEmail', 'UsersController@isValidEmail');

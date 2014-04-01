@@ -6,22 +6,23 @@
 <?php
 if(isset($title)) {
 ?>
-		<title><?php echo $title; ?> / Kplatform</title>
+		<title><?php echo $title; ?> / Jack'Marshall</title>
 <?php
 } else {
 ?>
-		<title>Kplatform</title>
+		<title>Jack'Marshall</title>
 <?php
 }
 ?>
 		<meta name="author" content="Moxar">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 		
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="shortcut icon" href="css/favicon.png" type="image/x-icon" />
@@ -39,7 +40,8 @@ if(isset($scripts) && !empty($scripts))
 ?>
 	</head>
 	<body>
-		<header>
+		<header class="navbar navbar-default navbar-static-top navbar-inverse">
+			<a href="home" class="navbar-brand">Jack'Marshall</a>
 		</header>
 		<section>
 			<?php echo $content; ?>
