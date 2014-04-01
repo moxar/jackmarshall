@@ -1,10 +1,14 @@
-			<form class="form form-horizontal" role="form" method="post">
-					<fieldset class="form-group has-feedback">
-					<input class="form-control" type="text" name="name" placeholder="Identifiant" />
-					<input class="form-control"  type="password" name="password" placeholder="Mot de passe" />
+			<form class="form" role="form" method="post">
+				<fieldset class="form-group">
+					<label for="name">Identifiant</label>
+					<input class="form-control" type="text" name="name" id="name"/>
 				</fieldset>
-					<fieldset class="form-group has-feedback">
+				<fieldset class="form-group">
+					<label for="password">Mot de passe</label>
+					<input class="form-control"  type="password" name="password"/>
+				</fieldset>
+				<fieldset class="form-group">
 					<input class="btn btn-default"  type="submit" value="Connexion" />
-					<a class="btn btn-default" href="signin">Inscription</a>
+					<a class="btn btn-default" href="home">Retour</a>
 				</fieldset>
-			</form>
+			</form> 

@@ -41,7 +41,26 @@ if(isset($scripts) && !empty($scripts))
 	</head>
 	<body>
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">
-			<a href="home" class="navbar-brand">Jack'Marshall</a>
+			<div class="container">
+				<a href="home" class="navbar-brand">Jack'Marshall</a>
+				<ul class="nav navbar-nav navbar-right">
+<?php
+if(Auth::check())
+{
+?>
+					<li><a href="logout"/>Déconnexion</a></li>
+<?php
+}
+else
+{
+?>
+					<li><a href="login"/>Connexion</a></li>
+					<li><a href="signin"/>Inscription</a></li>
+<?php
+}
+?>
+				</ul>
+			</div>
 		</header>
 		<section>
 			<?php echo $content; ?>
