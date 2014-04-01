@@ -5,7 +5,7 @@ class UsersController extends BaseController {
 	public function getLogin() {
 	
 		$this->display('users.login', array(
-			'title' => 'Login',
+			'title' => 'Connexion',
 		));
 	}
 	
@@ -24,7 +24,7 @@ class UsersController extends BaseController {
 	public function getSignin() {
 	
 		$this->display('users.signin', array(
-			'title' => 'Signin',
+			'title' => 'Inscription',
 			'scripts' => array('js/users.js'),
 		));
 	}
@@ -46,32 +46,27 @@ class UsersController extends BaseController {
 		return Redirect::to('/');
 	}
 	
-	public function isValidEmail() {
+	public function validateForm() {
 	
-		$response = array();
-		$response['email'] = "valid";
-		$email = Input::get('email');
-		if(($email) == null) $response['email'] = "null";
-// 		if(!is_email($email)) $response['email'] = "invalid";
-		if(!empty(User::where('email', $email)->first())) $response['email'] = "used";
-		return Response::json($response);
-	}
-	
-	public function isValidUserName() {
-		$reponse = array();
-		$response['name'] = "valid";
-		if((Input::get('name')) == null) $response['name'] = "null";
-		if(!empty(User::where('name', Input::get('name'))->first())) $response['name'] = "used";
-		return Response::json($response);
-	}
-	
-	public function isValidPassword()
-	{
-		$response = array();
-		$response['password'] = "valid";
-		if(Input::get('password') == null || Input::get('confirm') == null) $response['password'] = "null";
-		if(Input::get('password') != Input::get('confirm')) $response['password'] = "invalid";
-		return Response::json($response);
+		$validator = Validator::make(
+ 			array(
+				'name' => Input::get('name'),
+				'email' => Input::get('email'),
+				'password' => Input::get('password'),
+				'confirm' => Input::get('confirm')
+			), array(
+				'name' => array('required', 'min:5', 'unique:users,name'),
+				'email' => array('required', 'email', 'unique:users,isEmail'),
+				'password' => array('required', 'min:5', 'same:confirm')
+			)
+		);
+		return Response::json($validator->messages()->getMessages());
 	}
 }
+
+Validator::extend('isEmail', function($attribute, $value, $parameters)
+{
+    return !empty(Users::whereRaw("LOWER(email) = ?", array(strtolower($parameters['email'])))->get());
+});
+
 ?>

@@ -1,4 +1,16 @@
 form {
-	width: 400px;
+	width: 300px;
 	margin: auto;
+}
+
+header a {
+	color: white;
+}
+
+.glyphicon.form-control-feedback {
+	cursor: pointer;
+}
+
+.help-block {
+	display: none;
 }
