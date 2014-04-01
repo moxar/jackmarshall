@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->timestamps();
 			$table->string('name');
 			$table->string('password');
+			$table->string('email');
 		});
 		
 		Schema::create('tournaments', function(Blueprint $table)
