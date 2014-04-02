@@ -20,5 +20,10 @@ Route::get('login', 'UsersController@getLogin');
 Route::post('login', 'UsersController@postLogin');
 Route::get('logout', 'UsersController@logout');
 
+Route::get('tournaments', 'TournamentsController@listing');
+Route::get('tournaments/listing', 'TournamentsController@listing');
+Route::get('tournaments/create', 'TournamentsController@getCreate');
+Route::post('tournaments/create', 'TournamentsController@postCreate');
+
 Route::get('validate/signin', 'ValidationsController@validateSignin');
 Route::get('validate/login', 'ValidationsController@validateLogin');

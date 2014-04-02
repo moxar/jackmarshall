@@ -32,12 +32,13 @@ if(isset($scripts) && !empty($scripts))
 {
 	foreach($scripts as $script)
 	{
-?>	
+?>
 		<script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php
 	}
 }
 ?>
+
 	</head>
 	<body>
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">
