@@ -12,7 +12,10 @@ class UsersController extends BaseController {
 	
 	public function postLogin() {
 	
-		if(Auth::attempt(array('name' => Input::get('name'),'password' => Input::get('password'))))
+		if(Auth::attempt(array(
+			'name' => Input::get('name'),
+			'password' => Input::get('password')
+		)))
 		{					
  			return Redirect::intended('/');
 		}
@@ -21,7 +24,7 @@ class UsersController extends BaseController {
 			 return Redirect::to('login');
 		}
 	}
-
+	
 	public function getSignin() {
 	
 		$this->display('users.signin', array(
@@ -31,24 +34,7 @@ class UsersController extends BaseController {
 	}
 	
 	public function postSignin() {
-	
-		$user = new User();
-		$user->name = Input::get('name');
-		$user->password = Input::get('password');
-		$user->email = Input::get('email');
 		
-		$user->save();
-		return Redirect::to('/');
-	}
-	
-	public function signout()  
-	{
-		Auth::logout();
-		return Redirect::to('/');
-	}
-	
-	public function validateSignin() {
-	
 		$validator = Validator::make(
  			array(
 				'name' => Input::get('name'),
@@ -62,21 +48,22 @@ class UsersController extends BaseController {
 				'confirm' => array('required', 'min:5', 'same:password')
 			)
 		);
-		return Response::json($validator->messages()->getMessages());
+		
+		if($validator->passes())
+		{
+			$user = new User();
+			$user->name = Input::get('name');
+			$user->password = Hash::make(Input::get('password'));
+			$user->email = Input::get('email');
+			$user->save();
+		}
+		return Redirect::to('home');
 	}
 	
-	public function validateLogin() {
-	
-		$validator = Validator::make(
- 			array(
-				'name' => Input::get('name'),
-				'password' => Input::get('password')
-			), array(
-				'name' => array('required', 'incorrectLogin:'.Input::get('name').','.Input::get('password')),
-				'password' => array('required', 'incorrectLogin:'.Input::get('name').','.Input::get('password')),
-			)
-		);
-		return Response::json($validator->messages()->getMessages());
+	public function logout() {
+		
+		Auth::logout();
+		return Redirect::to('home');
 	}
 }
 

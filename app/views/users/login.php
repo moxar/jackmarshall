@@ -15,7 +15,7 @@
 				</fieldset>
 				
 				<fieldset class="form-group">
-					<input class="btn btn-default" type="submit" value="Connexion" />
+					<input class="btn btn-default" type="submit" value="Connexion"/>
 					<a class="btn btn-default" href="home">Retour</a>
 				</fieldset>
 			</form> 
