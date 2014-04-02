@@ -1,4 +1,4 @@
-			<form class="form" role="form" method="post">
+			<form id="signinForm" class="form" role="form" method="post">
 			
 				<fieldset class="form-group has-feedback">
 					<label class="control-label" for="name">Identifiant</label>
@@ -15,7 +15,7 @@
 				</fieldset>
 				
 				<fieldset class="form-group has-feedback">
-					<label class="control-label"  for="confirm">Confiration</label>
+					<label class="control-label"  for="confirm">Confirmation</label>
 					<input class="form-control"  type="password" name="confirm" id="confirm"/>
 					<span class="glyphicon form-control-feedback"></span>
 					<p class="help-block"></p>
@@ -29,7 +29,7 @@
 				</fieldset>
 				
 				<fieldset class="form-group">
-					<input class="btn btn-default"  type="submit" value="Inscription" />
+					<input class="btn btn-default" type="submit" value="Inscription" />
 					<a class="btn btn-default" href="/">Retour</a>
 				</fieldset>
 				
