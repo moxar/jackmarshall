@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	SigninForm = new JackForm("#signinForm");
+	signinForm = new JackForm("#signinForm");
 	$('#signinForm').validator("validate/signin", function(response) {
-			SigninForm.check(response);
+			signinForm.check(response);
 	});
 });

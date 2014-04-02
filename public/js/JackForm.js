@@ -34,4 +34,9 @@ function JackForm(selector)
 		else
 			node.find('input[type=submit]').attr('disabled', 'disabled');
 	};
+	
+	self.test = function() {
+		
+		console.log("JackForm test");
+	};
 }
