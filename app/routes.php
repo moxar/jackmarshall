@@ -20,4 +20,5 @@ Route::get('login', 'UsersController@getLogin');
 Route::post('login', 'UsersController@postLogin');
 Route::post('logout', 'UsersController@singout');
 
-Route::get('signin/validate', 'UsersController@validateForm');
+Route::get('validate/signin', 'UsersController@validateSignin');
+Route::get('validate/login', 'UsersController@validateLogin');

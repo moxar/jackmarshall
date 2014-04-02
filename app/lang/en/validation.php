@@ -68,6 +68,8 @@ return array(
 	),
 	"unique"           => "The :attribute has already been taken.",
 	"url"              => "The :attribute format is invalid.",
+	"is_unique"		=> "The :attribute has already been taken.",
+	"incorrect_login"		=> "Incorrect login/password set.",
 
 	/*
 	|--------------------------------------------------------------------------
