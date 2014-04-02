@@ -25,7 +25,6 @@
 			};
 			
 			inputs.change(self.attempt);
-			self.attempt();
        });
     };
 })(jQuery);

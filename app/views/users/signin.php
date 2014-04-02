@@ -9,7 +9,7 @@
 				
 				<fieldset class="form-group has-feedback">
 					<label class="control-label"  for="password">Mot de passe</label>
-					<input class="form-control" type="password" name="password" id="password" />
+					<input class="form-control" type="password" name="password" id="password"/>
 					<span class="glyphicon form-control-feedback"></span>
 					<p class="help-block"></p>
 				</fieldset>
