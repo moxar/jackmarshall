@@ -44,6 +44,9 @@ if(isset($scripts) && !empty($scripts))
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">
 			<div class="container">
 				<a href="home" class="navbar-brand">Jack'Marshall</a>
+				<ul class="nav navbar-nav">
+					<li><a href="tournaments">Tournois</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
 <?php
 if(Auth::check())

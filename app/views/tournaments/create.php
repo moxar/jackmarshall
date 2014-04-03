@@ -18,10 +18,11 @@
 							</span>
 						</div>
 <?php
-foreach(Auth::user()->players() as $player)
+foreach($players as $player)
 {
 ?>
-						<input class="btn btn-default" type="button" name="players[<?php echo $player->id; ?>]" value="<?php echo $player->name; ?>" />
+						<p><?php echo $player->name; ?></p>
+						<input class="btn btn-default" type="hidden" name="players[<?php echo $player->id; ?>]" value="true" />
 <?php
 }
 ?>
