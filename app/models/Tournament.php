@@ -1,8 +1,10 @@
 <?php
 
 class Tournament extends Eloquent {
-
-	public function users() {
-		return array();
+	
+	public function players() {
+		
+		return $this->belongsToMany('Player', 'players_tournaments', 'player', 'tournament');
 	}
+
 }

@@ -14,3 +14,12 @@ header a {
 .help-block {
 	display: none;
 }
+
+.newPlayer {
+	cursor: pointer;
+	display: inline-block;
+	margin: 5px;
+	width: 150px;
+	padding: 2px;
+	background-color: silver;
+}
