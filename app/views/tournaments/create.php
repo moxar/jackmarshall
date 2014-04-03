@@ -21,8 +21,8 @@
 foreach($players as $player)
 {
 ?>
-						<p><?php echo $player->name; ?></p>
-						<input class="btn btn-default" type="hidden" name="players[<?php echo $player->id; ?>]" value="true" />
+						<p class="active" data-id="<?php echo $player->id; ?>"><?php echo $player->name; ?></p>
+						<input class="btn btn-default" type="hidden" name="players[<?php echo $player->id; ?>]" value="active" data-id="<?php echo $player->id; ?>"/>
 <?php
 }
 ?>

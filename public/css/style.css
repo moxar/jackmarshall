@@ -15,11 +15,18 @@ header a {
 	display: none;
 }
 
-.newPlayer {
+.active, .inactive {
 	cursor: pointer;
 	display: inline-block;
 	margin: 5px;
 	width: 150px;
 	padding: 2px;
+}
+
+.active {
 	background-color: silver;
+}
+
+.inactive {
+	background-color: white;
 }

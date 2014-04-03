@@ -32,9 +32,9 @@ class TournamentsController extends BaseController {
 	
 	public function postCreate() {
 		
+		$user = Auth::user();
 		$tournament = new Tournament();
 		$tournament->name = Input::get('name');
-		$user = Auth::user();
 		$tournament = $user->tournaments()->save($tournament);
 		
  		if(!empty(Input::get('newPlayers'))) {
@@ -43,10 +43,8 @@ class TournamentsController extends BaseController {
  			{
  				$player = new Player();
  				$player->name = $newPlayer;
- 				$player->user = Auth::user()->id;
- 				$player->save();
-				
- 				$user->tournaments()->find($tournament->id)->players()->attach($player->id);
+ 				$player = $user->players()->save($player);
+				$tournament->players()->attach($player->id);
  			}
  		}
  		
@@ -54,10 +52,8 @@ class TournamentsController extends BaseController {
  			
  			foreach(Input::get('players') as $player_id => $state)
  			{
- 				if($state) 
- 				{
-					$user->tournaments()->find($tournament->id)->players()->attach($player_id);
-				}
+ 				if($state != "active") continue;
+				$tournament->players()->attach($player_id);
  			}
  		}
 		

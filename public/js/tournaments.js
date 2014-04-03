@@ -24,7 +24,6 @@ function TournamentCreateForm() {
  				'type': 'hidden',
  				'name': 'newPlayers['+ it +']',
  				'value': fieldset.find('input[type=text]:eq(0)').val(),
-				'class': 'btn btn-default',
 				'data-id': it
  			})
 		);
@@ -32,7 +31,7 @@ function TournamentCreateForm() {
 		fieldset.append($('<p/>')
 			.attr({
 				'data-id': it,
-				'class': 'newPlayer'
+				'class': 'active'
 			})
 			.text(fieldset.find('input[type=text]:eq(0)').val())
 		);
@@ -41,11 +40,28 @@ function TournamentCreateForm() {
 		it++;
 	};
 	
- 	$(document).on('click', '#tournamentCreateForm fieldset:eq(1) > p[data-id]', function(){
+ 	$(document).on('click', '#tournamentCreateForm fieldset:eq(1) > p[data-id]', function() {
 		
 		var id = $(this).attr('data-id');
-		$('input[data-id=' + id + ']').remove();
- 		$(this).remove();
+		var input = $(this).parent().find('input[data-id=' + id + ']');
+		var regExp = new RegExp("newPlayer");
+		if(regExp.test(input.attr("name")))
+		{
+			input.remove();
+			$(this).remove();
+		}
+		else
+		{
+			if($(this).hasClass('active'))
+			{
+				input.attr('value', 'inactive');
+			}
+			else
+			{
+				input.attr('value', 'active');
+			}
+			$(this).toggleClass('active inactive');
+		}
 	})
 	
 	$('#addPlayerButton').click(function(){
