@@ -20,33 +20,54 @@ class TournamentsController extends BaseController {
 	
 	public function getCreate() {
 	
+		$players = Auth::user()->players()->get();
+	
 		$this->display('tournaments.create', array(
 			'title' => 'Tournois',
 			'scripts' => array('js/JackForm.js', 'js/tournaments.js', 'js/validator.jquery.js')
+		), array(
+			'players' => $players
 		));
 	}
 	
 	public function postCreate() {
 		
-		// creer le tournois
-		// enregister chaque nouveau joueur
-		// enregistrer chaque nouveau joueur dans le pivot tournois joueur
-		// enregistrer chaque ancien joueur dans le pivot tournois
-		
 		$tournament = new Tournament();
 		$tournament->name = Input::get('name');
-		$tournament->save();
+		$user = Auth::user();
+		$tournament = $user->tournaments()->save($tournament);
 		
-		foreach(Input::get('newPlayers') as $newPlayer)
-		{
-			$player = new Player();
-			$player->name = $newPlayer;
-			$player->user = Auth::user()->id;
-			Tournament::find($tournament->id)->players()->save($player);
-		}
+ 		if(!empty(Input::get('newPlayers'))) {
+ 		
+ 			foreach(Input::get('newPlayers') as $newPlayer)
+ 			{
+ 				$player = new Player();
+ 				$player->name = $newPlayer;
+ 				$player->user = Auth::user()->id;
+ 				$player->save();
+				
+ 				$user->tournaments()->find($tournament->id)->players()->attach($player->id);
+ 			}
+ 		}
+ 		
+ 		if(!empty(Input::get('players'))) {
+ 			
+ 			foreach(Input::get('players') as $player_id => $state)
+ 			{
+ 				if($state) 
+ 				{
+					$user->tournaments()->find($tournament->id)->players()->attach($player_id);
+				}
+ 			}
+ 		}
 		
-		print_r(Input::get('newPlayers'));
-		exit;
+		return Redirect::to('tournaments');
+	}
+	
+	public function delete($tournament) {
+		
+		$tournament->delete();
+		return Redirect::back();
 	}
 }
 ?>

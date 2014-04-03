@@ -17,7 +17,7 @@ class CreateReportsTable extends Migration {
 			$table->increments('id')->unsigned();
 			$table->timestamps();
 			$table->integer('player')->unsigned();
-			$table->integer('game')->unsigned();
+			$table->integer('tournament')->unsigned();
 			$table->boolean('victory');
 			$table->tinyInteger('control')->unsigned();
 			$table->tinyInteger('destruction')->unsigned();

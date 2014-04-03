@@ -16,6 +16,7 @@ class CreateTournamentsTable extends Migration {
 		{
 			$table->increments('id')->unsigned();
 			$table->timestamps();
+			$table->integer('user');
 			$table->string('name');
 		});
 	}
