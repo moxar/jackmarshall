@@ -2,6 +2,11 @@
 
 class TournamentsController extends BaseController {
 
+	public function __construct()
+    {
+		$this->beforeFilter('auth');
+	}
+
 	public function index() {
 	
 		$this->listing();
@@ -37,9 +42,10 @@ class TournamentsController extends BaseController {
 		$tournament->name = Input::get('name');
 		$tournament = $user->tournaments()->save($tournament);
 		
- 		if(!empty(Input::get('newPlayers'))) {
+		$newPlayers = Input::get('newPlayers');
+ 		if(!empty($newPlayers)) {
  		
- 			foreach(Input::get('newPlayers') as $newPlayer)
+ 			foreach($newPlayers as $newPlayer)
  			{
  				$player = new Player();
  				$player->name = $newPlayer;
@@ -48,9 +54,10 @@ class TournamentsController extends BaseController {
  			}
  		}
  		
- 		if(!empty(Input::get('players'))) {
+		$players = Input::get('players');
+ 		if(!empty($players)) {
  			
- 			foreach(Input::get('players') as $player_id => $state)
+ 			foreach($players as $player_id => $state)
  			{
  				if($state != "active") continue;
 				$tournament->players()->attach($player_id);
