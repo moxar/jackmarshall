@@ -3,11 +3,11 @@ $(document).ready(function(){
 	tournamentCreateForm.test();
 });
 
-function TournamentCreateForm() {
+function TournamentCreateForm(selector) {
 	
 	JackForm.apply(this, arguments);
 	var self = this;
-	var node = $('#tournamentCreateForm');
+	var node = $(selector);
 	var it = 0;
 	
 	self.test = function() {
@@ -17,7 +17,7 @@ function TournamentCreateForm() {
 	
 	self.addPlayer = function() {
 		
-		var fieldsets = $('#tournamentCreateForm fieldset');
+		var fieldsets = node.find('fieldset');
 		
 		fieldsets.eq(1).find('div:eq(1)').append($('<p/>')
 			.attr({
@@ -64,7 +64,7 @@ function TournamentCreateForm() {
 	
 	$('#addPlayerButton').click(function(){
 		
-		if($('#tournamentCreateForm fieldset:eq(1)').find('input[type=text]').val() != '')
+		if(node.find('fieldset:eq(1) input[type=text]').val() != '')
 		{
 			self.addPlayer();
 		}

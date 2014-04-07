@@ -6,6 +6,10 @@ class Tournament extends Eloquent {
 	
 		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
 	}
+	
+	public function reports() {
+		return $this->hasMany('Report', 'tournament');
+	}
 
 }
 

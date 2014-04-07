@@ -25,10 +25,22 @@ class TournamentsController extends BaseController {
 	
 	public function manage($tournament) {
 	
-		$players = $tournament->players()->get();
+		$players = $tournament->reports()
+			->join('players', 'players.id', '=', 'reports.player')
+			->select(DB::raw('sum(victory) as victory'))
+			->select(DB::raw('sum(control) as control'))
+			->select(DB::raw('sum(destruction) as destruction'))
+			->select(DB::raw('(SELECT sum(victory) FROM reports WHERE tournament = '.$tournament->id.' AND player <> reports.player AND game IN (SELECT game FROM reports WHERE tournament = '.$tournament->id.' AND player = reports.player)) as sos'))
+			->groupBy('player')
+			->orderBy('victory', 'DESC')
+			->orderBy('sos', 'DESC')
+			->orderBy('control', 'DESC')
+			->orderBy('destruction', 'DESC')
+			->get();	
 		
 		$this->display('tournaments.manage', array(
 			'title' => 'Tournois',
+			'scripts' => array('js/JackForm.js', 'js/tournaments.manage.js', 'js/validator.jquery.js')
 		), array(
 			'players' => $players
 		));
@@ -40,7 +52,7 @@ class TournamentsController extends BaseController {
 	
 		$this->display('tournaments.create', array(
 			'title' => 'Tournois',
-			'scripts' => array('js/JackForm.js', 'js/tournaments.js', 'js/validator.jquery.js')
+			'scripts' => array('js/JackForm.js', 'js/tournaments.create.js', 'js/validator.jquery.js')
 		), array(
 			'players' => $players
 		));
