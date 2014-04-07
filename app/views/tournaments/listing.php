@@ -22,7 +22,7 @@ foreach($tournaments as $tournament)
 						<td><?php echo $tournament->created_at; ?></td>
 						<td><?php echo count($tournament->players()->get()); ?></td>
 						<td>
-							<a href="tournaments/<?php echo $tournament->id; ?>">
+							<a href="tournaments/<?php echo $tournament->id; ?>"/show>
 								<span class="glyphicon glyphicon-circle-arrow-right"></span>
 							</a>
 						</td>
