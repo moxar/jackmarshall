@@ -19,26 +19,26 @@ function TournamentCreateForm(selector) {
 		
 		var fieldsets = node.find('fieldset');
 		
-		fieldsets.eq(1).find('div:eq(1)').append($('<p/>')
+		fieldsets.eq(2).find('div:eq(1)').append($('<p/>')
 			.attr({
 				'class': 'active'
 			})
-			.text(fieldsets.eq(0).find('input[type=text]:eq(1)').val())
+			.text(fieldsets.eq(1).find('input[type=text]:eq(1)').val())
 			.append($('<input/>')
 				.attr({
 					'type': 'hidden',
 					'name': 'newPlayers['+ it +']',
-					'value': fieldsets.eq(0).find('input[type=text]:eq(1)').val(),
+					'value': fieldsets.eq(1).find('input[type=text]:eq(1)').val(),
 					'data-id': it
 				})
 			 )
 		);
 		
-		fieldsets.eq(0).find('input[type=text]:eq(1)').val('');
+		fieldsets.eq(1).find('input[type=text]:eq(1)').val('');
 		it++;
 	};
 	
- 	$(document).on('click', '#tournamentCreateForm fieldset:eq(1) div p', function() {
+ 	$(document).on('click', '#tournamentCreateForm fieldset:eq(2) div p', function() {
 		
 		console.log("test");
 		var input = $(this).find('input');
@@ -64,8 +64,9 @@ function TournamentCreateForm(selector) {
 	
 	$('#addPlayerButton').click(function(){
 		
-		if(node.find('fieldset:eq(1) input[type=text]').val() != '')
+		if(node.find('fieldset:eq(1) input[type=text]:eq(1)').val() != '')
 		{
+			console.log(node.find('fieldset:eq(1) input[type=text]:eq(1)').val());
 			self.addPlayer();
 		}
 	});

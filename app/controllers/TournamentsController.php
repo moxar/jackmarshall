@@ -23,9 +23,11 @@ class TournamentsController extends BaseController {
 		));
 	}
 	
-	public function manage($tournament) {
+	public function show($tournament) {
 	
-		$players = $tournament->reports()
+		$players = $tournament->players()->get();
+	
+		$reports = $tournament->reports()
 			->join('players', 'players.id', '=', 'reports.player')
 			->select(DB::raw('sum(victory) as victory'))
 			->select(DB::raw('sum(control) as control'))
@@ -36,13 +38,14 @@ class TournamentsController extends BaseController {
 			->orderBy('sos', 'DESC')
 			->orderBy('control', 'DESC')
 			->orderBy('destruction', 'DESC')
-			->get();	
+			->get();
 		
-		$this->display('tournaments.manage', array(
+		$this->display('tournaments.show', array(
 			'title' => 'Tournois',
-			'scripts' => array('js/JackForm.js', 'js/tournaments.manage.js', 'js/validator.jquery.js')
+			'scripts' => array('js/JackForm.js', 'js/validator.jquery.js')
 		), array(
-			'players' => $players
+			'players' => $players,
+			'tournament' => $tournament,
 		));
 	}
 	

@@ -1,11 +1,11 @@
 			<section class="container">
 				<h2>Nouveau tournois</h2>
-				<fieldset class="form-group">
-					<input class="btn btn-default" type="submit" value="Creer"/>
-					<a class="btn btn-default" href="tournaments">Retour</a>
-				</fieldset>
-				<hr/>
 				<form method="POST" role="form" class="form" id="tournamentCreateForm">
+					<fieldset class="form-group">
+						<input class="btn btn-default" type="submit" value="Creer"/>
+						<a class="btn btn-default" href="tournaments">Retour</a>
+						<hr/>
+					</fieldset>
 					<fieldset class="form-group">
 						<h2>Informations sur le tournois</h2>
 						<div class="row has-feedback">
