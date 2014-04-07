@@ -17,37 +17,35 @@ function TournamentCreateForm() {
 	
 	self.addPlayer = function() {
 		
-		var fieldset = $('#tournamentCreateForm fieldset:eq(1)');
-			
- 		fieldset.append($('<input/>')
- 			.attr({
- 				'type': 'hidden',
- 				'name': 'newPlayers['+ it +']',
- 				'value': fieldset.find('input[type=text]:eq(0)').val(),
-				'data-id': it
- 			})
-		);
+		var fieldsets = $('#tournamentCreateForm fieldset');
 		
-		fieldset.append($('<p/>')
+		fieldsets.eq(1).find('div:eq(1)').append($('<p/>')
 			.attr({
-				'data-id': it,
 				'class': 'active'
 			})
-			.text(fieldset.find('input[type=text]:eq(0)').val())
+			.text(fieldsets.eq(0).find('input[type=text]:eq(1)').val())
+			.append($('<input/>')
+				.attr({
+					'type': 'hidden',
+					'name': 'newPlayers['+ it +']',
+					'value': fieldsets.eq(0).find('input[type=text]:eq(1)').val(),
+					'data-id': it
+				})
+			 )
 		);
 		
-		fieldset.find('input[type=text]').val('');
+		fieldsets.eq(0).find('input[type=text]:eq(1)').val('');
 		it++;
 	};
 	
- 	$(document).on('click', '#tournamentCreateForm fieldset:eq(1) > p[data-id]', function() {
+ 	$(document).on('click', '#tournamentCreateForm fieldset:eq(1) div p', function() {
 		
-		var id = $(this).attr('data-id');
-		var input = $(this).parent().find('input[data-id=' + id + ']');
+		console.log("test");
+		var input = $(this).find('input');
 		var regExp = new RegExp("newPlayer");
+		
 		if(regExp.test(input.attr("name")))
 		{
-			input.remove();
 			$(this).remove();
 		}
 		else

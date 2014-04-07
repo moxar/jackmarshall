@@ -37,6 +37,7 @@ Route::get('tournaments', 'TournamentsController@listing');
 Route::get('tournaments/listing', 'TournamentsController@listing');
 Route::get('tournaments/create', 'TournamentsController@getCreate');
 Route::post('tournaments/create', 'TournamentsController@postCreate');
+Route::get('tournaments/{tournament}', 'TournamentsController@manage');
 Route::get('tournaments/{tournament}/delete', 'TournamentsController@delete');
 
 Route::get('validate/signin', 'ValidationsController@validateSignin');

@@ -23,6 +23,17 @@ class TournamentsController extends BaseController {
 		));
 	}
 	
+	public function manage($tournament) {
+	
+		$players = $tournament->players()->get();
+		
+		$this->display('tournaments.manage', array(
+			'title' => 'Tournois',
+		), array(
+			'players' => $players
+		));
+	}
+	
 	public function getCreate() {
 	
 		$players = Auth::user()->players()->get();
