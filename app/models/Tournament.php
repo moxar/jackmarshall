@@ -7,14 +7,27 @@ class Tournament extends Eloquent {
 		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
 	}
 	
+	public function rounds() {
+		
+		return $this->hasMany('Round', 'tournament');
+	}
+	
+	public function games() {
+	
+        return $this->rounds()->games();
+	}
+	
 	public function reports() {
-		return $this->hasMany('Report', 'tournament');
+	
+		return $this->rounds()->games()->reports();
 	}
 
 }
 
 Tournament::deleting(function($tournament) {
-	Tournament::find($tournament->id)->players()->detach();
+
+	$tournament->players()->detach();
+	$tournament->rounds()->delete();
 });
 
 

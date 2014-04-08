@@ -1,6 +1,6 @@
 <?php
 
-class ReportsController extends BaseController {
+class GamesController extends BaseController {
 
 	public function __construct()
     {
@@ -15,7 +15,7 @@ class ReportsController extends BaseController {
 	public function listing() {
 	}
 	
-	public function show($repport) {
+	public function show($game) {
 	}
 	
 	public function getCreate() {
@@ -30,9 +30,9 @@ class ReportsController extends BaseController {
 	public function postUpdate() {
 	}
 	
-	public function delete($repport) {
+	public function delete($game) {
 		
-		$repport->delete();
+		$game->delete();
 		return Redirect::back();
 	}
 }
