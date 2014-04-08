@@ -4,6 +4,7 @@ class UsersController extends BaseController {
 
 	public function getLogin() {
 	
+		$this->beforeFilter('guest');
 		$this->display('users.login', array(
 			'title' => 'Connexion',
 			'scripts' => array('js/validator.jquery.js', 'js/login.js', 'js/JackForm.js'),
@@ -27,6 +28,7 @@ class UsersController extends BaseController {
 	
 	public function getSignin() {
 	
+		$this->beforeFilter('guest');
 		$this->display('users.signin', array(
 			'title' => 'Inscription',
 			'scripts' => array('js/validator.jquery.js', 'js/signin.js', 'js/JackForm.js'),
@@ -62,6 +64,7 @@ class UsersController extends BaseController {
 	
 	public function logout() {
 		
+		$this->beforeFilter('auth');
 		Auth::logout();
 		return Redirect::to('home');
 	}

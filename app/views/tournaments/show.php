@@ -1,3 +1,4 @@
+			<h1>Tournaments - show</h1>
 			<ol>
 <?php
 foreach($players as $player)

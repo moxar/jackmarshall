@@ -1,3 +1,4 @@
+			<h1>Tournaments - Create</h1>
 			<section class="container">
 				<h2>Nouveau tournois</h2>
 				<form method="POST" role="form" class="form" id="tournamentCreateForm">
