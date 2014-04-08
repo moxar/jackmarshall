@@ -1,3 +1,4 @@
+			<h1>Tournaments - listing</h1>
 			<section class="container">
 				<h1>Tournois</h1>
 				<a href="tournaments/create" class="btn btn-default">Nouveau tournois</a>
