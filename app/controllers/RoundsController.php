@@ -1,6 +1,6 @@
 <?php
 
-class ReportsController extends BaseController {
+class RoundsController extends BaseController {
 
 	public function __construct()
     {
@@ -15,7 +15,7 @@ class ReportsController extends BaseController {
 	public function listing() {
 	}
 	
-	public function show($repport) {
+	public function show($round) {
 	}
 	
 	public function getCreate() {
@@ -30,9 +30,9 @@ class ReportsController extends BaseController {
 	public function postUpdate() {
 	}
 	
-	public function delete($repport) {
+	public function delete($round) {
 		
-		$repport->delete();
+		$round->delete();
 		return Redirect::back();
 	}
 }
