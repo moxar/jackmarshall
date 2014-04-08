@@ -12,7 +12,7 @@ class Game extends Eloquent {
 		return $this->belongsTo('Round');
 	}
 	
-	public funcion reports() {
+	public function reports() {
 	
 		return $this->hasMany('Report', 'game');
 	}

@@ -17,6 +17,7 @@ class CreateRoundsTable extends Migration {
 			$table->increments('id')->unsigned();
 			$table->timestamps();
 			$table->integer('tournament')->unsigned();
+			$table->tinyInteger('number')->unsigned();
 		});
 	}
 
