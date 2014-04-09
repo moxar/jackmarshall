@@ -1,7 +1,7 @@
 			<h1>Tournaments - show</h1>
 			<ol>
 <?php
-foreach($players as $player)
+foreach($tournament->players as $player)
 {
 ?>
 				<li><?php echo $player->name; ?></li>

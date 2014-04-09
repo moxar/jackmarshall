@@ -17,23 +17,20 @@ class TournamentsController extends BaseController {
 				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
 			),
 			array(
-				'tournaments' => $tournaments;
+				'tournaments' => $tournaments
 			)
 		);
 	}
 	
 	public function show($tournament) {
-	
-		$players = $tournament->players();
-	
+		
 		$this->display('tournaments.show',
 			array(
 				'title' => 'Tournois',
 				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
 			),
 			array(
-				'tournament' => $tournament,
-				'players' => $players
+				'tournament' => $tournament
 			)
 		);
 	}
@@ -42,7 +39,7 @@ class TournamentsController extends BaseController {
 	
 		$this->beforeFilter('auth');
 		
-		$players = Auth::user()->players()->get();
+		$players = Auth::user()->players;
 		
 		$this->display('tournaments.create',
 			array(
@@ -85,7 +82,7 @@ class TournamentsController extends BaseController {
 		$this->beforeFilter('auth');
 		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
 		
-		$players = Auth::user()->players()->get();
+		$players = Auth::user()->players;
 		$tournamentPlayers = $tournament->players()->select('players.id')->get();
 		
 		$this->display('tournaments.update',
