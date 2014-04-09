@@ -10,4 +10,4 @@ foreach($players as $player)
 ?>
 			</ol>
 			
-			<a href="reports/<?php echo $tournament->id; ?>/create">Nouveau rapport</a>
+			<a href="rounds/<?php echo $tournament->id; ?>/create">Nouvelle ronde</a>
