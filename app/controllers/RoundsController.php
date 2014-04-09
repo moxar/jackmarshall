@@ -1,28 +1,72 @@
 <?php
 
 class RoundsController extends BaseController {
-
-	public function index() {
 	
-		$this->listing();
-	}
-	
-	public function listing() {
+	public function listing($tournament) {
+		
+		$this->display('rounds.listing', 
+			array(
+				'title' => 'Rondes',
+				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
+			),
+			array(
+				'tournament' => $tournament
+			)
+		);
 	}
 	
 	public function show($round) {
+		
+		$this->display('rounds.show', 
+			array(
+				'title' => 'Rondes',
+				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
+			),
+			array(
+				'round' => $round
+			)
+		);
 	}
 	
-	public function getCreate() {
+	public function getCreate($tournament) {
+		
+		$this->display('rounds.create', 
+			array(
+				'title' => 'Rondes',
+				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
+			),
+			array(
+				'tournament' => $tournament
+			)
+		);
+	}
 	}
 	
-	public function postCreate() {
+	public function postCreate($tournament) {
+	
+		$round = new Round;
+		foreach(Input::get('games') as $name) {
+			
+			$game = new Game;
+			$game->name = $name;
+			$game->save();
+		}
 	}
 	
-	public function getUpdate() {
+	public function getUpdate($round) {
+		
+		$this->display('rounds.update', 
+			array(
+				'title' => 'Rondes',
+				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
+			),
+			array(
+				'round' => $round
+			)
+		);
 	}
 	
-	public function postUpdate() {
+	public function postUpdate($round) {
 	}
 	
 	public function delete($round) {
@@ -31,5 +75,6 @@ class RoundsController extends BaseController {
 		return Redirect::back();
 	}
 }
+
 ?>
  

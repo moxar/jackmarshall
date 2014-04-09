@@ -42,8 +42,14 @@ Route::post('tournaments/update', 'TournamentsController@postUpdate');
 Route::get('tournaments/{tournament}', 'TournamentsController@show');
 Route::get('tournaments/{tournament}/delete', 'TournamentsController@delete');
 
+Route::get('rounds/{tournament}', 'RoundsController@listing');
+Route::get('rounds/{tournament}/listing', 'RoundsController@listing');
 Route::get('rounds/{tournament}/create', 'RoundsController@getCreate');
 Route::post('rounds/{tournament}/create', 'RoundsController@postCreate');
+Route::get('rounds/{round}/update', 'RoundsController@getUpdate');
+Route::post('rounds/{round}/update', 'RoundsController@postUpdate');
+Route::get('rounds/{round}/show', 'RoundsController@show');
+Route::get('rounds/{round}/delete', 'RoundsController@delete');
 
 Route::get('validate/signin', 'ValidationsController@validateSignin');
 Route::get('validate/login', 'ValidationsController@validateLogin');
