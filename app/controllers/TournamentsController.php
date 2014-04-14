@@ -39,15 +39,13 @@ class TournamentsController extends BaseController {
 	
 		$this->beforeFilter('auth');
 		
-		$players = Auth::user()->players;
-		
 		$this->display('tournaments.create',
 			array(
 				'title' => 'Tournois',
 				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
 			),
 			array(
-				'players' => $players
+				'players' => Auth::user()->players
 			)
 		);
 	}
