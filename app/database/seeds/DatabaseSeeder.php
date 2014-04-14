@@ -81,10 +81,15 @@ class TournamentTableSeeder extends Seeder {
 		DB::table('players_tournaments')->delete();
 		
 		$user = User::first();
-        Tournament::create(array(
+		$tournament = new Tournament(array(
 			'user' => $user->id,
 			'name' => 'Tournois du 26 avril',
 		));
+		$tournament->save();
+		
+		foreach(Players::get() as $player) {
+			$tournament->players()->attach($player->id);
+		}
 	}
 }
 

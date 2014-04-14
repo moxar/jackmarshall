@@ -45,7 +45,6 @@ Route::get('tournaments/{tournament}/delete', 'TournamentsController@delete');
 Route::get('rounds/{tournament}', 'RoundsController@listing');
 Route::get('rounds/{tournament}/listing', 'RoundsController@listing');
 Route::get('rounds/{tournament}/create', 'RoundsController@getCreate');
-Route::post('rounds/{tournament}/create', 'RoundsController@postCreate');
 Route::get('rounds/{round}/update', 'RoundsController@getUpdate');
 Route::post('rounds/{round}/update', 'RoundsController@postUpdate');
 Route::get('rounds/{round}/show', 'RoundsController@show');
