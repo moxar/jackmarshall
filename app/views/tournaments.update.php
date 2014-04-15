@@ -1,15 +1,14 @@
-			<h1>Tournament - Update<h1>
+			<h1>Tournament - <?php echo $tournament->name; ?><h1>
 			<form method="POST">
 				<fieldset>
-					<legend></legend>
-					<input type="text" name="name" value="<?php echo $tournament->name; ?>" />
-					<input type="sbumit" value="update" />
+					<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" /></label>
+					<input type="sbumit" value="Valider" />
 				</fieldset>
 				<fieldset id="registeredPlayersFieldset">
 <?php
-foreach($players as $player)
+foreach(Auth::user()->players as $player)
 {
-	if(in_array($player->id, $tournamentPlayers))
+	if(in_array($player->id, $tournament->players))
 	{
 ?>
 					<p class="checker registeredPlayer active">

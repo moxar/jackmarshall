@@ -24,8 +24,35 @@ Route::bind('tournament', function($key, $route)
 	}
 });
 
-Route::get('/', 'HomeController@index');
-Route::get('home', 'HomeController@index');
+
+Route::bind('round', function($key, $route)
+{
+	$round = Round::find($key);
+	if($round == null)
+	{
+		App::abort(404);
+	}
+	else
+	{
+		return $round;
+	}
+});
+
+
+Route::bind('report', function($key, $route)
+{
+	$report = Report::find($key);
+	if($report == null)
+	{
+		App::abort(404);
+	}
+	else
+	{
+		return $report;
+	}
+});
+
+Route::get('/', 'TournamentsController@listing');
 
 Route::get('signin', 'UsersController@getSignin');
 Route::post('signin', 'UsersController@postSignin');
@@ -36,19 +63,17 @@ Route::get('logout', 'UsersController@logout');
 Route::get('tournaments', 'TournamentsController@listing');
 Route::get('tournaments/listing', 'TournamentsController@listing');
 Route::get('tournaments/create', 'TournamentsController@getCreate');
-Route::post('tournaments/create', 'TournamentsController@postCreate');
-Route::get('tournaments/update', 'TournamentsController@getUpdate');
-Route::post('tournaments/update', 'TournamentsController@postUpdate');
 Route::get('tournaments/{tournament}', 'TournamentsController@show');
+Route::get('tournaments/{tournament}/update', 'TournamentsController@getUpdate');
+Route::post('tournaments/{tournament}/update', 'TournamentsController@postUpdate');
 Route::get('tournaments/{tournament}/delete', 'TournamentsController@delete');
 
-Route::get('rounds/{tournament}', 'RoundsController@listing');
-Route::get('rounds/{tournament}/listing', 'RoundsController@listing');
 Route::get('rounds/{tournament}/create', 'RoundsController@getCreate');
 Route::get('rounds/{round}/update', 'RoundsController@getUpdate');
 Route::post('rounds/{round}/update', 'RoundsController@postUpdate');
-Route::get('rounds/{round}/show', 'RoundsController@show');
 Route::get('rounds/{round}/delete', 'RoundsController@delete');
+
+Route::get('reports/{report}/update', 'ReportsController@update');
 
 Route::get('validate/signin', 'ValidationsController@validateSignin');
 Route::get('validate/login', 'ValidationsController@validateLogin');
