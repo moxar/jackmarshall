@@ -9,7 +9,7 @@ class Game extends Eloquent {
 	
 	public function round() {
 	
-		return $this->belongsTo('Round');
+		return $this->belongsTo('Round', 'round')->first();
 	}
 	
 	public function reports() {

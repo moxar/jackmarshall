@@ -1,6 +1,6 @@
 			<h1>Tournament - <?php echo $tournament->name; ?></h1>
 			<script type="text/javascript" src="js/tournaments.create.js"></script>
-			<form method="POST">
+			<form method="POST" id="#tournamentCreateForm">
 				<fieldset>
 					<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" /></label>
 					<input type="submit" value="Valider" />
@@ -14,7 +14,7 @@ foreach(Auth::user()->players as $player)
 ?>
 					<p class="checker registeredPlayer active">
 						<span><?php echo $player->name; ?></span>
-						<input type="hidden" name="<?php echo $player->id; ?>" value="active" />
+						<input type="hidden" name="players[<?php echo $player->id; ?>]"/>
 					</p>
 <?php
 	}
@@ -23,7 +23,7 @@ foreach(Auth::user()->players as $player)
 ?>
 					<p class="checker registeredPlayer inactive">
 						<span><?php echo $player->name; ?></span>
-						<input type="hidden" name="<?php echo $player->id; ?>" value="inactive" />
+						<input type="hidden" name="players[<?php echo $player->id; ?>]" disabled="disabled"/>
 					</p>
 <?php
 	}

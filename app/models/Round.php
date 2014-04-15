@@ -4,7 +4,7 @@ class Round extends Eloquent {
 
 	public function tournament() {
 		
-		return $this->belongsTo('Tournament');
+		return $this->belongsTo('Tournament', 'tournament')->first();
 	}
 
 	public function games() {
@@ -19,7 +19,7 @@ class Round extends Eloquent {
 	
 	public function user() {
 	
-		return $this->tournament()->user();
+		return $this->tournament()->user()->first();
 	}
 }
  
