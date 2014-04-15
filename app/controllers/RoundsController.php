@@ -2,43 +2,26 @@
 
 class RoundsController extends BaseController {
 	
-	public function listing($tournament) {
-		
-		$this->display('rounds.listing', 
-			array(
-				'title' => 'Rondes',
-				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
-			),
-			array(
-				'tournament' => $tournament
-			)
-		);
-	}
-	
-	public function show($round) {
-		
-		$this->display('rounds.show', 
-			array(
-				'title' => 'Rondes',
-				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
-			),
-			array(
-				'round' => $round,
-				'players' => $round->tournament()->players()
-			)
-		);
-	}
-	
 	public function getCreate($tournament) {
 	
 		$this->beforeFilter('auth');
 		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
 	
+		// Creating round
 		$lastRound = $tournament->rounds()->orderBy('number', 'DESC')->first();
 		$round = new Round;
 		$round->tournament = $tournament;
 		$round->number = empty($lastRound) ? 1 : $lastRound->number + 1;
 		$round->save();
+		
+		// Creating games belonging to round
+		$gamesNumber = round(count($tournament->players) / 2);
+		for($ii = 0; $ii < $gameNumber; $ii++) {
+			$game = new Game;
+			$game->round = $round->id;
+			$game->slug = "Ronde ".$round->number." - Partie ".$ii;
+			$game->save();
+		}
 		
 		return Redirect::to('rounds/'.$round->id.'/update');
 	}
@@ -48,16 +31,10 @@ class RoundsController extends BaseController {
 		$this->beforeFilter('auth');
 		if($round->tournament()->user != Auth::user()->id) return Redirect::to('tournaments');
 		
-		$this->display('rounds.update', 
-			array(
-				'title' => 'Rondes',
-				'scripts' => array('js/validator.jquery.js', 'js/JackForm.js')
-			),
-			array(
-				'round' => $round,
-				'players' => $round->tournament()->players
-			)
-		);
+		$this->display('rounds.update', array(
+			'round' => $round,
+			'players' => $round->tournament()->players()
+		));
 	}
 	
 	public function postUpdate($round) {
@@ -67,10 +44,8 @@ class RoundsController extends BaseController {
 		
 		foreach(Input::get('games') as $input) {
 		
-			$game = new Game(array(
-				"slug" => $input['slug'],
-				"round" => $round->id
-			));
+			$game = Game::find($game->id);
+			$game->slug = $input['slug'];
 			$game->save();
 			
 			foreach($input['player'] as $player) {
@@ -82,6 +57,8 @@ class RoundsController extends BaseController {
 				$report->save();
 			}
 		}
+		
+		return Redirect::to('rounds/'.$round->id.'/update');
 	}
 	
 	public function delete($round) {

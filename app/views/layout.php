@@ -3,17 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<base href="<?php echo Request::root(); ?>/">
-<?php
-if(isset($title)) {
-?>
-		<title><?php echo $title; ?> / Jack'Marshall</title>
-<?php
-} else {
-?>
 		<title>Jack'Marshall</title>
-<?php
-}
-?>
 		<meta name="author" content="Moxar">
 		
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
