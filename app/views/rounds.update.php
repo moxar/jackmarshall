@@ -20,11 +20,11 @@ foreach($round->games as $game)
 							</td>
 							<td>
 								<input type="hidden" name="games[<?php echo $game->id; ?>][player][1]" value="<?php echo $players[$it]->id; ?>" />
-								<?php echo $players[$it]->name; ?>
+								<a href="reports/<?php echo $report->id; ?>/update"><?php echo $players[$it]->name; ?></a>
 							</td>
 							<td>
 								<input type="hidden" name="games[<?php echo $game->id; ?>][player][2]" value="<?php echo $players[$it+1]->id; ?>" />
-								<?php echo $players[$it+1]->name; ?>
+								<a href="reports/<?php echo $report->id; ?>/update"><?php echo $players[$it+1]->name; ?></a>
 							</td>
 						</tr>
 <?php
