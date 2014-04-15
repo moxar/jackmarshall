@@ -17,7 +17,8 @@ class TournamentsController extends BaseController {
 	public function show($tournament) {
 		
 		$this->display('tournaments.show', array(
-			'tournament' => $tournament
+			'tournament' => $tournament,
+			'players' => $tournament->players
 		));
 	}
 	
@@ -54,20 +55,27 @@ class TournamentsController extends BaseController {
 		
 		$tournament->players()->detach();
 		
-		foreach(Input::get('players') as $id => $state) {
+		if(is_array(Input::get('players'))) {
 		
-			if($state == 'active') $tournament->players()->attach($id);
+			foreach(Input::get('players') as $key => $value) {
+			
+				$tournament->players()->attach($key);
+			}
 		}
 		
-		foreach(Input::get('newPlayers') as $name) {
+		if(is_array(Input::get('newPlayers'))) {
 		
-			$player = new Player;
-			$player->name = $name;
-			$player->save();
-			$tournament->players()->attach($player->id);
+			foreach(Input::get('newPlayers') as $name) {
+			
+				$player = new Player;
+				$player->name = $name;
+				$player->user = Auth::user()->id;
+				$player->save();
+				$tournament->players()->attach($player->id);
+			}
 		}
 		
-		return Redirect::to('tournament/'.$tournament->id);
+		return Redirect::to('tournaments/'.$tournament->id);
 	}
 	
 	public function delete($tournament) {

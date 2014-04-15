@@ -4,7 +4,7 @@ class Report extends Eloquent {
 
 	public function player() {
 	
-		return $this->belongsTo('Player');
+		return $this->belongsTo('Player', 'player')->first();
 	}
 
 	public function tournament() {
@@ -19,7 +19,7 @@ class Report extends Eloquent {
 	
 	public function game() {
 		
-		return $this->belongsTo('Game');
+		return $this->belongsTo('Game', 'game')->first();
 	}
 	
 	public function user() {

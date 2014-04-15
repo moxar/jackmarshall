@@ -15,21 +15,24 @@ function TournamentCreateForm(selector) {
 		player.append($('<span/>').text(name));
 		player.append($('<input/>').attr({
 			'type': 'hidden',
-			'name': 'newPlayer[' + it + ']',
+			'name': 'newPlayers[' + it + ']',
 			'value': name
 		}));
 		$('#newPlayersFieldset').append(player);
+		$('#addPlayerText').val('');
+		it++;
 	};
 	
-	self.togglePlayerStatus = function() {
-		var checker = $(this);
+	self.togglePlayerStatus = function(node) {
+		var checker = node;
 		checker.toggleClass('active inactive');
 		var input = checker.find('input[type=hidden]');
-		input.val(input.val() == "active" ? "inactive" : "active");
+		if (input.attr('disabled')) input.removeAttr('disabled');
+		else input.attr('disabled', 'disabled');
 	};
 	
-	self.removePlayer = function() {
-		$(this).remove();
+	self.removePlayer = function(node) {
+		node.remove();
 	};
 	
 	$('#addPlayerButton').click(function() {
@@ -37,10 +40,10 @@ function TournamentCreateForm(selector) {
 	});
 	
 	$(document).on('click', 'p.registeredPlayer', function() {
-		self.togglePlayerStatus();
+		self.togglePlayerStatus($(this));
 	});
 	
 	$(document).on('click', 'p.newPlayer', function() {
-		self.removePlayer();
+		self.removePlayer($(this));
 	});
 }

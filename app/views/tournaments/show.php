@@ -9,10 +9,7 @@ foreach($tournament->rounds() as $round)
 }
 ?>
 			</ul>
-			<form method="POST" action="rounds/create">
-				<input type="hidden" name="tournament" value="<?php echo $tournament->id; ?>" />
-				<input type="submit" value="Nouvelle ronde" />
-			</form>
+			<a href="rounds/<?php echo $tournament->id; ?>/create">Nouvelle ronde</a>
 			
 			<h1>Classement</h1>
 			<table>
