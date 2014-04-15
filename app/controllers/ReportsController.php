@@ -6,33 +6,17 @@ class ReportsController extends BaseController {
     {
 		$this->beforeFilter('auth');
 	}
-
-	public function index() {
-	
-		$this->listing();
-	}
-	
-	public function listing() {
-	}
-	
-	public function show($repport) {
-	}
-	
-	public function getCreate() {
-	}
-	
-	public function postCreate() {
-	}
 	
 	public function getUpdate() {
+	
 	}
 	
 	public function postUpdate() {
 	}
 	
-	public function delete($repport) {
+	public function delete($report) {
 		
-		$repport->delete();
+		$report->delete();
 		return Redirect::back();
 	}
 }

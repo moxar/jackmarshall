@@ -16,6 +16,11 @@ class Game extends Eloquent {
 	
 		return $this->hasMany('Report', 'game');
 	}
+	
+	public function user() {
+	
+		return $this->tournament()->user();
+	}
 }
  
 Game::deleting(function($game) {

@@ -21,6 +21,11 @@ class Tournament extends Eloquent {
 	
 		return $this->rounds()->games()->reports();
 	}
+	
+	public function user() {
+	
+		return $this->belongsTo('User');
+	}
 
 }
 

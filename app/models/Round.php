@@ -16,6 +16,11 @@ class Round extends Eloquent {
 	
         return $this->games()->reports();
 	}
+	
+	public function user() {
+	
+		return $this->tournament()->user();
+	}
 }
  
 Round::deleting(function($round) {

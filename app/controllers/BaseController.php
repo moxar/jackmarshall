@@ -4,15 +4,8 @@ class BaseController extends Controller {
 	
     protected $layout = 'layout';
     
-    protected function display($view, $metadata = array(), $data = array())
+    protected function display($view, $data = array())
     {
-		if(isset($metadata) && is_array($metadata) && count($metadata) != 0) 
-		{
-			foreach($metadata as $key => $value)
-			{
-				$this->layout->$key = $value;
-			}
-		}
 	    $this->layout->content = View::make($view, $data);
     }
 

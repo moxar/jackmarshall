@@ -73,7 +73,9 @@ Route::get('rounds/{round}/update', 'RoundsController@getUpdate');
 Route::post('rounds/{round}/update', 'RoundsController@postUpdate');
 Route::get('rounds/{round}/delete', 'RoundsController@delete');
 
-Route::get('reports/{report}/update', 'ReportsController@update');
+Route::get('reports/{report}/update', 'ReportsController@getUpdate');
+Route::post('reports/{report}/update', 'ReportsController@postUpdate');
+Route::get('reports/{report}/delete', 'ReportsController@delete');
 
 Route::get('validate/signin', 'ValidationsController@validateSignin');
 Route::get('validate/login', 'ValidationsController@validateLogin');
