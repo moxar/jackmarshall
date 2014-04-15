@@ -1,14 +1,15 @@
-			<h1>Tournament - <?php echo $tournament->name; ?><h1>
+			<h1>Tournament - <?php echo $tournament->name; ?></h1>
+			<script type="text/javascript" src="js/tournaments.create.js"></script>
 			<form method="POST">
 				<fieldset>
 					<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" /></label>
-					<input type="sbumit" value="Valider" />
+					<input type="submit" value="Valider" />
 				</fieldset>
 				<fieldset id="registeredPlayersFieldset">
 <?php
 foreach(Auth::user()->players as $player)
 {
-	if(in_array($player->id, $tournament->players))
+	if(in_array($player->id, $tournamentPlayers))
 	{
 ?>
 					<p class="checker registeredPlayer active">

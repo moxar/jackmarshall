@@ -4,11 +4,7 @@ class UsersController extends BaseController {
 
 	public function getLogin() {
 	
-		$this->beforeFilter('guest');
-		$this->display('users.login', array(
-			'title' => 'Connexion',
-			'scripts' => array('js/validator.jquery.js', 'js/login.js', 'js/JackForm.js'),
-		));
+		$this->display('users.login');
 	}
 	
 	public function postLogin() {
@@ -28,11 +24,7 @@ class UsersController extends BaseController {
 	
 	public function getSignin() {
 	
-		$this->beforeFilter('guest');
-		$this->display('users.signin', array(
-			'title' => 'Inscription',
-			'scripts' => array('js/validator.jquery.js', 'js/signin.js', 'js/JackForm.js'),
-		));
+		$this->display('users.signin');
 	}
 	
 	public function postSignin() {
@@ -59,14 +51,13 @@ class UsersController extends BaseController {
 			$user->email = Input::get('email');
 			$user->save();
 		}
-		return Redirect::to('home');
+		return Redirect::to('/');
 	}
 	
 	public function logout() {
 		
-		$this->beforeFilter('auth');
 		Auth::logout();
-		return Redirect::to('home');
+		return Redirect::to('/');
 	}
 }
 

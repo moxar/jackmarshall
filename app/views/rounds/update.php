@@ -10,7 +10,6 @@
 					</thead>
 					<tbody>
 <?php
-$it = 0;
 foreach($round->games as $game)
 {
 ?>
@@ -19,16 +18,15 @@ foreach($round->games as $game)
 								<input type="text" name="games[<?php echo $game->id; ?>][slug]" value="<?php echo $game->slug; ?>" />
 							</td>
 							<td>
-								<input type="hidden" name="games[<?php echo $game->id; ?>][player][1]" value="<?php echo $players[$it]->id; ?>" />
-								<a href="reports/<?php echo $report->id; ?>/update"><?php echo $players[$it]->name; ?></a>
+								<input type="hidden" name="games[<?php echo $game->id; ?>][player][0]" value="<?php echo $game->players[0]->id; ?>" />
+								<a href="reports/<?php echo $game->report[0]->id; ?>/update"><?php echo $game->players[0]->name; ?></a>
 							</td>
 							<td>
-								<input type="hidden" name="games[<?php echo $game->id; ?>][player][2]" value="<?php echo $players[$it+1]->id; ?>" />
-								<a href="reports/<?php echo $report->id; ?>/update"><?php echo $players[$it+1]->name; ?></a>
+								<input type="hidden" name="games[<?php echo $game->id; ?>][player][1]" value="<?php echo $game->players[1]->id; ?>" />
+								<a href="reports/<?php echo $game->report[1]->id; ?>/update"><?php echo $game->players[1]->name; ?></a>
 							</td>
 						</tr>
 <?php
-$it+=2;
 }
 ?>
 					</tbody>
