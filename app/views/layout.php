@@ -26,19 +26,6 @@ if(isset($title)) {
 		
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="shortcut icon" href="css/favicon.png" type="image/x-icon" />
-					
-<?php
-if(isset($scripts) && !empty($scripts))
-{
-	foreach($scripts as $script)
-	{
-?>
-		<script type="text/javascript" src="<?php echo $script; ?>"></script>
-<?php
-	}
-}
-?>
-
 	</head>
 	<body>
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">

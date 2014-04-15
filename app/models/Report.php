@@ -21,4 +21,9 @@ class Report extends Eloquent {
 		
 		return $this->belongsTo('Game');
 	}
+	
+	public function user() {
+		
+		return $this->tournament()->user();
+	}
 }
