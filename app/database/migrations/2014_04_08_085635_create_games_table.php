@@ -17,7 +17,7 @@ class CreateGamesTable extends Migration {
 			$table->increments('id')->unsigned();
 			$table->timestamps();
 			$table->integer('round')->unsigned();
-			$table->string('slug');
+			$table->string('slug')->nullable();
 		});
 	}
 

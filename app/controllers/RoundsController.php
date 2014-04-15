@@ -4,7 +4,6 @@ class RoundsController extends BaseController {
 	
 	public function getCreate($tournament) {
 	
-		$this->beforeFilter('auth');
 		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
 	
 		// Creating round
@@ -28,26 +27,33 @@ class RoundsController extends BaseController {
 	
 	public function getUpdate($round) {
 	
-		$this->beforeFilter('auth');
 		if($round->tournament()->user != Auth::user()->id) return Redirect::to('tournaments');
 		
+		$players = $round->tournament()->players();
+		$round->games = $this->placeIntoGame($players, $round->games);
+		foreach($round->games as &$games)
+		{
+			$game->report[0] = $game->reports()->where('player', $game->players[0])->first();
+			$game->report[1] = $game->reports()->where('player', $game->players[1])->first();
+		}
+		
 		$this->display('rounds.update', array(
-			'round' => $round,
-			'players' => $round->tournament()->players()
+			'round' => $round
 		));
 	}
 	
 	public function postUpdate($round) {
 	
-		$this->beforeFilter('auth');
 		if($round->tournament()->user != Auth::user()->id) return Redirect::to('tournaments');
 		
+		// Creating games
 		foreach(Input::get('games') as $input) {
 		
 			$game = Game::find($game->id);
 			$game->slug = $input['slug'];
 			$game->save();
 			
+			// Creating reports for each game
 			foreach($input['player'] as $player) {
 			
 				$report = new Report(array(
@@ -63,11 +69,26 @@ class RoundsController extends BaseController {
 	
 	public function delete($round) {
 	
-		$this->beforeFilter('auth');
 		if($round->tournament()->user != Auth::user()->id) return Redirect::to('tournaments');
 		
 		$round->delete();
 		return Redirect::back();
+	}
+	
+	public function placeIntoGame($players, $games, $gt = 0, $pt = 0) {
+	
+		while($pt < count($players)) {
+			
+			if((!isset($games[$gt]) || empty($games[$gt]) || $games[$gt]->players[0]->neverFought($players[$pt])) && count($games[$gt]->players)) < 2 {
+				$games[$gt]->players[] = $players[$pt];
+				$this->placeIntoGame(&$player, &$games, 0, $pt+1);
+			}
+			else
+			{
+				$this->placeIntoGame(&$player, &$games, $gt+1, $pt);
+			}
+		}
+		return $games;
 	}
 }
 

@@ -4,8 +4,6 @@ $(document).ready(function(){
 
 function TournamentCreateForm(selector) {
 	
-	JackForm.apply(this, arguments);
-	
 	var self = this;
 	var node = $(selector);
 	var it = 0;
@@ -19,7 +17,7 @@ function TournamentCreateForm(selector) {
 			'type': 'hidden',
 			'name': 'newPlayer[' + it + ']',
 			'value': name
-		});
+		}));
 		$('#newPlayersFieldset').append(player);
 	};
 	
@@ -44,7 +42,5 @@ function TournamentCreateForm(selector) {
 	
 	$(document).on('click', 'p.newPlayer', function() {
 		self.removePlayer();
-	}
+	});
 }
-
-TournamentCreateForm.prototype = new JackForm();

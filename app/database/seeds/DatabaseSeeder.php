@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder {
 
         User::create(array(
 			'name' => 'UchroniesGames',
-			'password' => 'password',
+			'password' => Hash::make('password'),
 			'email' => 'contact@uchroniesgames.fr',
 		));
     }
@@ -87,7 +87,7 @@ class TournamentTableSeeder extends Seeder {
 		));
 		$tournament->save();
 		
-		foreach(Players::get() as $player) {
+		foreach(Player::get() as $player) {
 			$tournament->players()->attach($player->id);
 		}
 	}

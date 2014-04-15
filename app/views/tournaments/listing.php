@@ -1,7 +1,6 @@
-			<h1>Tournaments - listing</h1>
-			<section class="container">
+				<section class="container">
 				<h1>Tournois</h1>
-				<a href="tournaments/create" class="btn btn-default">Nouveau tournois</a>
+				<a href="tournaments/create">Nouveau tournois</a>
 				<table class="table table-striped table-condensed table-hover">
 					<caption class="h2">Liste des tournois</caption>
 					<thead>
