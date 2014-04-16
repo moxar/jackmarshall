@@ -156,7 +156,7 @@ class ReportTableSeeder extends Seeder {
 		Report::create(array('game' => $games[2]->id, 'player' => $players[4]->id, 'victory' => 1, 'control' => 5, 'destruction' => 21));
 		Report::create(array('game' => $games[2]->id, 'player' => $players[5]->id, 'victory' => 0, 'control' => 1, 'destruction' => 16));
 		Report::create(array('game' => $games[3]->id, 'player' => $players[6]->id, 'victory' => 1, 'control' => 0, 'destruction' => 16));
-		Report::create(array('game' => $games[3]->id, 'player' => $players[7]->id, 'victory' => 0, 'control' => 0, 'destruction' => 8));
+		Report::create(array('game' => $games[3]->id, 'player' => $players[7]->id, 'victory' => 0, 'control' => 0, 'destruction' => 12));
 		
 		
 		Report::create(array('game' => $games[4]->id, 'player' => $players[0]->id, 'victory' => 1, 'control' => 5, 'destruction' => 18));
@@ -166,7 +166,7 @@ class ReportTableSeeder extends Seeder {
 		Report::create(array('game' => $games[6]->id, 'player' => $players[1]->id, 'victory' => 1, 'control' => 5, 'destruction' => 21));
 		Report::create(array('game' => $games[6]->id, 'player' => $players[3]->id, 'victory' => 0, 'control' => 1, 'destruction' => 16));
 		Report::create(array('game' => $games[7]->id, 'player' => $players[5]->id, 'victory' => 1, 'control' => 0, 'destruction' => 16));
-		Report::create(array('game' => $games[7]->id, 'player' => $players[7]->id, 'victory' => 0, 'control' => 0, 'destruction' => 8));
+		Report::create(array('game' => $games[7]->id, 'player' => $players[7]->id, 'victory' => 0, 'control' => 0, 'destruction' => 12));
 		
 		
 		Report::create(array('game' => $games[8]->id, 'player' => $players[0]->id, 'victory' => 1, 'control' => 5, 'destruction' => 18));
@@ -176,6 +176,6 @@ class ReportTableSeeder extends Seeder {
 		Report::create(array('game' => $games[10]->id, 'player' => $players[5]->id, 'victory' => 1, 'control' => 5, 'destruction' => 21));
 		Report::create(array('game' => $games[10]->id, 'player' => $players[6]->id, 'victory' => 0, 'control' => 1, 'destruction' => 16));
 		Report::create(array('game' => $games[11]->id, 'player' => $players[3]->id, 'victory' => 1, 'control' => 0, 'destruction' => 16));
-		Report::create(array('game' => $games[11]->id, 'player' => $players[7]->id, 'victory' => 0, 'control' => 0, 'destruction' => 8));
+		Report::create(array('game' => $games[11]->id, 'player' => $players[7]->id, 'victory' => 0, 'control' => 0, 'destruction' => 12));
 	}
 }
