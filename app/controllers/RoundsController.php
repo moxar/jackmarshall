@@ -4,7 +4,7 @@ class RoundsController extends BaseController {
 	
 	public function getCreate($tournament) {
 	
-		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
+ 		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
 	
 		// Creating round
 		$lastRound = $tournament->rounds()->orderBy('number', 'DESC')->first();
@@ -28,14 +28,6 @@ class RoundsController extends BaseController {
 	public function getUpdate($round) {
 	
 		if($round->user() != Auth::user()) return Redirect::to('tournaments/'.$round->tournament()->id);
-		
-		$players = $round->tournament()->players();
-		$round->games = $this->placeIntoGame($players, $round->games);
-		foreach($round->games as &$games)
-		{
-			$game->report[0] = $game->reports()->where('player', $game->players[0])->first();
-			$game->report[1] = $game->reports()->where('player', $game->players[1])->first();
-		}
 		
 		$this->display('rounds.update', array(
 			'round' => $round
@@ -73,25 +65,6 @@ class RoundsController extends BaseController {
 		
 		$round->delete();
 		return Redirect::back();
-	}
-	
-	public function placeIntoGame($players, $games, $gt = 0, $pt = 0) {
-	
-		if(!$games[0] instanceOf Game) return $games;
-		$tournament = $games[0]->tournament();
-	
-		while($pt < count($players)) {
-			
-			if((!isset($games[$gt]) || empty($games[$gt]) || $games[$gt]->players[0]->neverFought($players[$pt], $tournament)) && count($games[$gt]->players) < 2) {
-				$games[$gt]->players[] = $players[$pt];
-				$this->placeIntoGame($player, $games, 0, $pt+1);
-			}
-			else
-			{
-				$this->placeIntoGame($player, $games, $gt+1, $pt);
-			}
-		}
-		return $games;
 	}
 }
 
