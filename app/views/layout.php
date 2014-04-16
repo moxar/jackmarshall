@@ -29,7 +29,7 @@
 if(Auth::check())
 {
 ?>
-					<li><a href="logout"/>Déconnexion</a></li>
+					<li><a href="logout">Déconnexion</a></li>
 <?php
 }
 else

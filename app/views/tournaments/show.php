@@ -1,7 +1,7 @@
 			<h1>Rondes - <?php echo $tournament->name; ?></h1> 
 			<ul>
 <?php
-foreach($tournament->rounds() as $round)
+foreach($tournament->rounds as $round)
 {
 ?>
 				<li><a href="rounds/<?php echo $round->id; ?>">Ronde <?php echo $round->number; ?></a></li>
@@ -28,9 +28,9 @@ foreach($players as $player)
 ?>
 				<tr>
 					<td><?php echo $player->name; ?></td>
-					<td><?php echo $player->VP; ?></td>
-					<td><?php echo $player->CP; ?></td>
-					<td><?php echo $player->DP; ?></td>
+					<td><?php echo $player->vp; ?></td>
+					<td><?php echo $player->cp; ?></td>
+					<td><?php echo $player->dp; ?></td>
 				</tr>
 <?php
 }
