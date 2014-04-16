@@ -15,10 +15,18 @@ class TournamentsController extends BaseController {
 	}
 	
 	public function show($tournament) {
+	
+		$players = $tournament->players()
+			->orderBy('vp', 'DESC')
+			->orderBy('cp', 'DESC')
+			->orderBy('dp', 'DESC')
+			;
+		$players->toSql();
+		$players = Player::aggregate($players, $tournament->id)->get();
 		
 		$this->display('tournaments.show', array(
 			'tournament' => $tournament,
-			'players' => $tournament->players
+			'players' => $players
 		));
 	}
 	
@@ -37,8 +45,6 @@ class TournamentsController extends BaseController {
 		$tournament->user = Auth::user()->id;
 		
 		return App::make('TournamentsController')->postUpdate($tournament);
-		
-// 		return Redirect::to('tournaments/'.$tournament->id);
 	}
 	
 	public function getUpdate($tournament) {
