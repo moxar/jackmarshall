@@ -69,6 +69,10 @@ class PlayerTableSeeder extends Seeder {
 			'user' => $user->id,
 			'name' => 'Connetable_PA',
 		));
+		Player::create(array(
+			'user' => $user->id,
+			'name' => Player::GHOST,
+		));
     }
 }
 
@@ -87,7 +91,7 @@ class TournamentTableSeeder extends Seeder {
 		));
 		$tournament->save();
 		
-		foreach(Player::get() as $player) {
+		foreach(Player::where('name', '<>', Player::GHOST)->get() as $player) {
 			$tournament->players()->attach($player->id);
 		}
 	}

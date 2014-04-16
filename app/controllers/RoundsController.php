@@ -29,8 +29,42 @@ class RoundsController extends BaseController {
 	
 		if($round->user() != Auth::user()) return Redirect::to('tournaments/'.$round->tournament()->id);
 		
+		$data = $round->tournament()->players()->get();
+		$players = array();
+		foreach($data as $player) {
+			$players[] = $player;
+		}
+		$games = array();
+		$games = $round->games()->get();
+		
+		$pt = 0;
+		$gt = 0;
+		
+		while(!empty($players))
+		{
+			$pt++;
+			
+			if($pt > count($players) - 1) {
+				$games[$gt]->players = array($players[0], $players[count($players)-1]);
+				$gt++;
+				break;
+			}
+			
+			if(!$players[0]->hasPlayedWith($players[$pt], $round->tournament())) {
+			
+				$games[$gt]->players = array($players[0], $players[$pt]);
+				$gt++;
+				unset($players[$pt]);
+				unset($players[0]);
+				$players = array_values($players);
+				$pt = 0;
+				continue;
+			}			
+		}
+		
 		$this->display('rounds.update', array(
-			'round' => $round
+			'round' => $round,
+			'games' => $games
 		));
 	}
 	

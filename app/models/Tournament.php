@@ -4,7 +4,12 @@ class Tournament extends Eloquent {
 	
 	public function players() {
 	
-		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
+ 		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
+	}
+	
+	public function playersButFantom() {
+	
+ 		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player')->where('players.name', '<>', Player::GHOST);
 	}
 	
 	public function rounds() {

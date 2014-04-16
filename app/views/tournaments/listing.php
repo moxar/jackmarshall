@@ -21,14 +21,14 @@ foreach($tournaments as $tournament)
 						<tr>
 							<td><?php echo $tournament->name; ?></td>
 							<td><?php echo $tournament->created_at; ?></td>
-							<td><?php echo count($tournament->players); ?></td>
+							<td><?php echo count($tournament->playersButFantom); ?></td>
 							<td>
-								<a href="tournaments/<?php echo $tournament->id; ?>"/show>
+								<a href="tournaments/<?php echo $tournament->id; ?>/show">
 									<span class="glyphicon glyphicon-circle-arrow-right"></span>
 								</a>
 							</td>
 							<td>
-								<a href="tournaments/<?php echo $tournament->id; ?>"/update>
+								<a href="tournaments/<?php echo $tournament->id; ?>/update">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</a>
 							</td>
