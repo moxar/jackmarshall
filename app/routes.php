@@ -56,6 +56,7 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::get('logout', 'UsersController@logout');
 	Route::get('tournaments/create', 'TournamentsController@getCreate');
+	Route::post('tournaments/create', 'TournamentsController@postCreate');
 	Route::get('tournaments/{tournament}/update', 'TournamentsController@getUpdate');
 	Route::post('tournaments/{tournament}/update', 'TournamentsController@postUpdate');
 	Route::get('tournaments/{tournament}/delete', 'TournamentsController@delete');

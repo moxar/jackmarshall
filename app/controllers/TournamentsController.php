@@ -23,12 +23,22 @@ class TournamentsController extends BaseController {
 	}
 	
 	public function getCreate() {
+				
+		$this->display('tournaments.update', array(
+			'tournament' => new Tournament,
+			'tournamentPlayers' => array()
+		));
+		
+	}
+	
+	public function postCreate() {
 		
 		$tournament = new Tournament;
 		$tournament->user = Auth::user()->id;
-		$tournament->save();
 		
-		return Redirect::to('tournaments/'.$tournament->id.'/update');
+		return App::make('TournamentsController')->postUpdate($tournament);
+		
+// 		return Redirect::to('tournaments/'.$tournament->id);
 	}
 	
 	public function getUpdate($tournament) {
@@ -36,8 +46,8 @@ class TournamentsController extends BaseController {
 		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
 		
 		$tournamentPlayers = array();
-		foreach($tournament->players()->select('players.id')->get() as $player) {
-			$tournamentPlayers[] = $player;
+		foreach($tournament->players as $player) {
+			$tournamentPlayers[] = $player->id;
 		}
 				
 		$this->display('tournaments.update', array(
@@ -73,6 +83,10 @@ class TournamentsController extends BaseController {
 				$player->save();
 				$tournament->players()->attach($player->id);
 			}
+		}
+		
+		if(count(Input::get('newPlayers')) + count(Input::get('players')) % 2 != 0) {
+			$tournament->players()->attach(Player::fantom()->id);
 		}
 		
 		return Redirect::to('tournaments/'.$tournament->id);

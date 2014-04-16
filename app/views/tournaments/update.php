@@ -1,4 +1,4 @@
-			<h1>Tournament - <?php echo $tournament->name; ?></h1>
+			<h1>Tournois - <?php echo is_null($tournament->name) ? "Nouveau" : $tournament->name; ?></h1>
 			<script type="text/javascript" src="js/tournaments.create.js"></script>
 			<form method="POST" id="#tournamentCreateForm">
 				<fieldset>
@@ -7,7 +7,7 @@
 				</fieldset>
 				<fieldset id="registeredPlayersFieldset">
 <?php
-foreach(Auth::user()->players as $player)
+foreach(Auth::user()->playersButFantom as $player)
 {
 	if(in_array($player->id, $tournamentPlayers))
 	{
