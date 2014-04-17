@@ -44,9 +44,7 @@ class Player extends Eloquent {
 				
 		 "), "players.id", "=",  "aggregate.id");
 		
-		return $query;
-		// print_r($query->toSql());exit;
-		 
+		return $query;		 
 	}
 }
  
