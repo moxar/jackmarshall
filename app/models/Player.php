@@ -30,7 +30,8 @@ class Player extends Eloquent {
 	
 	public static function aggregate($query, $tournament) {
 		
-		$query->join(DB::raw("
+		$query
+		->join(DB::raw("
 			(
 				SELECT players.id AS id, SUM(victory) AS vp, SUM(destruction) AS dp, SUM(control) AS cp
 				FROM reports
@@ -41,10 +42,11 @@ class Player extends Eloquent {
 				WHERE tournaments.id = ".DB::getPdo()->quote($tournament)."
 				GROUP BY players.id
 			) AS aggregate
-				
 		 "), "players.id", "=",  "aggregate.id");
 		
 		return $query;		 
 	}
 }
  
+ 
+
