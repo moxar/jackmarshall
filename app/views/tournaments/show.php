@@ -19,6 +19,7 @@ foreach($tournament->rounds as $round)
 						<th>VP</th>
 						<th>CP</th>
 						<th>DP</th>
+						<th>SOS</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,6 +32,7 @@ foreach($players as $player)
 					<td><?php echo $player->vp; ?></td>
 					<td><?php echo $player->cp; ?></td>
 					<td><?php echo $player->dp; ?></td>
+					<td><?php echo $player->sos; ?></td>
 				</tr>
 <?php
 }
