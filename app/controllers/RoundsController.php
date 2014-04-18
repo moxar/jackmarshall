@@ -50,7 +50,7 @@ class RoundsController extends BaseController {
 				break;
 			}
 			
-			if(!$players[0]->hasPlayedWith($players[$pt], $round->tournament())) {
+			if(count($players[0]->opponents($round->tournament())->where('players.id', '=', $players[$pt])->get()) == 0) {
 			
 				$games[$gt]->players = array($players[0], $players[$pt]);
 				$gt++;
