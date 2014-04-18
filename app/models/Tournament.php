@@ -7,6 +7,20 @@ class Tournament extends Eloquent {
  		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
 	}
 	
+	public function orderedPlayers() {
+	
+		return $this->players()
+			->select('*')
+			->addSelect('victory')
+			->addSelect('control')
+			->addSelect('destruction')
+			->addSelect('sos')
+			->orderBy('victory', 'DESC')
+			->orderBy('sos', 'DESC')
+			->orderBy('control', 'DESC')
+			->orderBy('destruction', 'DESC');
+	}
+	
 	public function playersButFantom() {
 	
  		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player')->where('players.name', '<>', Player::GHOST);
