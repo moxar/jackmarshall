@@ -11,8 +11,10 @@ class RoundsController extends BaseController {
 		$round = new Round;
 		$round->number = empty($lastRound) ? 1 : $lastRound->number + 1;
 		$round->tournament = $tournament->id;
+		$round->placeHolder = true;
 		
 		$games = $round->assignPlayersToGames();
+		
 		$this->display('rounds.update', array(
 			'round' => $round,
 			'games' => $games,
@@ -38,6 +40,7 @@ class RoundsController extends BaseController {
 	
 		$tournament = $round->tournament();
 		if($round->user() != Auth::user()) return Redirect::to('tournaments/'.$tournament->id);
+		$round->placeHolder = false;
 		
 		$games = $round->assignPlayersToGames();
 		

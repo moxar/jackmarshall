@@ -19,10 +19,36 @@ foreach($games as $game)
 								<input class="form-control" type="text" name="games[<?php echo $game->id; ?>][slug]" value="<?php echo $game->slug; ?>" />
 							</td>
 							<td>
-								<input class="form-control" type="hidden" name="games[<?php echo $game->id; ?>][players][0]" value="<?php echo $game->players[0]->id; ?>" /><?php echo $game->players[0]->name; ?>
+								<input type="hidden" name="games[<?php echo $game->id; ?>][players][0]" value="<?php echo $game->players[0]->id; ?>" />
+<?php
+	if(!$round->placeHolder) {
+?>
+								<a href="#"><?php echo $game->players[0]->name; ?></a>
+<?php
+	}
+	else
+	{
+?>
+								<?php echo $game->players[0]->name; ?>
+<?php
+	}
+?>
 							</td>
 							<td>
-								<input class="form-control" type="hidden" name="games[<?php echo $game->id; ?>][players][1]" value="<?php echo $game->players[1]->id; ?>" /><?php echo $game->players[1]->name; ?>
+								<input type="hidden" name="games[<?php echo $game->id; ?>][players][1]" value="<?php echo $game->players[1]->id; ?>" />
+<?php
+	if(!$round->placeHolder) {
+?>
+								<a href="#"><?php echo $game->players[1]->name; ?></a>
+<?php
+	}
+	else
+	{
+?>
+								<?php echo $game->players[1]->name; ?>
+<?php
+	}
+?>
 							</td>
 						</tr>
 <?php
