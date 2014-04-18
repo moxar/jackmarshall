@@ -9,58 +9,37 @@ class RoundsController extends BaseController {
 		// Creating round
 		$lastRound = $tournament->rounds()->orderBy('number', 'DESC')->first();
 		$round = new Round;
-		$round->tournament = $tournament->id;
 		$round->number = empty($lastRound) ? 1 : $lastRound->number + 1;
+		$round->tournament = $tournament->id;
+		
+		$games = $round->assignPlayersToGames();
+		$this->display('rounds.update', array(
+			'round' => $round,
+			'games' => $games,
+		));
+		
+	}
+	
+	public function postCreate($tournament) {
+	
+		if($tournament->user() != Auth::user()) return Redirect::to('tournaments');
+		
+		$round = new Round;
+		$round->number = Input::get('number');
+		$round->tournament = $tournament->id;
 		$round->save();
 		
-		// Creating games belonging to round
-		$gameNumber = round(count($tournament->players) / 2);
-		for($ii = 0; $ii < $gameNumber; $ii++) {
-			$game = new Game;
-			$game->round = $round->id;
-			$game->slug = "Ronde ".$round->number." - Partie ".$ii;
-			$game->save();
-		}
+		App::make('GamesController')->createMultiple($round);
 		
 		return Redirect::to('rounds/'.$round->id.'/update');
 	}
 	
 	public function getUpdate($round) {
 	
-		if($round->user() != Auth::user()) return Redirect::to('tournaments/'.$round->tournament()->id);
+		$tournament = $round->tournament();
+		if($round->user() != Auth::user()) return Redirect::to('tournaments/'.$tournament->id);
 		
-		$data = $round->tournament()->players()->get();
-		$players = array();
-		foreach($data as $player) {
-			$players[] = $player;
-		}
-		$games = array();
-		$games = $round->games()->get();
-		
-		$pt = 0;
-		$gt = 0;
-		
-		while(!empty($players))
-		{
-			$pt++;
-			
-			if($pt > count($players) - 1) {
-				$games[$gt]->players = array($players[0], $players[count($players)-1]);
-				$gt++;
-				break;
-			}
-			
-			if(count($players[0]->opponents($round->tournament())->where('players.id', '=', $players[$pt])->get()) == 0) {
-			
-				$games[$gt]->players = array($players[0], $players[$pt]);
-				$gt++;
-				unset($players[$pt]);
-				unset($players[0]);
-				$players = array_values($players);
-				$pt = 0;
-				continue;
-			}			
-		}
+		$games = $round->assignPlayersToGames();
 		
 		$this->display('rounds.update', array(
 			'round' => $round,
@@ -72,23 +51,7 @@ class RoundsController extends BaseController {
 	
 		if($round->tournament()->user != Auth::user()->id) return Redirect::to('tournaments');
 		
-		// Creating games
-		foreach(Input::get('games') as $input) {
-		
-			$game = Game::find($game->id);
-			$game->slug = $input['slug'];
-			$game->save();
-			
-			// Creating reports for each game
-			foreach($input['player'] as $player) {
-			
-				$report = new Report(array(
-					"game" => $game->id, 
-					"player" => $player
-				));
-				$report->save();
-			}
-		}
+		App::make('GamesController')->createMultiple($round);
 		
 		return Redirect::to('rounds/'.$round->id.'/update');
 	}
@@ -101,6 +64,4 @@ class RoundsController extends BaseController {
 		return Redirect::back();
 	}
 }
-
 ?>
- 

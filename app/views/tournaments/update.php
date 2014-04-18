@@ -2,8 +2,8 @@
 			<script type="text/javascript" src="js/tournaments.create.js"></script>
 			<form method="POST" id="#tournamentCreateForm">
 				<fieldset>
-					<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" /></label>
-					<input type="submit" value="Valider" />
+					<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" class="form-control"/></label>
+					<input type="submit" value="Valider" class="btn btn-default"/>
 				</fieldset>
 				<fieldset id="registeredPlayersFieldset">
 <?php
@@ -31,7 +31,7 @@ foreach(Auth::user()->playersButFantom as $player)
 ?>
 				</fieldset>
 				<fieldset id="newPlayersFieldset">
-					<label>New player<input type="text" id="addPlayerText" /></label>
-					<input type="button" value="Add player" id="addPlayerButton" />
+					<label>New player<input type="text" id="addPlayerText"  class="form-control"/></label>
+					<input type="button" value="Add player" id="addPlayerButton" class="btn btn-default"/>
 				</fieldset>
 			</form>

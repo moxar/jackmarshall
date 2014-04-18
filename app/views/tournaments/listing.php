@@ -1,6 +1,5 @@
 				<section class="container">
 				<h1>Tournois</h1>
-				<a href="tournaments/create">Nouveau tournois</a>
 				<table class="table table-striped table-condensed table-hover">
 					<caption class="h2">Liste des tournois</caption>
 					<thead>
@@ -41,6 +40,9 @@ foreach($tournaments as $tournament)
 <?php
 }
 ?>
+						<tr>
+							<td colspan="6"><a href="tournaments/create">Nouveau tournois</a></td>
+						</tr>
 					</tbody>
 				</table>
 			</section>

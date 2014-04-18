@@ -29,6 +29,16 @@ class ReportsController extends BaseController {
 		$report->delete();
 		return Redirect::back();
 	}
+	
+	public function createMultiple($game) {
+			
+		foreach($game->players as $player) {
+		
+			$report = new Report;
+			$report->game = $game->id;
+			$report->player = $player;
+			$report->save();
+		}
+	}
 }
 ?>
- 

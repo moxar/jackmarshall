@@ -1,6 +1,7 @@
 			<h1>Ronde - <?php echo $round->number; ?></h1>
 			<form method="POST">
-				<table>
+				<input type="hidden" name="number" value="<?php echo $round->number; ?>" />
+				<table class="table table-striped table-condensed table-hover">
 					<thead>
 						<tr>
 							<th>Game</th>
@@ -15,21 +16,25 @@ foreach($games as $game)
 ?>
 						<tr>
 							<td>
-								<input type="text" name="games[<?php echo $game->id; ?>][slug]" value="<?php echo $game->slug; ?>" />
+								<input class="form-control" type="text" name="games[<?php echo $game->id; ?>][slug]" value="<?php echo $game->slug; ?>" />
 							</td>
 							<td>
-								<input type="hidden" name="games[<?php echo $game->id; ?>][player][0]" value="<?php echo $game->players[0]->id; ?>" /><?php echo $game->players[0]->name; ?>
+								<input class="form-control" type="hidden" name="games[<?php echo $game->id; ?>][players][0]" value="<?php echo $game->players[0]->id; ?>" /><?php echo $game->players[0]->name; ?>
 							</td>
 							<td>
-								<input type="hidden" name="games[<?php echo $game->id; ?>][player][1]" value="<?php echo $game->players[1]->id; ?>" /><?php echo $game->players[1]->name; ?>
+								<input class="form-control" type="hidden" name="games[<?php echo $game->id; ?>][players][1]" value="<?php echo $game->players[1]->id; ?>" /><?php echo $game->players[1]->name; ?>
 							</td>
 						</tr>
 <?php
 }
 ?>
+						<tr>
+							<td colspan="3">
+								<input type="button" value="Classer" id="sortButton" class="btn btn-default"/>
+								<input type="button" value="Mélanger" id="shuffleButton" class="btn btn-default" />
+							</td>
+						</tr>
 					</tbody>
 				</table>
-				<input type="submit" value="Valider" />
+				<input type="submit" value="Valider"  class="btn btn-default"/>
 			</form>
-			<input type="button" value="Classer" id="sortButton" />
-			<input type="button" value="Mélanger" id="shuffleButton" />
