@@ -45,13 +45,24 @@ class Tournament extends Eloquent {
 	
 		return $this->belongsTo('User', 'user')->first();
 	}
-
+	
+	public function updateSos() {
+		
+		foreach($this->players()->get() as $player) {
+			$sos = $player->opponents($this)->join('players_tournaments', 'players.id', '=', 'players_tournaments.player')->sum('players_tournaments.victory');
+			$this->players()->updateExistingPivot($player->id, array(
+				'sos' => empty($sos) ? 0 : $sos
+			), true);
+		}
+	}
 }
 
 Tournament::deleting(function($tournament) {
 
+	foreach($tournament->rounds()->get() as $round) {
+		$round->delete();
+	}
 	$tournament->players()->detach();
-	$tournament->rounds()->delete();
 });
 
 

@@ -17,12 +17,6 @@ class TournamentsController extends BaseController {
 	public function show($tournament) {
 	
 		$players = $tournament->orderedPlayers()->get();
-			
-		// foreach($players as $player) {
-			// $player->sos = $player->opponents($tournament)
-			// ->join("players_tournaments", "players.id", "=", "players_tournaments.player")
-			// ->sum('players_tournaments.victory');
-		// }
 		
 		$this->display('tournaments.show', array(
 			'tournament' => $tournament,

@@ -21,7 +21,7 @@ class ReportsController extends BaseController {
 		$report->destruction = Input::get('destruction');
 		$report->save();
 		
-		return Redirect::to('rounds/'.$report->round().'/update');
+		return Redirect::to('rounds/'.$report->round()->id.'/update');
 	}
 	
 	public function delete($report) {

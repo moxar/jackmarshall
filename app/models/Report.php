@@ -26,55 +26,66 @@ class Report extends Eloquent {
 		
 		return $this->tournament()->user();
 	}
+	
+	public function reducePlayersScore() {
+
+		$player = $this->tournament()->players()
+			->select('*')
+			->addSelect('victory')
+			->addSelect('control')
+			->addSelect('destruction')
+			->addSelect('sos')
+			->where('players.id', '=', $this->player()->id)
+			->first();
+			
+		$this->tournament()->players()->updateExistingPivot($player->id, array(
+			"victory" => $player->victory - Report::find($this->id)->victory,
+			"control" => $player->control - Report::find($this->id)->control,
+			"destruction" => $player->destruction - Report::find($this->id)->destruction,
+		), true);
+	}
+	
+	public function improvePlayersScore() {
+
+		$player = $this->tournament()->players()
+			->select('*')
+			->addSelect('victory')
+			->addSelect('control')
+			->addSelect('destruction')
+			->where('players.id', '=', $this->player()->id)
+			->first();
+		
+		$this->tournament()->players()->updateExistingPivot($player->id, array(
+			"victory" => $player->victory + $this->victory,
+			"control" => $player->control + $this->control,
+			"destruction" => $player->destruction + $this->destruction,
+		), true);
+	}
 }
 
-// Report::saving(function($report) {
+Report::updating(function($report) {
 
-	// $player = $report->tournament()->players()
-		// ->select('*')
-		// ->addSelect('victory')
-		// ->addSelect('control')
-		// ->addSelect('destruction')
-		// ->where('players.id', '=', $report->player()->id)
-		// ->first();
-		
-	// $report->tournament()->players()->updateExistingPivot($player->id, array(
-		// "victory" => $player->victory + $report->victory,
-		// "control" => $player->control + $report->control,
-		// "destruction" => $player->destruction + $report->destruction,
-	// ), true);
-// });
+	$report->reducePlayersScore();
+});
 
-// Report::updating(function($report) {
+Report::updated(function($report) {
 
-	// $player = $report->tournament()->players()
-		// ->select('*')
-		// ->addSelect('victory')
-		// ->addSelect('control')
-		// ->addSelect('destruction')
-		// ->where('players.id', '=', $report->player()->id)
-		// ->first();
-		
-	// $report->tournament()->players()->updateExistingPivot($player->id, array(
-		// "victory" => $player->victory - $report->victory,
-		// "control" => $player->control - $report->control,
-		// "destruction" => $player->destruction - $report->destruction,
-	// ), true);
-// });
+	$report->improvePlayersScore();
+	$report->tournament()->updateSos();
+});
 
-// Report::deleting(function($report) {
+Report::deleting(function($report) {
 
-	// $player = $report->tournament()->players()
-		// ->select('*')
-		// ->addSelect('victory')
-		// ->addSelect('control')
-		// ->addSelect('destruction')
-		// ->where('players.id', '=', $report->player()->id)
-		// ->first();
-		
-	// $report->tournament()->players()->updateExistingPivot($player->id, array(
-		// "victory" => $player->victory - $report->victory,
-		// "control" => $player->control - $report->control,
-		// "destruction" => $player->destruction - $report->destruction,
-	// ), true);
-// });
+	$report->reducePlayersScore();
+});
+
+Report::created(function($report) {
+
+	$report->improvePlayersScore();
+	$report->tournament()->updateSos();
+});
+
+Report::deleted(function($report) {
+
+	$report->tournament()->updateSos();
+});

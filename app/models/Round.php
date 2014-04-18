@@ -14,7 +14,7 @@ class Round extends Eloquent {
 	
 	public function reports() {
 	
-        return $this->games()->reports();
+        return $this->hasManyThrough('Report', 'Game', 'round', 'game');
 	}
 	
 	public function user() {
@@ -72,5 +72,7 @@ class Round extends Eloquent {
  
 Round::deleting(function($round) {
 
-	$round->games()->delete();
+	foreach($round->games()->get() as $game) {
+		$game->delete();
+	}
 });

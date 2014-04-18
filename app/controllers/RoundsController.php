@@ -15,9 +15,12 @@ class RoundsController extends BaseController {
 		
 		$games = $round->assignPlayersToGames();
 		
+		$players = $tournament->orderedPlayers()->get();
+		
 		$this->display('rounds.update', array(
 			'round' => $round,
 			'games' => $games,
+			'players' => $players,
 		));
 		
 	}
@@ -42,11 +45,30 @@ class RoundsController extends BaseController {
 		if($round->user() != Auth::user()) return Redirect::to('tournaments/'.$tournament->id);
 		$round->placeHolder = false;
 		
-		$games = $round->assignPlayersToGames();
+		$games = $round->games()->get();
+		
+		foreach($games as $game) {
+		
+			$players = array();
+			$reports = $game->reports()->get();
+			for($pt = 0; $pt < count($reports); $pt++) {
+				
+				$players[$pt] = $reports[$pt]->player();
+			}
+			
+			foreach($players as $player) {
+				$player->report = $round->reports()->select('reports.id as id')->where('reports.player', '=', $player->id)->first();
+			}
+			
+			$game->players = $players;
+		}
+		
+		$players = $tournament->orderedPlayers()->get();
 		
 		$this->display('rounds.update', array(
 			'round' => $round,
-			'games' => $games
+			'games' => $games,
+			'players' => $players,
 		));
 	}
 	
@@ -54,7 +76,7 @@ class RoundsController extends BaseController {
 	
 		if($round->tournament()->user != Auth::user()->id) return Redirect::to('tournaments');
 		
-		App::make('GamesController')->createMultiple($round);
+		App::make('GamesController')->updateMultiple($round);
 		
 		return Redirect::to('rounds/'.$round->id.'/update');
 	}

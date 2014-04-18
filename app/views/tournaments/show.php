@@ -1,4 +1,4 @@
-			<h1>Rondes - <?php echo $tournament->name; ?></h1> 
+			<h1><?php echo $tournament->name; ?> > Rondes</h1> 
 			<table class="table table-striped table-condensed table-hover">
 				<thead>
 					<tr>
