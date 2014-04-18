@@ -16,9 +16,21 @@ class TournamentsController extends BaseController {
 	
 	public function show($tournament) {
 	
-		$players = $tournament->players()->orderBy('vp', 'DESC')->orderBy('cp', 'DESC')->orderBy('dp', 'DESC');
-		$players->toSql();
-		$players = Player::aggregate($players, $tournament->id)->get();
+		$players = $tournament->players()
+			->select('*')
+			->addSelect('victory')
+			->addSelect('control')
+			->addSelect('destruction')
+			->orderBy('victory', 'DESC')
+			->orderBy('control', 'DESC')
+			->orderBy('destruction', 'DESC')
+			->get();
+			
+		foreach($players as $player) {
+			$player->sos = $player->opponents($tournament)
+			->join("players_tournaments", "players.id", "=", "players_tournaments.player")
+			->sum('players_tournaments.victory');
+		}
 		
 		$this->display('tournaments.show', array(
 			'tournament' => $tournament,

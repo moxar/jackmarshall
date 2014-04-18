@@ -29,9 +29,9 @@ foreach($players as $player)
 ?>
 				<tr>
 					<td><?php echo $player->name; ?></td>
-					<td><?php echo $player->vp; ?></td>
-					<td><?php echo $player->cp; ?></td>
-					<td><?php echo $player->dp; ?></td>
+					<td><?php echo $player->victory; ?></td>
+					<td><?php echo $player->control; ?></td>
+					<td><?php echo $player->destruction; ?></td>
 					<td><?php echo $player->sos; ?></td>
 				</tr>
 <?php
