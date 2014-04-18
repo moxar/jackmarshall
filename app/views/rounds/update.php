@@ -1,55 +1,55 @@
-			<h1>Ronde - <?php echo $round->number; ?></h1>
+			<h1><a href="tournaments/<?php echo $round->tournament()->id; ?>"><?php echo $round->tournament()->name; ?></a> &gt; Ronde - <?php echo $round->number; ?></h1>
 			<form method="POST">
 				<input type="hidden" name="number" value="<?php echo $round->number; ?>" />
 				<table class="table table-striped table-condensed table-hover">
 					<thead>
 						<tr>
-							<th>Game</th>
-							<th>Player 1</th>
-							<th>Player 2</th>
+							<th>Partie</th>
+<?php
+if(!empty($games[0])){
+	for($pt = 0; $pt < count($games[0]->players); $pt++) {
+?>
+							<th>Joueur <?php echo $pt+1; ?></th>
+<?php
+	}
+}
+?>
 						</tr>
 					</thead>
 					<tbody>
 <?php
-foreach($games as $game)
-{
+foreach($games as $game) {
 ?>
 						<tr>
 							<td>
+								<input type="hidden" name="games[<?php echo $game->id; ?>][id]" value="<?php echo $game->id; ?>" />
 								<input class="form-control" type="text" name="games[<?php echo $game->id; ?>][slug]" value="<?php echo $game->slug; ?>" />
 							</td>
+<?php
+
+	for($pt = 0; $pt < count($game->players); $pt++) {
+		
+		$player = $game->players[$pt];
+?>
 							<td>
-								<input type="hidden" name="games[<?php echo $game->id; ?>][players][0]" value="<?php echo $game->players[0]->id; ?>" />
+								<input type="hidden" name="games[<?php echo $game->id; ?>][players][<?php echo $pt; ?>]" value="<?php echo $player->id; ?>" />
 <?php
-	if(!$round->placeHolder) {
+		if(!$round->placeHolder) {
 ?>
-								<a href="#"><?php echo $game->players[0]->name; ?></a>
+								<a href="reports/<?php echo $player->report->id; ?>/update"><?php echo $player->name; ?></a>
 <?php
-	}
-	else
-	{
+		}
+		else
+		{
 ?>
-								<?php echo $game->players[0]->name; ?>
+								<?php echo $game->players[$pt]->name."\n"; ?>
 <?php
-	}
+		}
 ?>
 							</td>
-							<td>
-								<input type="hidden" name="games[<?php echo $game->id; ?>][players][1]" value="<?php echo $game->players[1]->id; ?>" />
-<?php
-	if(!$round->placeHolder) {
-?>
-								<a href="#"><?php echo $game->players[1]->name; ?></a>
-<?php
-	}
-	else
-	{
-?>
-								<?php echo $game->players[1]->name; ?>
 <?php
 	}
 ?>
-							</td>
 						</tr>
 <?php
 }
@@ -64,3 +64,32 @@ foreach($games as $game)
 				</table>
 				<input type="submit" value="Valider"  class="btn btn-default"/>
 			</form>
+			
+			<h1>Classement</h1>
+			<table class="table table-striped table-condensed table-hover">
+				<thead>
+					<tr>
+						<th>Joueur</th>
+						<th>VP</th>
+						<th>CP</th>
+						<th>DP</th>
+						<th>SOS</th>
+					</tr>
+				</thead>
+				<tbody>
+<?php
+foreach($players as $player)
+{
+?>
+				<tr>
+					<td><?php echo $player->name; ?></td>
+					<td><?php echo $player->victory; ?></td>
+					<td><?php echo $player->control; ?></td>
+					<td><?php echo $player->destruction; ?></td>
+					<td><?php echo $player->sos; ?></td>
+				</tr>
+<?php
+}
+?>
+				</tbody>
+			</table>
