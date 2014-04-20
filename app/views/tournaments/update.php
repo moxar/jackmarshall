@@ -1,5 +1,5 @@
-			<h1>Tournois - <?php echo is_null($tournament->name) ? "Nouveau" : $tournament->name; ?></h1>
 			<script type="text/javascript" src="js/tournaments.create.js"></script>
+			<h1>Tournois - <?php echo is_null($tournament->name) ? "Nouveau" : $tournament->name; ?></h1>
 			<form method="POST" id="#tournamentCreateForm">
 				<fieldset>
 					<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" class="form-control"/></label>

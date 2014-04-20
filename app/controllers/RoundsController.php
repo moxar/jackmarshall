@@ -17,7 +17,7 @@ class RoundsController extends BaseController {
 		
 		$players = $tournament->orderedPlayers()->get();
 		
-		$this->display('rounds.update', array(
+		$this->display(array('rounds.update', 'tournaments.ranking'), array(
 			'round' => $round,
 			'games' => $games,
 			'players' => $players,
@@ -57,7 +57,7 @@ class RoundsController extends BaseController {
 			}
 			
 			foreach($players as $player) {
-				$player->report = $round->reports()->select('reports.id as id')->where('reports.player', '=', $player->id)->first();
+				$player->report = $round->reports()->select(array('*', 'reports.id AS id'))->where('reports.player', '=', $player->id)->first();
 			}
 			
 			$game->players = $players;
@@ -65,7 +65,7 @@ class RoundsController extends BaseController {
 		
 		$players = $tournament->orderedPlayers()->get();
 		
-		$this->display('rounds.update', array(
+		$this->display(array('rounds.update', 'tournaments.ranking'), array(
 			'round' => $round,
 			'games' => $games,
 			'players' => $players,

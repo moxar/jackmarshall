@@ -14,14 +14,22 @@ class TournamentsController extends BaseController {
 		));
 	}
 	
+	public function ranking($tournament) {
+		
+		$players = $tournament->orderedPlayers()->get();
+		
+		return View::make('tournaments.ranking', array('players' => $players));
+	}
+	
 	public function show($tournament) {
 	
 		$players = $tournament->orderedPlayers()->get();
 		
-		$this->display('tournaments.show', array(
+		$this->display(array('tournaments.show', 'tournaments.ranking'), array(
 			'tournament' => $tournament,
-			'players' => $players
-		));
+			'players' => $players,
+		)
+		);
 	}
 	
 	public function getCreate() {
