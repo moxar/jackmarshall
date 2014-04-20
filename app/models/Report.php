@@ -32,10 +32,11 @@ class Report extends Eloquent {
 		$this->victory = 0;
 		$this->control = 0;
 		$this->destruction = 0;
+		$this->save();
 	}
 }
 
-Report::saved(function($report) {
+Report::saving(function($report) {
 
 	$tournament = $report->tournament();
 	$player = $report->player();
@@ -44,10 +45,4 @@ Report::saved(function($report) {
 	foreach($opponents as $opponent) {
 		$opponent->updateSos($tournament);
 	}
-});
-
-Report::deleting(function($report) {
-
-	$report->reset();
-	$report->save();
 });

@@ -201,6 +201,9 @@ class ReportTableSeeder extends Seeder {
 			foreach($players as $player) {
 			
 				$player->updateScore($tournament);
+			}
+			foreach($players as $player) {
+			
 				$opponents = $player->opponents($tournament)->get();
 				foreach($opponents as $opponent) {
 				
