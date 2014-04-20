@@ -1,28 +1,25 @@
 <?php
 
 class Player extends Eloquent {
-
-	const GHOST = "fantôme";
 	
 	public function tournaments() {
 	
 		return $this->belongsToMany('Tournament', 'players_tournaments', 'player', 'tournament');
 	}
-	
-	public static function fantom() {
-	
-		return Player::where('name', '=', Player::GHOST)->where('user', '=', Auth::user()->id)->first();
-	}
-	
+		
 	public function opponents($tournament) {
 		
-		return $players = Player::join('reports', 'reports.player', '=', 'players.id')
-				->whereRaw("reports.game IN (
-					SELECT games.id 
-					FROM games 
-					JOIN reports ON reports.game = games.id 
-					WHERE reports.player = ".DB::getPdo()->quote($this->id)."
-				)")->where('players.id', '<>', $this->id);
+		return $players = Player::select(array('*','players.id AS id'))
+			->distinct()
+			->join('reports', 'reports.player', '=', 'players.id')
+			->whereRaw('reports.game IN (
+				SELECT games.id 
+				FROM reports
+				JOIN games ON games.id =  reports.game
+				JOIN rounds ON rounds.id = games.round
+				WHERE reports.player = '.DB::getPdo()->quote($this->id).'
+				AND rounds.tournament = '.DB::getPdo()->quote($tournament->id).'
+			)')->where('players.id', '<>', $this->id);
 	}
 	
 	public function updateScore($tournament) {
@@ -48,6 +45,16 @@ class Player extends Eloquent {
 					'destruction' => $scores->destruction,
 				)
 			);
+	}
+	
+	public function updateSos($tournament) {
+	
+		$opponents = $this->opponents($tournament)->get();
+		$sos = $tournament->playersReports($opponents)->sum('victory');
+		DB::table('players_tournaments')
+			->where('player', '=', $this->id)
+			->where('tournament', '=', $tournament->id)
+			->update(array('sos' => $sos));
 	}
 }
  

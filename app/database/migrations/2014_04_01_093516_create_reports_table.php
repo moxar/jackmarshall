@@ -15,7 +15,8 @@ class CreateReportsTable extends Migration {
 		Schema::create('reports', function(Blueprint $table)
 		{
 			$table->increments('id')->unsigned();
-			// $table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->integer('game')->unsigned();
 			$table->integer('player')->unsigned();
 			$table->boolean('victory')->nullable();

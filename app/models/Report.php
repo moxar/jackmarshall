@@ -26,14 +26,28 @@ class Report extends Eloquent {
 		
 		return $this->tournament()->user();
 	}
+	
+	public function reset() {
+		
+		$this->victory = 0;
+		$this->control = 0;
+		$this->destruction = 0;
+	}
 }
 
 Report::saved(function($report) {
 
-	$report->player()->updateScore($report->tournament());
+	$tournament = $report->tournament();
+	$player = $report->player();
+	$player->updateScore($tournament);
+	$opponents = $player->opponents($tournament)->get();
+	foreach($opponents as $opponent) {
+		$opponent->updateSos($tournament);
+	}
 });
 
-Report::deleted(function($report) {
+Report::deleting(function($report) {
 
-	$report->player()->updateScore($report->tournament());
+	$report->reset();
+	$report->save();
 });
