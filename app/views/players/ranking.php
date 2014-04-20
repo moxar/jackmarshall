@@ -1,4 +1,4 @@
-			<section id="rankingSection">
+			<section class="container" id="rankingSection">
 				<h1>Classement</h1>
 				<table class="table table-striped table-condensed table-hover">
 					<thead>

@@ -10,19 +10,16 @@ class RoundsController extends BaseController {
 		$lastRound = $tournament->rounds()->orderBy('number', 'DESC')->first();
 		$round = new Round;
 		$round->number = empty($lastRound) ? 1 : $lastRound->number + 1;
-		$round->tournament = $tournament->id;
-		$round->placeHolder = true;
-		
-		$games = $round->assignPlayersToGames();
 		
 		$players = $tournament->orderedPlayers()->get();
 		
-		$this->display(array('rounds.update', 'tournaments.ranking'), array(
-			'round' => $round,
-			'games' => $games,
-			'players' => $players,
-		));
 		
+		$this->display(array('rounds.create', 'players.ranking'), array(
+			'tournament' => $tournament,
+			'round' => $round,
+			'players' => $players,
+			'ppg' => 2,
+		));
 	}
 	
 	public function postCreate($tournament) {
@@ -43,7 +40,6 @@ class RoundsController extends BaseController {
 	
 		$tournament = $round->tournament();
 		if($round->user() != Auth::user()) return Redirect::to('tournaments/'.$tournament->id);
-		$round->placeHolder = false;
 		
 		$games = $round->games()->get();
 		
@@ -65,20 +61,11 @@ class RoundsController extends BaseController {
 		
 		$players = $tournament->orderedPlayers()->get();
 		
-		$this->display(array('rounds.update', 'tournaments.ranking'), array(
+		$this->display(array('reports.update', 'players.ranking'), array(
 			'round' => $round,
 			'games' => $games,
 			'players' => $players,
 		));
-	}
-	
-	public function postUpdate($round) {
-	
-		if($round->tournament()->user != Auth::user()->id) return Redirect::to('tournaments');
-		
-		App::make('GamesController')->updateMultiple($round);
-		
-		return Redirect::to('rounds/'.$round->id.'/update');
 	}
 	
 	public function delete($round) {

@@ -36,12 +36,13 @@ class ReportsController extends BaseController {
 		return Redirect::back();
 	}
 	
-	public function createMultiple($game) {
+	public function createMultiple($object, $game) {
 			
-		foreach($game->players as $player) {
-		
+			
+		foreach($game['players'] as $player) {
+	
 			$report = new Report;
-			$report->game = $game->id;
+			$report->game = $object->id;
 			$report->player = $player;
 			$report->save();
 		}

@@ -125,7 +125,7 @@ class GameTableSeeder extends Seeder {
 		
 		foreach($rounds as $round) {
 			for($gt = 1; $gt <= $round->tournament()->players()->count() / 2; $gt++) {
-				$games[] = array('round' => $round->id, 'slug' => 'ronde '.$round->number.': table '.$gt);
+				$games[] = array('round' => $round->id, 'slug' => 'T '.$gt);
 			}
 		}
 		

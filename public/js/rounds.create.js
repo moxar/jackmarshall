@@ -7,6 +7,39 @@ function PlayerPool(selector) {
     var self = this;
 	var node = $(selector);
 	var cells = node.find('.row + .row .cell + .cell');
+	var originalOrder;
+	
+	construct: {
+		originalOrder = [];
+		cells.each(function(){
+			originalOrder.push({
+				'name': $(this).find('span').text(),
+				'id': $(this).find('input').val()
+			});
+		});
+	}
+	
+	self.shuffle = function() {
+		var players = [];
+		cells.each(function(){
+			players.push({
+				'name': $(this).find('span').text(),
+				'id': $(this).find('input').val()
+			});
+		});
+		players.shuffle();
+		for(pt = 0; pt < players.length; pt++) {
+			cells.eq(pt).find('span').text(players[pt].name);
+			cells.eq(pt).find('input').val(players[pt].id);
+		}
+	};
+	
+	self.order = function() {
+		for(pt = 0; pt < originalOrder.length; pt++) {
+			cells.eq(pt).find('span').text(originalOrder[pt].name);
+			cells.eq(pt).find('input').val(originalOrder[pt].id);
+		}
+	}
 	
 	node.css({
 		'width': cells.outerWidth(true) * node.children().first().children().length
@@ -33,6 +66,14 @@ function PlayerPool(selector) {
 			})
 		},
 		hoverClass: 'active'
-	})
+	});
+	
+	$('#shuffleButton').click(function(){
+		self.shuffle();
+	});
+	
+	$('#orderButton').click(function(){
+		self.order();
+	});
     
 };
