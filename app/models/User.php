@@ -64,8 +64,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return 'remember_token';
 	}
 	
-	public function players()
-	{
+	public function players() {
+	
 		return $this->hasMany('Player', 'user');
 	}
 	
@@ -74,8 +74,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
  		return $this->hasMany('Player', 'user')->where('players.name', '<>', Player::GHOST);
 	}
 	
-	public function tournaments()
-	{
+	public function tournaments() {
+	
 		return $this->hasMany('Tournament', 'user');
 	}
 

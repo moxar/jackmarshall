@@ -24,6 +24,31 @@ class Player extends Eloquent {
 					WHERE reports.player = ".DB::getPdo()->quote($this->id)."
 				)")->where('players.id', '<>', $this->id);
 	}
+	
+	public function updateScore($tournament) {
+		
+		$scores = $tournament->playerReports($this)
+			->select(
+				array(
+					DB::raw('SUM(reports.victory) AS victory'),
+					DB::raw('SUM(reports.control) AS control'),
+					DB::raw('SUM(reports.destruction) AS destruction'),
+				)
+			)
+			->groupBy('reports.player')
+			->first();
+	
+		DB::table('players_tournaments')
+			->where('player', '=', $this->id)
+			->where('tournament', '=', $tournament->id)
+			->update(
+				array(
+					'victory' => $scores->victory,
+					'control' => $scores->control,
+					'destruction' => $scores->destruction,
+				)
+			);
+	}
 }
  
  

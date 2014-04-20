@@ -33,14 +33,22 @@ class Tournament extends Eloquent {
 	
 	public function games() {
 	
-        return $this->rounds()->games();
+        return $this->hasManyThrough('Game', 'Round', 'tournament', 'round');
 	}
 	
 	public function reports() {
 	
-		return $this->rounds()->games()->reports();
+		return Report::where('tournaments.id', '=', $this->id)
+			->join('games', 'games.id', '=', 'reports.game')
+			->join('rounds', 'rounds.id', '=', 'games.round')
+			->join('tournaments', 'tournaments.id', '=', 'rounds.tournament');
 	}
 	
+	public function playerReports($player) {
+		
+		return $this->reports()->where('reports.player', '=', $player->id);
+	}
+				
 	public function user() {
 	
 		return $this->belongsTo('User', 'user')->first();
