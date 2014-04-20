@@ -53,3 +53,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 }
+
+User::deleting(function($user) {
+	
+	$tournaments = $user->tournaments()->get();
+	foreach($tournaments as $tournament) {
+		$tournament->delete();
+	}
+	$user->players()->delete();
+});

@@ -86,7 +86,7 @@ class TournamentsController extends BaseController {
 		}
 		
 		if(count(Input::get('newPlayers')) + count(Input::get('players')) % 2 != 0) {
-			$tournament->players()->attach(Player::fantom()->id);
+			$tournament->players()->attach(User::fantom()->id);
 		}
 		
 		return Redirect::to('tournaments/'.$tournament->id);

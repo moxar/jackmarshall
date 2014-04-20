@@ -34,7 +34,14 @@ class Player extends Eloquent {
 			)
 			->groupBy('reports.player')
 			->first();
-	
+			
+		if(is_null($scores)) {
+			$scores = new StdClass;
+			$scores->victory = 0;
+			$scores->control = 0;
+			$scores->destruction = 0;
+		}
+		
 		DB::table('players_tournaments')
 			->where('player', '=', $this->id)
 			->where('tournament', '=', $tournament->id)
@@ -57,6 +64,5 @@ class Player extends Eloquent {
 			->update(array('sos' => $sos));
 	}
 }
- 
  
 

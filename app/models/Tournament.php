@@ -66,7 +66,8 @@ class Tournament extends Eloquent {
 
 Tournament::deleting(function($tournament) {
 
-	foreach($tournament->rounds()->get() as $round) {
+	$rounds = $tournament->rounds()->get();
+	foreach($rounds as $round) {
 		$round->delete();
 	}
 	$tournament->players()->detach();
