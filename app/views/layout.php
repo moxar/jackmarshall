@@ -16,6 +16,8 @@
 		
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="shortcut icon" href="css/favicon.png" type="image/x-icon" />
+		
+		<script type="text/javascript" src="js/arrayX.js"></script>
 	</head>
 	<body>
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">
@@ -44,8 +46,20 @@ else
 			</div>
 		</header>
 		<section>
+<?php
+if(!is_array($content)) {
+?>
 			<?php echo $content; ?>
+<?php
+}
+else {
+	foreach($content as $view) {
+?>
+			<?php echo $view; ?>
+<?php
+	}
+}
+?>
 		</section>
 	</body>
 </html>
-

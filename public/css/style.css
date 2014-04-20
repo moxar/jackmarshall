@@ -31,3 +31,30 @@ header a {
 .inactive {
 	background-color: #FFFFFF;
 }
+
+.scoreLink:hover {
+	cursor: pointer;
+}
+
+.placeHolder {
+	margin: 5px;
+	border: solid black 1px;
+	width: 172px;
+	padding: 2px;
+	text-align: center;
+}
+
+.cell.th {
+	font-weight: bold;
+}
+
+.cell {
+	display: inline-block;
+	margin: 5px;
+	border: solid black 1px;
+	padding-top: 10px;
+	width: 150px;
+	height: 45px;
+	text-align: center;
+	cursor: pointer;
+}

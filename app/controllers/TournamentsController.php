@@ -9,24 +9,33 @@ class TournamentsController extends BaseController {
 	
 	public function listing() {
 				
-		$this->display('tournaments.listing', array(
+		$this->display('tournaments.table', array(
 			'tournaments' => Tournament::get()
 		));
+	}
+	
+	public function ranking($tournament) {
+		
+		$players = $tournament->orderedPlayers()->get();
+		
+		return View::make('players.ranking', array('players' => $players));
 	}
 	
 	public function show($tournament) {
 	
 		$players = $tournament->orderedPlayers()->get();
 		
-		$this->display('tournaments.show', array(
+		$this->display(array('rounds.table', 'players.ranking'), array(
 			'tournament' => $tournament,
-			'players' => $players
-		));
+			'players' => $players,
+		)
+		);
 	}
 	
 	public function getCreate() {
 				
-		$this->display('tournaments.update', array(
+		$this->display(array('tournaments.create', 'players.management'), array(
+			'players' => Auth::user()->playersButFantom()->get(),
 			'tournament' => new Tournament,
 			'tournamentPlayers' => array()
 		));
@@ -50,7 +59,8 @@ class TournamentsController extends BaseController {
 			$tournamentPlayers[] = $player->id;
 		}
 				
-		$this->display('tournaments.update', array(
+		$this->display(array('tournaments.update', 'players.management'), array(
+			'players' => Auth::user()->playersButFantom()->get(),
 			'tournament' => $tournament,
 			'tournamentPlayers' => $tournamentPlayers
 		));
@@ -86,7 +96,7 @@ class TournamentsController extends BaseController {
 		}
 		
 		if(count(Input::get('newPlayers')) + count(Input::get('players')) % 2 != 0) {
-			$tournament->players()->attach(Player::fantom()->id);
+			$tournament->players()->attach(User::fantom()->id);
 		}
 		
 		return Redirect::to('tournaments/'.$tournament->id);
