@@ -5,78 +5,60 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
+	const GHOST = "fantôme";
 	protected $hidden = array('password');
 
-	/**
-	 * Get the unique identifier for the user.
-	 *
-	 * @return mixed
-	 */
-	public function getAuthIdentifier()
-	{
+	public function getAuthIdentifier() {
 		return $this->getKey();
 	}
 
-	/**
-	 * Get the password for the user.
-	 *
-	 * @return string
-	 */
-	public function getAuthPassword()
-	{
+	public function getAuthPassword() {
 		return $this->password;
 	}
 
-	/**
-	 * Get the e-mail address where password reminders are sent.
-	 *
-	 * @return string
-	 */
-	public function getReminderEmail()
-	{
+	public function getReminderEmail() {
 		return $this->email;
 	}
 	
-	public function getRememberToken()
-	{
+	public function getRememberToken() {
 		return $this->remember_token;
 	}
 
-	public function setRememberToken($value)
-	{
+	public function setRememberToken($value) {
 		$this->remember_token = $value;
 	}
 
-	public function getRememberTokenName()
-	{
+	public function getRememberTokenName() {
 		return 'remember_token';
 	}
 	
-	public function players()
-	{
+	public function players() {
+	
 		return $this->hasMany('Player', 'user');
 	}
 	
 	public function playersButFantom() {
 	
- 		return $this->hasMany('Player', 'user')->where('players.name', '<>', Player::GHOST);
+ 		return $this->hasMany('Player', 'user')->where('players.name', '<>', User::GHOST);
 	}
 	
-	public function tournaments()
-	{
+	public static function fantom() {
+	
+		return Player::where('name', '=', User::GHOST)->where('user', '=', Auth::user()->id)->first();
+	}
+	
+	public function tournaments() {
+	
 		return $this->hasMany('Tournament', 'user');
 	}
 
 }
+
+User::deleting(function($user) {
+	
+	$tournaments = $user->tournaments()->get();
+	foreach($tournaments as $tournament) {
+		$tournament->delete();
+	}
+	$user->players()->delete();
+});

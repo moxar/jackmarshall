@@ -17,10 +17,10 @@ class CreatePlayersTournamentsTable extends Migration {
 			$table->increments('id')->unsigned();
 			$table->integer('player');
 			$table->integer('tournament');
-			$table->integer('victory')->default(0);
-			$table->integer('control')->default(0);
-			$table->integer('destruction')->default(0);
-			$table->integer('sos')->default(0);
+			$table->integer('victory')->nullable();
+			$table->integer('control')->nullable();
+			$table->integer('destruction')->nullable();
+			$table->integer('sos')->nullable();
 		});
 	}
 

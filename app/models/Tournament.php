@@ -2,6 +2,11 @@
 
 class Tournament extends Eloquent {
 	
+	public function user() {
+	
+		return $this->belongsTo('User', 'user')->first();
+	}
+	
 	public function players() {
 	
  		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
@@ -23,7 +28,7 @@ class Tournament extends Eloquent {
 	
 	public function playersButFantom() {
 	
- 		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player')->where('players.name', '<>', Player::GHOST);
+ 		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player')->where('players.name', '<>', User::GHOST);
 	}
 	
 	public function rounds() {
@@ -33,33 +38,36 @@ class Tournament extends Eloquent {
 	
 	public function games() {
 	
-        return $this->rounds()->games();
+        return $this->hasManyThrough('Game', 'Round', 'tournament', 'round');
 	}
 	
 	public function reports() {
 	
-		return $this->rounds()->games()->reports();
+		return Report::where('tournaments.id', '=', $this->id)
+			->join('games', 'games.id', '=', 'reports.game')
+			->join('rounds', 'rounds.id', '=', 'games.round')
+			->join('tournaments', 'tournaments.id', '=', 'rounds.tournament');
 	}
 	
-	public function user() {
-	
-		return $this->belongsTo('User', 'user')->first();
-	}
-	
-	public function updateSos() {
+	public function playerReports($player) {
 		
-		foreach($this->players()->get() as $player) {
-			$sos = $player->opponents($this)->join('players_tournaments', 'players.id', '=', 'players_tournaments.player')->sum('players_tournaments.victory');
-			$this->players()->updateExistingPivot($player->id, array(
-				'sos' => empty($sos) ? 0 : $sos
-			), true);
+		return $this->reports()->where('reports.player', '=', $player->id);
+	}
+	
+	public function playersReports($players) {
+		
+		$ids = array();
+		foreach($players as $player) {
+			$ids[] = $player->id;
 		}
+		return $this->reports()->whereIn('reports.player', $ids);
 	}
 }
 
 Tournament::deleting(function($tournament) {
 
-	foreach($tournament->rounds()->get() as $round) {
+	$rounds = $tournament->rounds()->get();
+	foreach($rounds as $round) {
 		$round->delete();
 	}
 	$tournament->players()->detach();
