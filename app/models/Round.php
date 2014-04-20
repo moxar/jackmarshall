@@ -72,7 +72,17 @@ class Round extends Eloquent {
  
 Round::deleting(function($round) {
 
-	foreach($round->games()->get() as $game) {
-		$game->delete();
+	$games = $round->games()->get();
+	$gamesToDelete = array();
+	foreach($games as $game) {
+		$gamesToDelete[] = $game->id;
+	}
+	Report::whereIn('game', $gamesToDelete)->delete();
+	Game::whereIn('id', $gamesToDelete)->delete();
+	$tournament = $round->tournament();
+	$players = $tournament->players()->get();
+	foreach($players as $player) {
+		$player->updateScore($tournament);
+		$player->updateSos($tournament);
 	}
 });

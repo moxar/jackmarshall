@@ -27,65 +27,22 @@ class Report extends Eloquent {
 		return $this->tournament()->user();
 	}
 	
-	public function reducePlayersScore() {
-
-		$player = $this->tournament()->players()
-			->select('*')
-			->addSelect('victory')
-			->addSelect('control')
-			->addSelect('destruction')
-			->addSelect('sos')
-			->where('players.id', '=', $this->player()->id)
-			->first();
-			
-		$this->tournament()->players()->updateExistingPivot($player->id, array(
-			"victory" => $player->victory - Report::find($this->id)->victory,
-			"control" => $player->control - Report::find($this->id)->control,
-			"destruction" => $player->destruction - Report::find($this->id)->destruction,
-		), true);
-	}
-	
-	public function improvePlayersScore() {
-
-		$player = $this->tournament()->players()
-			->select('*')
-			->addSelect('victory')
-			->addSelect('control')
-			->addSelect('destruction')
-			->where('players.id', '=', $this->player()->id)
-			->first();
+	public function reset() {
 		
-		$this->tournament()->players()->updateExistingPivot($player->id, array(
-			"victory" => $player->victory + $this->victory,
-			"control" => $player->control + $this->control,
-			"destruction" => $player->destruction + $this->destruction,
-		), true);
+		$this->victory = 0;
+		$this->control = 0;
+		$this->destruction = 0;
+		$this->save();
 	}
 }
 
-Report::updating(function($report) {
+Report::saving(function($report) {
 
-	$report->reducePlayersScore();
-});
-
-Report::updated(function($report) {
-
-	$report->improvePlayersScore();
-	$report->tournament()->updateSos();
-});
-
-Report::deleting(function($report) {
-
-	$report->reducePlayersScore();
-});
-
-Report::created(function($report) {
-
-	$report->improvePlayersScore();
-	$report->tournament()->updateSos();
-});
-
-Report::deleted(function($report) {
-
-	$report->tournament()->updateSos();
+	$tournament = $report->tournament();
+	$player = $report->player();
+	$player->updateScore($tournament);
+	$opponents = $player->opponents($tournament)->get();
+	foreach($opponents as $opponent) {
+		$opponent->updateSos($tournament);
+	}
 });

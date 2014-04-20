@@ -23,10 +23,3 @@ class Game extends Eloquent {
 	}
 }
  
-Game::deleting(function($game) {
-
-	foreach($game->reports()->get() as $report) {
-		$report->delete();
-	}
-});
- 
