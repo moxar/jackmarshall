@@ -10,8 +10,8 @@ function TournamentCreateForm(selector) {
 	
 	self.addPlayer = function() {
 		var name = $('#addPlayerText').val();
-		var player = $('<p/>');
-		player.addClass('checker active newPlayer');
+		var player = $('<section/>');
+		player.addClass('checker active newPlayer cell');
 		player.append($('<span/>').text(name));
 		player.append($('<input/>').attr({
 			'type': 'hidden',
@@ -39,11 +39,11 @@ function TournamentCreateForm(selector) {
 		self.addPlayer();
 	});
 	
-	$(document).on('click', 'p.registeredPlayer', function() {
+	$(document).on('click', 'section.registeredPlayer', function() {
 		self.togglePlayerStatus($(this));
 	});
 	
-	$(document).on('click', 'p.newPlayer', function() {
+	$(document).on('click', 'section.newPlayer', function() {
 		self.removePlayer($(this));
 	});
 }

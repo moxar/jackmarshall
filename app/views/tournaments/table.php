@@ -1,7 +1,7 @@
-				<section class="container">
+			<section class="container">
+				<nav>Tournois</nav>
 				<h1>Tournois</h1>
 				<table class="table table-striped table-condensed table-hover">
-					<caption class="h2">Liste des tournois</caption>
 					<thead>
 						<tr>
 							<th>Nom</th>

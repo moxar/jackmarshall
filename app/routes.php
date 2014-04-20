@@ -87,4 +87,3 @@ Route::get('tournaments/{tournament}', 'TournamentsController@show');
 
 Route::get('validate/signin', 'ValidationsController@validateSignin');
 Route::get('validate/login', 'ValidationsController@validateLogin');
-Route::get('test', 'TestController@test');
