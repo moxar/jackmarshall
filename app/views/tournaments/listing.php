@@ -4,11 +4,9 @@
 					<caption class="h2">Liste des tournois</caption>
 					<thead>
 						<tr>
-							<th>Nom du tournois</th>
-							<th>Date du tournois</th>
-							<th>Nombre de participants</th>
-							<th><!-- GET --></th>
-							<th><!-- UPD --></th>
+							<th>Nom</th>
+							<th>Date</th>
+							<th>Participants</th>
 							<th><!-- DEL --></th>
 						</tr>
 					</thead>
@@ -18,18 +16,13 @@ foreach($tournaments as $tournament)
 {
 ?>
 						<tr>
-							<td><?php echo $tournament->name; ?></td>
-							<td><?php echo $tournament->created_at; ?></td>
-							<td><?php echo count($tournament->playersButFantom); ?></td>
 							<td>
-								<a href="tournaments/<?php echo $tournament->id; ?>">
-									<span class="glyphicon glyphicon-circle-arrow-right"></span>
-								</a>
+								<a href="tournaments/<?php echo $tournament->id; ?>"><?php echo $tournament->name; ?></a>								
 							</td>
+							<td><?php echo $tournament->created_at; ?></td>
 							<td>
-								<a href="tournaments/<?php echo $tournament->id; ?>/update">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</a>
+								<?php echo count($tournament->playersButFantom); ?>
+								<a href="tournaments/<?php echo $tournament->id; ?>/update">(Contrôler)</a>
 							</td>
 							<td>
 								<a href="tournaments/<?php echo $tournament->id; ?>/delete">
@@ -41,7 +34,7 @@ foreach($tournaments as $tournament)
 }
 ?>
 						<tr>
-							<td colspan="6"><a href="tournaments/create">Nouveau tournois</a></td>
+							<td colspan="6"><a href="tournaments/create"><span class="glyphicon glyphicon-plus"></span> Nouveau tournois</a></td>
 						</tr>
 					</tbody>
 				</table>

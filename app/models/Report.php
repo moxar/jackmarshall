@@ -36,7 +36,7 @@ class Report extends Eloquent {
 	}
 }
 
-Report::saving(function($report) {
+Report::saved(function($report) {
 
 	$tournament = $report->tournament();
 	$player = $report->player();

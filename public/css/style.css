@@ -31,3 +31,7 @@ header a {
 .inactive {
 	background-color: #FFFFFF;
 }
+
+.scoreLink:hover {
+	cursor: pointer;
+}

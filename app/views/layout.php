@@ -44,7 +44,20 @@ else
 			</div>
 		</header>
 		<section>
+<?php
+if(!is_array($content)) {
+?>
 			<?php echo $content; ?>
+<?php
+}
+else {
+	foreach($content as $view) {
+?>
+			<?php echo $view; ?>
+<?php
+	}
+}
+?>
 		</section>
 	</body>
 </html>

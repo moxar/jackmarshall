@@ -6,7 +6,14 @@ class BaseController extends Controller {
     
     protected function display($view, $data = array())
     {
-	    $this->layout->content = View::make($view, $data);
+		if(is_array($view)) {
+			foreach($view as $v) {
+				$this->layout->content[] = View::make($v, $data);
+			}
+		}
+		else {
+			$this->layout->content = View::make($view, $data);
+		}
     }
 
     /**

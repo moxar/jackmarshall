@@ -16,12 +16,18 @@ class ReportsController extends BaseController {
 	
 	public function postUpdate($report) {
 		
-		$report->victory = Input::get('victory') ? 1 : 0;
-		$report->control = Input::get('control');
-		$report->destruction = Input::get('destruction');
+		if(!is_null(Input::get('victory'))) $report->victory = Input::get('victory');
+		if(!is_null(Input::get('control'))) $report->control = Input::get('control');
+		if(!is_null(Input::get('destruction'))) $report->destruction = Input::get('destruction');
 		$report->save();
 		
-		return Redirect::to('rounds/'.$report->round()->id.'/update');
+		if(Request::ajax()) {
+			return App::make('tournamentsController')->ranking($report->tournament());
+		}
+		else
+		{
+			return Redirect::to('rounds/'.$report->round()->id.'/update');
+		}
 	}
 	
 	public function delete($report) {
