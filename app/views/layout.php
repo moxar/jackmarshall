@@ -22,7 +22,7 @@
 	<body>
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">
 			<div class="container">
-				<a href="/" class="navbar-brand">Jack'Marshall</a>
+				<a href="./" class="navbar-brand">Jack'Marshall</a>
 				<ul class="nav navbar-nav">
 					<li><a href="tournaments">Tournois</a></li>
 				</ul>

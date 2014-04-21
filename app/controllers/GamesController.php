@@ -11,7 +11,7 @@ class GamesController extends BaseController {
 			$g->slug = $game['slug'];
 			$g->save();
 			
-			App::make('reportsController')->createMultiple($g, $game);
+			App::make('ReportsController')->createMultiple($g, $game);
 		}
 	}
 }

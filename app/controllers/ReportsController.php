@@ -22,7 +22,7 @@ class ReportsController extends BaseController {
 		$report->save();
 		
 		if(Request::ajax()) {
-			return App::make('tournamentsController')->ranking($report->tournament());
+			return App::make('TournamentsController')->ranking($report->tournament());
 		}
 		else
 		{
