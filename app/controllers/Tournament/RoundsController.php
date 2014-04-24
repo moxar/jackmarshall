@@ -19,7 +19,7 @@ class RoundsController extends BaseController {
 		$round = new Round;
 		$round->number = empty($lastRound) ? 1 : $lastRound->number + 1;
 		$players = $tournament->orderedPlayers()->get();
-		$this->display(array('rounds.create', 'players.ranking'), array(
+		$this->display(array('tournament.rounds.create', 'tournament.players.ranking'), array(
 			'tournament' => $tournament,
 			'round' => $round,
 			'players' => $players,
@@ -59,7 +59,7 @@ class RoundsController extends BaseController {
 
 		$players = $tournament->orderedPlayers()->get();
 
-		$this->display(array('reports.update', 'players.ranking'), array(
+		$this->display(array('tournament.reports.update', 'tournament.players.ranking'), array(
 			'round' => $round,
 			'games' => $games,
 			'players' => $players,

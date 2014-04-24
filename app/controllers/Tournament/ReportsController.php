@@ -15,7 +15,7 @@ class ReportsController extends BaseController {
 	}
 
 	public function getUpdate($report) {
-		$this->display('reports.update', array(
+		$this->display('tournament.reports.update', array(
 			'report' => $report
 		));
 	}
