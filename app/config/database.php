@@ -48,7 +48,7 @@ return array(
 
 		'jackmarshall' => array(
 			'driver'   => 'sqlite',
-			'database' => __DIR__.'/../database/jackmarshall.sqlite',
+			'database' => app_path().'/database/jackmarshall.sqlite',
 			'prefix'   => '',
 		),
 

@@ -1,6 +1,3 @@
-			<section class="container">
-				<script type="text/javascript" src="js/rounds.create.js"></script>
-
 				<nav>
 					<a href="tournaments/<?php echo $tournament->id; ?>"><?php echo $tournament->name; ?></a>
 					&gt; Ronde - <?php echo $round->number; ?>
@@ -11,7 +8,7 @@
 					<section id="playerPool">
 						<section class="row">
 							<section class="cell th">Ronde <?php echo $round->number; ?></section><!--
-<?php				
+<?php
 for($ct = 1; $ct <= $ppg; $ct++) {
 ?>
 							--><section class="cell th">Joueur <?php echo $ct; ?></section><!--
@@ -48,4 +45,4 @@ for($rt = 1; $rt <= ($players->count() / $ppg); $rt++) {
 						<input type="button" value="Classement automatique" id="orderButton" class="btn btn-default" />
 					</fieldset>
 				</form>
-			
+				<script type="text/javascript" src="js/rounds.create.js"></script>

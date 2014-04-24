@@ -1,5 +1,3 @@
-			<section class="container">
-				<script type="text/javascript" src="js/players.create.js"></script>
 				<form method="POST" id="#tournamentCreateForm">
 					<fieldset>
 						<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" class="form-control"/></label>
@@ -8,7 +6,7 @@
 					<fieldset id="registeredPlayersFieldset">
 <?php
 $pt = 0;
-while($pt < count($players)) {		
+while($pt < count($players)) {
 	for($ct = 0; $ct < 6; $ct++)
 	{
 		if(!isset($players[$pt])) break 2;
@@ -43,4 +41,4 @@ while($pt < count($players)) {
 					<fieldset id="newPlayersFieldset">
 					</fieldset>
 				</form>
-			</section>
+				<script type="text/javascript" src="js/players.create.js"></script>

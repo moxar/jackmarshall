@@ -1,4 +1,3 @@
-			<section class="container" id="rankingSection">
 				<h1>Classement</h1>
 				<table class="table table-striped table-condensed table-hover">
 					<thead>
@@ -12,8 +11,7 @@
 					</thead>
 					<tbody>
 <?php
-foreach($players as $player)
-{
+foreach($players as $player) {
 ?>
 					<tr>
 						<td><?php echo $player->name; ?></td>
@@ -27,4 +25,3 @@ foreach($players as $player)
 ?>
 					</tbody>
 				</table>
-			</section>

@@ -1,4 +1,3 @@
-			<section class="container">
 				<nav>
 					<a href="tournaments/<?php echo $round->tournament()->id; ?>"><?php echo $round->tournament()->name; ?></a>
 					&gt; Ronde - <?php echo $round->number; ?>
@@ -34,9 +33,7 @@ foreach($games as $game) {
 									<p><?php echo $game->slug; ?></p>
 								</td>
 <?php
-
 	for($pt = 0; $pt < count($game->players); $pt++) {
-		
 		$player = $game->players[$pt];
 		$report = $player->report;
 ?>
@@ -68,4 +65,3 @@ foreach($games as $game) {
 						</tbody>
 					</table>
 				</form>
-			</section>

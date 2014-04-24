@@ -10,8 +10,9 @@ class BaseController extends Controller {
 			$this->layout->$key = $value;
 		}
 		if(is_array($view)) {
+			$this->layout->content = "";
 			foreach($view as $v) {
-				$this->layout->content .= View::make($view, $data);
+				$this->layout->content .= View::make($v, $data);
 			}
 		} else {
 			$this->layout->content = View::make($view, $data);
