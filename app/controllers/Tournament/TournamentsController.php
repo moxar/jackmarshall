@@ -17,7 +17,7 @@ class TournamentsController extends BaseController {
 	}
 
 	public function listing() {
-		$this->display('tournaments.table', array(
+		$this->display('tournament.tournaments.table', array(
 			'tournaments' => Tournament::get()
 		));
 	}
@@ -30,8 +30,8 @@ class TournamentsController extends BaseController {
 	public function show($tournament) {
 		$players = $tournament->orderedPlayers()->get();
 		$this->display(array(
-				'rounds.table',
-				'players.ranking',
+				'tournament.rounds.table',
+				'tournament.players.ranking',
 			), array(
 				'tournament' => $tournament,
 				'players' => $players,
@@ -40,7 +40,7 @@ class TournamentsController extends BaseController {
 	}
 
 	public function getCreate() {
-		$this->display(array('tournaments.create', 'players.management'), array(
+		$this->display(array('tournament.tournaments.create', 'tournament.players.management'), array(
 			'players' => Auth::user()->playersButFantom()->get(),
 			'tournament' => new Tournament,
 			'tournamentPlayers' => array()
@@ -59,7 +59,7 @@ class TournamentsController extends BaseController {
 		foreach($tournament->players as $player) {
 			$tournamentPlayers[] = $player->id;
 		}
-		$this->display(array('tournaments.update', 'players.management'), array(
+		$this->display(array('tournament.tournaments.update', 'tournament.players.management'), array(
 			'players' => Auth::user()->playersButFantom()->get(),
 			'tournament' => $tournament,
 			'tournamentPlayers' => $tournamentPlayers

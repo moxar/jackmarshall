@@ -13,7 +13,7 @@ use Validator;
 class UsersController extends BaseController {
 
 	public function getLogin() {
-		$this->display('users.login');
+		$this->display('tournament.users.login');
 	}
 
 	public function postLogin() {
@@ -31,7 +31,7 @@ class UsersController extends BaseController {
 	}
 
 	public function getSignin() {
-		$this->display('users.signin');
+		$this->display('tournament.users.signin');
 	}
 
 	public function postSignin() {
