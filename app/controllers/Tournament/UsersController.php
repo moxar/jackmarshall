@@ -1,34 +1,40 @@
 <?php
 
+namespace Tournament;
+
+use Auth;
+use BaseController;
+use Hash;
+use Input;
+use Redirect;
+use User;
+use Validator;
+
 class UsersController extends BaseController {
 
 	public function getLogin() {
-	
 		$this->display('users.login');
 	}
-	
+
 	public function postLogin() {
-	
 		if(Auth::attempt(array(
 			'name' => Input::get('name'),
 			'password' => Input::get('password')
 		)))
-		{					
+		{
  			return Redirect::intended('/');
 		}
 		else
 		{
-			 return Redirect::to('login');
+			return Redirect::to('login');
 		}
 	}
-	
+
 	public function getSignin() {
-	
 		$this->display('users.signin');
 	}
-	
+
 	public function postSignin() {
-		
 		$validator = Validator::make(
  			array(
 				'name' => Input::get('name'),
@@ -42,9 +48,7 @@ class UsersController extends BaseController {
 				'confirm' => array('required', 'min:5', 'same:password')
 			)
 		);
-		
-		if($validator->passes())
-		{
+		if($validator->passes()) {
 			$user = new User();
 			$user->name = Input::get('name');
 			$user->password = Hash::make(Input::get('password'));
@@ -53,9 +57,8 @@ class UsersController extends BaseController {
 		}
 		return Redirect::to('/');
 	}
-	
+
 	public function logout() {
-		
 		Auth::logout();
 		return Redirect::to('/');
 	}
