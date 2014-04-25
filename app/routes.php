@@ -9,9 +9,10 @@ if(File::exists(app_path().'/routes/'.$domain.'.php')) {
 	include app_path().'/routes/www.php';
 }
 
-App::missing(function($exception)
-{
-	print_r($exception);
+View::composer('layout', function($view) use ($domain) {
+	if(View::exists($domain.'.menu')) {
+		$view->with('menu', View::make($domain.'.menu'));
+	}
 });
 
 ?>

@@ -2,6 +2,8 @@
 
 class BaseController extends Controller {
 
+	protected $layout = 'layout';
+
 	protected function display($view, $data = array())
 	{
 		foreach($data as $key => $value) {

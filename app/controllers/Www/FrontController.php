@@ -2,7 +2,9 @@
 
 namespace Www;
 
-class FrontController extends BaseController {
+use BaseController as Controller;
+
+class FrontController extends Controller {
 
 	public function index() {
 		$this->home();

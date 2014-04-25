@@ -1,6 +1,6 @@
 <?php
 
-namespace Builder;
+namespace Admin;
 
 use BaseController as Controller;
 
@@ -11,7 +11,7 @@ class FrontController extends Controller {
 	}
 
 	public function home() {
-		$this->display('builder.front.home');
+		$this->display('admin.front.home');
 	}
 }
 

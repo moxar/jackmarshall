@@ -18,6 +18,7 @@ class Users extends Migration {
 			$table->string('login');
 			$table->string('password');
 			$table->string('email');
+			$table->enum('rank', array('user', 'moderator', 'administrator'));
 			$table->timestamps();
 			$table->string('remember_token')->nullable();
 		});

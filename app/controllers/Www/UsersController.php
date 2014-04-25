@@ -3,6 +3,7 @@
 namespace Www;
 
 use Auth;
+use BaseController as Controller;
 use Hash;
 use Input;
 use Redirect;
@@ -10,7 +11,7 @@ use Session;
 use User;
 use Validator;
 
-class UsersController extends BaseController {
+class UsersController extends Controller {
 
 	public function signin() {
 		$this->display('www.users.signin');
