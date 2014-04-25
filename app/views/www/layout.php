@@ -15,13 +15,12 @@
 			<div class="container">
 				<a href="/" class="navbar-brand">Jack'Marshall</a>
 				<ul class="nav navbar-nav">
-					<li><a href="tournaments">Tournois</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 <?php
 if(Auth::check()) {
 ?>
-					<li><a href="logout">Déconnexion</a></li>
+					<li><a href="logout">Déconnexion (<?php echo Auth::user()->name; ?>)</a></li>
 <?php
 } else {
 ?>

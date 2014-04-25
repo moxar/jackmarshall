@@ -5,6 +5,8 @@ $domain = (count($host) == 3)?$host[0]:'www';
 
 if(File::exists(app_path().'/routes/'.$domain.'.php')) {
 	include app_path().'/routes/'.$domain.'.php';
+} else {
+	include app_path().'/routes/www.php';
 }
 
 ?>
