@@ -3,7 +3,6 @@
 namespace Www;
 
 use Auth;
-use BaseController;
 use Hash;
 use Input;
 use Redirect;

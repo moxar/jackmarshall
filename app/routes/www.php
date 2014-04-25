@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'Tournament\TournamentsController@listing');
+Route::get('/', 'Www\FrontController@index');
 Route::get('signin', 'Www\UsersController@signin');
 Route::post('signin', 'Www\UsersController@subscribe');
 Route::get('login', 'Www\UsersController@login');
