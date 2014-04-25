@@ -11,7 +11,7 @@
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<header class="navbar navbar-default navbar-static-top navbar-inverse">
+		<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
 			<div class="container">
 				<a href="/" class="navbar-brand">Jack'Marshall</a>
 				<ul class="nav navbar-nav">
@@ -33,14 +33,13 @@ if(Auth::check()) {
 				</ul>
 			</div>
 		</header>
-		<section>
+		<section class="container">
 <?php
 if(!is_array($content)) {
 ?>
 			<?php echo $content; ?>
 <?php
-}
-else {
+} else {
 	foreach($content as $view) {
 ?>
 			<?php echo $view; ?>

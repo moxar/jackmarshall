@@ -2,16 +2,15 @@
 
 class BaseController extends Controller {
 
-	protected $layout = 'layout';
-
 	protected function display($view, $data = array())
 	{
 		foreach($data as $key => $value) {
 			$this->layout->$key = $value;
 		}
 		if(is_array($view)) {
+			$this->layout->content = "";
 			foreach($view as $v) {
-				$this->layout->content .= View::make($view, $data);
+				$this->layout->content .= View::make($v, $data);
 			}
 		} else {
 			$this->layout->content = View::make($view, $data);
