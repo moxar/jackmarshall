@@ -2,17 +2,17 @@
 			<p>L'inscription à Jack'Marshall est rapide, sans douleur, et garantie sans surprise cachée. Contrairement à tout ce qui pourrait découler de son utilisation…</p>
 			<form class="form" role="form" method="POST">
 				<div class="form-group">
-					<label for="name" class="control-label">Nom</label>
-						<input type="text" name="name" id="name" placeholder="nom" value="<?php echo Input::old('name'); ?>" class="form-control" required>
+					<label for="login" class="control-label">Nom</label>
+						<input type="text" name="login" id="login" placeholder="identifiant" value="<?php echo Input::old('login'); ?>" class="form-control" required>
 						<p class="help-block">Le nom est utilisé à la fois pour vous connecter et pour vous repérer dans les tournois. Il est donc conseillé de ne pas y mettre n'importe quoi.</p>
 <?php
-if($errors->has('name')) {
+if($errors->has('login')) {
 ?>
 						<div class="alert alert-danger alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							<ul>
 <?php
-	foreach($errors->get('name') as $e) {
+	foreach($errors->get('login') as $e) {
 ?>
 								<li><?php echo $e; ?></li>
 <?php

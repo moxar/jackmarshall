@@ -11,8 +11,8 @@ if(Session::get('error') == true) {
 ?>
 			<form class="form" role="form" method="POST">
 				<div class="form-group">
-					<label for="name" class="control-label">Nom</label>
-						<input type="text" name="name" id="name" placeholder="nom" value="<?php echo Input::old('name'); ?>" class="form-control" required>
+					<label for="login" class="control-label">Nom</label>
+						<input type="text" name="login" id="login" placeholder="identifiant" value="<?php echo Input::old('login'); ?>" class="form-control" required>
 				</div>
 				<div class="form-group">
 					<label for="password" class="control-label">Mot de passe</label>

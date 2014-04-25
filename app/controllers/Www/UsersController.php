@@ -18,7 +18,7 @@ class UsersController extends BaseController {
 
 	public function subscribe() {
 		$validator = Validator::make(Input::all(), array(
-			'name' => array('required', 'unique:users,name'),
+			'login' => array('required', 'unique:users,login'),
 			'email' => array('required', 'email', 'unique:users,email'),
 			'password' => array('required', 'same:confirmation'),
 			'confirmation' => array('required', 'same:password')
@@ -29,7 +29,7 @@ class UsersController extends BaseController {
 		}
 
 		$user = new User();
-		$user->name = Input::get('name');
+		$user->login = Input::get('login');
 		$user->password = Hash::make(Input::get('password'));
 		$user->email = Input::get('email');
 		$user->save();
@@ -42,19 +42,19 @@ class UsersController extends BaseController {
 
 	public function connect() {
 		if(Auth::attempt(array(
-			'name' => Input::get('name'),
+			'login' => Input::get('login'),
 			'password' => Input::get('password')
 		))) {
  			return Redirect::intended('/');
 		}
 
 		Session::flash('error', true);
-		return Redirect::back();
+		return Redirect::back()->withInput();
 	}
 
 	public function disconnect() {
 		Auth::logout();
-		return Redirect::back('/');
+		return Redirect::back();
 	}
 }
 

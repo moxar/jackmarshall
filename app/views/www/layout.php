@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<base href="<?php echo Request::root(); ?>">
+		<base href="//<?php echo Helper::host(); ?>">
 		<title>Jack Marshall</title>
 		<link rel="shortcut icon" href="css/favicon.png" type="image/x-icon">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -15,12 +15,13 @@
 			<div class="container">
 				<a href="/" class="navbar-brand">Jack'Marshall</a>
 				<ul class="nav navbar-nav">
+					<li><a href="//builder.<?php echo Helper::host(); ?>">Builder</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 <?php
 if(Auth::check()) {
 ?>
-					<li><a href="logout">Déconnexion (<?php echo Auth::user()->name; ?>)</a></li>
+					<li><a href="logout">Déconnexion (<?php echo Auth::user()->login; ?>)</a></li>
 <?php
 } else {
 ?>
