@@ -1,6 +1,12 @@
 html body {
   padding-top: 50px;
 }
+html body .container {
+  width: 960px;
+}
 html body input.form-control {
   margin: 0.5em auto;
+}
+html body nav.contextual {
+  margin: 1em;
 }

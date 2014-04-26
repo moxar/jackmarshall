@@ -15,18 +15,4 @@ View::composer('layout', function($view) use ($domain) {
 	}
 });
 
-Route::bind('faction', function($value, $route) {
-	$faction = Faction::where('slug', $value)->first();
-	if($faction == null) {
-		throw new NotFoundException;
-	}
-	return $faction;
-});
-
-Route::filter('administrator', function() {
-	if(Auth::guest() || Auth::user()->rank != 'administrator') {
-		return Redirect::to(cross(':/login'));
-	}
-});
-
 ?>

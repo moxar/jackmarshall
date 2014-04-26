@@ -7,8 +7,10 @@
 		<link rel="shortcut icon" href="css/favicon.png" type="image/x-icon">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo cross(':/css/style.css'); ?>">
+		<script src="<?php echo cross(':/css/bootstrap-select.min.css'); ?>"></script>
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="<?php echo cross(':/js/bootstrap-select.min.js'); ?>"></script>
 	</head>
 	<body>
 		<header class="navbar navbar-default navbar-fixed-top navbar-inverse">
@@ -16,7 +18,7 @@
 				<a href="/" class="navbar-brand">Jack'Marshall</a>
 				<ul class="nav navbar-nav">
 <?php
-if(Auth::check() && Auth::user()->rank = 'administrator') {
+if(Auth::check() && Auth::user()->rank == 'administrator') {
 ?>
 					<li class="<?php if(sub() == 'admin') { echo 'active'; } ?>"><a href="<?php echo cross('admin'); ?>" >Admin</a></li>
 <?php

@@ -33,7 +33,9 @@ class UsersController extends Controller {
 		$user->login = Input::get('login');
 		$user->password = Hash::make(Input::get('password'));
 		$user->email = Input::get('email');
+		$user->rank = 'user';
 		$user->save();
+		Auth::login($user);
 		return Redirect::to('/');
 	}
 

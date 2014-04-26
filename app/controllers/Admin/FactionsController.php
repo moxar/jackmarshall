@@ -40,6 +40,34 @@ class FactionsController extends Controller {
 		$faction->name = Input::get('name');
 		$faction->image = Input::file('image');
 		$faction->save();
+
+		return Redirect::to(cross('/factions'));
+	}
+
+	public function edit($faction) {
+		$this->display('admin.factions.edit', array(
+			'faction' => $faction,
+		));
+	}
+
+	public function update($faction) {
+		$validator = Validator::make(Input::all(), array(
+			'name' => array('unique:factions,name'),
+			'image' => array('image'),
+		));
+
+		if($validator->fails()) {
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		if(Input::has('name')) {
+			$faction->name = Input::get('name');
+		}
+		if(Input::hasFile('image')) {
+			$faction->image = Input::file('image');
+		}
+		$faction->save();
+
 		return Redirect::to(cross('/factions'));
 	}
 

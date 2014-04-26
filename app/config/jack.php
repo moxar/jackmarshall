@@ -2,9 +2,9 @@
 
 return array(
 	'paths' => array(
-		'assets' => public_path(),
 		'factions' => 'images/factions',
 	),
+	'ranks' => array('user', 'moderator', 'administrator'),
 );
 
 ?>
