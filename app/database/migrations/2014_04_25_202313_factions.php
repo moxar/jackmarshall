@@ -17,9 +17,8 @@ class Factions extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('slug');
-			$table->integer('parent')->unsigned()->nullable();
 
-			$table->foreign('parent')->references('id')->on('factions');
+			$table->unique('slug');
 		});
 	}
 

@@ -15,4 +15,12 @@ View::composer('layout', function($view) use ($domain) {
 	}
 });
 
+Route::bind('faction', function($value, $route) {
+	$faction = Faction::where('slug', $value);
+	if($faction == null) {
+		throw new NotFoundException;
+	}
+	return $faction;
+});
+
 ?>
