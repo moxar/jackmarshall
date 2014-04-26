@@ -3,31 +3,34 @@
 function cross($path = null) {
 	if($path == null) {
 		// '' -> 'host.tld'
-		echo host();
-		return;
+		return scheme().host();
 	}
 
 	$chunks = explode(':', $path, 2);
 	if(count($chunks) == 2) {
 		if(empty($chunks[0])) {
 			// ':/path' -> 'host.tld/path'
-			echo host().'/'.ltrim($chunks[1], '/');
-			return;
+			return scheme().host().'/'.ltrim($chunks[1], '/');
 		}
 		// 'domain:/path' -> 'domain.host.tld/path'
-		echo $chunks[0].'.'.host().'/'.ltrim($chunks[1], '/');
-		return;
+		return scheme().$chunks[0].'.'.host().'/'.ltrim($chunks[1], '/');
 	}
 
 	if($chunks[0][0] == '/') {
 		// '/path' -> 'domain.host.tld/path'
-		echo sub().'.'.host().'/'.ltrim($chunks[0], '/');
-		return;
+		return scheme().sub().'.'.host().'/'.ltrim($chunks[0], '/');
 	}
 
 	// 'domain' -> 'domain.host.tld'
-	echo $chunks[0].'.'.host();
-	return;
+	return scheme().$chunks[0].'.'.host();
+}
+
+function scheme() {
+	static $scheme = null;
+	if($scheme == null) {
+		$scheme = (Request::secure())?'https://':'http://';
+	}
+	return $scheme;
 }
 
 function host() {

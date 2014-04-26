@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<base href="//<?php cross(); ?>">
+		<base href="<?php echo cross(); ?>">
 		<title>Jack Marshall</title>
 		<link rel="shortcut icon" href="css/favicon.png" type="image/x-icon">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="//<?php cross('/css/style.css'); ?>">
+		<link rel="stylesheet" href="<?php echo cross(':/css/style.css'); ?>">
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	</head>
@@ -18,22 +18,22 @@
 <?php
 if(Auth::check() && Auth::user()->rank = 'administrator') {
 ?>
-					<li><a href="//<?php cross('admin'); ?>">Admin</a></li>
+					<li class="<?php if(sub() == 'admin') { echo 'active'; } ?>"><a href="<?php echo cross('admin'); ?>" >Admin</a></li>
 <?php
 }
 ?>
-					<li><a href="//<?php cross('builder'); ?>">Builder</a></li>
+					<li class="<?php if(sub() == 'builder') { echo 'active'; } ?>"><a href="<?php echo cross('builder'); ?>">Builder</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 <?php
 if(Auth::check()) {
 ?>
-					<li><a href="//<?php cross('/logout'); ?>">Déconnexion (<?php echo Auth::user()->login; ?>)</a></li>
+					<li><a href="<?php echo cross(':/logout'); ?>">Déconnexion (<?php echo Auth::user()->login; ?>)</a></li>
 <?php
 } else {
 ?>
-					<li><a href="//<?php cross('/login'); ?>"/>Connexion</a></li>
-					<li><a href="//<?php cross('/signin'); ?>"/>Inscription</a></li>
+					<li><a href="<?php echo cross(':/login'); ?>"/>Connexion</a></li>
+					<li><a href="<?php echo cross(':/signin'); ?>"/>Inscription</a></li>
 <?php
 }
 ?>
@@ -44,7 +44,9 @@ if(Auth::check()) {
 if(isset($menu) && !empty($menu)) {
 ?>
 		<nav class="container">
-			<?php echo $menu; ?>
+			<ul class="nav nav-tabs">
+				<?php echo $menu; ?>
+			</ul>
 		</nav>
 <?php
 }

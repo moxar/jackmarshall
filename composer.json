@@ -2,7 +2,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"elwinar/babel": "dev-master",
-		"elwinar/laravel4-validator": "dev-master"
+		"elwinar/laravel4-validator": "dev-master",
+		"intervention/image": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
