@@ -17,7 +17,6 @@ class Models extends Migration {
 			$table->enum('type', Config::get('jack.types'));
 			$table->string('name');
 			$table->string('slug');
-			$table->string('points');
 			$table->string('field_allowance');
 			$table->enum('expansion', Config::get('jack.expansions'));
 
@@ -26,6 +25,15 @@ class Models extends Migration {
 
 			$table->integer('parent_id')->unsigned()->nullable();
 			$table->foreign('parent_id')->references('id')->on('models');
+		});
+
+		Schema::create('models_sizes', function($table) {
+			$table->integer('model_id')->unsigned();
+			$table->foreign('model_id')->references('id')->on('models');
+			$table->integer('quantity');
+			$table->integer('cost');
+
+			$table->primary(array('model_id', 'quantity'));
 		});
 	}
 
@@ -36,6 +44,7 @@ class Models extends Migration {
 	 */
 	public function down()
 	{
+		Schema::drop('models_sizes');
 		Schema::drop('models');
 	}
 

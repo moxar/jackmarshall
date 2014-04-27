@@ -36,9 +36,7 @@ class FactionsController extends Controller {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
-		$faction = new Faction();
-		$faction->name = Input::get('name');
-		$faction->image = Input::file('image');
+		$faction = new Faction(Input::all());
 		$faction->save();
 
 		return Redirect::to(cross('/factions'));

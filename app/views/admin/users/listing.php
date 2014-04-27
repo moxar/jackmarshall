@@ -1,26 +1,28 @@
 			<h1><?php t('title.admin.user.listing'); ?></h1>
-			<table class="table table-striped table-hover table-condensed">
+			<table class="table table-striped table-hover table-condensed sortable">
 				<colgroup>
-					<col style="width: 25px;">
+					<col class="small">
 					<col>
 					<col>
 					<col>
-					<col span="2" style="width: 3em;">
+					<col span="3" class="actions">
 				</colgroup>
 				<thead>
 					<tr>
-						<th>#</th>
-						<th><?php t('ui.label.login'); ?></th>
-						<th><?php t('ui.label.email'); ?></th>
-						<th><?php t('ui.label.rank'); ?></th>
+						<th data-sort="int">#</th>
+						<th data-sort="string"><?php t('ui.label.login'); ?></th>
+						<th data-sort="string"><?php t('ui.label.email'); ?></th>
+						<th data-sort="string"><?php t('ui.label.rank'); ?></th>
 						<th><!-- View --></th>
 						<th><!-- Edit --></th>
 						<th><!-- Delete --></th>
 					</tr>
 				</thead>
+				<tfoot>
+				</tfoot>
 				<tbody>
 <?php
-foreach(User::all() as $user) {
+foreach(User::orderBy('login')->get() as $user) {
 ?>
 					<tr>
 						<td><?php echo $user->id; ?></td>

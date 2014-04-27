@@ -1,5 +1,5 @@
 			<h1><?php t('title.admin.model.listing'); ?></h1>
-			<table class="table table-striped table-hover table-condensed">
+			<table class="table table-striped table-hover table-condensed sortable">
 				<colgroup>
 					<col style="width: 25px;">
 					<col>
@@ -9,21 +9,26 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th><!-- Faction --></th>
-						<th><?php t('ui.label.name'); ?></th>
-						<th><?php t('ui.label.type'); ?></th>
-						<th><?php t('ui.label.expansion'); ?></th>
+						<th data-sort="string"><!-- Faction --></th>
+						<th data-sort="string"><?php t('ui.label.name'); ?></th>
+						<th data-sort="string"><?php t('ui.label.type'); ?></th>
+						<th data-sort="string"><?php t('ui.label.expansion'); ?></th>
 						<th><!-- View --></th>
 						<th><!-- Edit --></th>
 						<th><!-- Delete --></th>
 					</tr>
 				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="7"><a href="<?php c('/models/new'); ?>"><?php t('ui.link.new.model'); ?></a></td>
+					</tr>
+				</tfoot>
 				<tbody>
 <?php
 foreach(Model::all() as $model) {
 ?>
 					<tr>
-						<td><img src="<?php c(':/'.$model->faction->image); ?>"></td>
+						<td data-sort-value="<?php echo $model->faction->name; ?>"><img src="<?php c(':/'.$model->faction->image); ?>"></td>
 						<td><?php echo $model->name; ?></td>
 						<td><?php t('text.type.'.$model->type); ?></td>
 						<td><?php t('text.expansion.'.$model->expansion); ?></td>
@@ -34,8 +39,5 @@ foreach(Model::all() as $model) {
 <?php
 }
 ?>
-					<tr>
-						<td colspan="7"><a href="<?php c('/models/new'); ?>"><?php t('ui.link.new.model'); ?></a></td>
-					</tr>
 				</tbody>
 			</table>

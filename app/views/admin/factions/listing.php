@@ -1,22 +1,27 @@
 			<h1><?php t('title.admin.faction.listing'); ?></h1>
-			<table class="table table-striped table-hover table-condensed">
+			<table class="table table-striped table-hover table-condensed sortable">
 				<colgroup>
-					<col style="width: 25px;">
+					<col class="small">
 					<col>
-					<col span="3" style="width: 3em;">
+					<col span="3" class="actions">
 				</colgroup>
 				<thead>
 					<tr>
 						<th><!-- Image --></th>
-						<th><?php t('ui.label.name'); ?></th>
+						<th data-sort="string"><?php t('ui.label.name'); ?></th>
 						<th><!-- View --></th>
 						<th><!-- Edit --></th>
 						<th><!-- Delete --></th>
 					</tr>
 				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="5"><a href="<?php c('/factions/new'); ?>"><?php t('ui.link.new.faction'); ?></a></td>
+					</tr>
+				</tfoot>
 				<tbody>
 <?php
-foreach(Faction::all() as $faction) {
+foreach(Faction::orderBy('name')->get() as $faction) {
 ?>
 					<tr>
 						<td><img src="<?php c(':/'.$faction->image); ?>"></td>
@@ -28,8 +33,5 @@ foreach(Faction::all() as $faction) {
 <?php
 }
 ?>
-					<tr>
-						<td colspan="5"><a href="<?php c('/factions/new'); ?>"><?php t('ui.link.new.faction'); ?></a></td>
-					</tr>
 				</tbody>
 			</table>

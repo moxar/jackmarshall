@@ -1,3 +1,10 @@
+.glyphicons(@character) {
+	margin-left: 0.5em;
+	font-family: "Glyphicons Halflings";
+	font-size: 80%;
+	content: @character;
+}
+
 html {
 	body {
 		header.navbar {
@@ -18,6 +25,30 @@ html {
 					border-radius: 0;
 					border-top: 0;
 				}
+			}
+		}
+
+		table.sortable {
+			th[data-sort] {
+				cursor: pointer;
+			}
+
+			th.sorting-asc:after {
+				.glyphicons("");
+			}
+
+			th.sorting-desc:after {
+				.glyphicons("");
+			}
+		}
+
+		table {
+			col.small {
+				width: 1em;
+			}
+
+			col.actions {
+				width: 2em;
 			}
 		}
 	}

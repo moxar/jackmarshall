@@ -11,6 +11,7 @@
 		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script src="<?php c(':/js/bootstrap-select.min.js'); ?>"></script>
+		<script src="<?php c(':/js/stupidtable.min.js'); ?>"></script>
 	</head>
 	<body>
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">
@@ -78,10 +79,6 @@ if(!is_array($content)) {
 }
 ?>
 		</section>
+		<script src="<?php c(':/js/script.js'); ?>"></script>
 	</body>
 </html>
-<!--
-<?php
-echo Config::get('session.domain');
-?>
--->

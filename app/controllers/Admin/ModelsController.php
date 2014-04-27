@@ -28,7 +28,6 @@ class ModelsController extends Controller {
 			'faction_id' => array('required', 'exists:factions,id'),
 			'type' => array('required', 'in:'.implode(',', Config::get('jack.types'))),
 			'name' => array('required', 'unique:models,name'),
-			'points' => array('required', 'regex:/[0-9]+:[0-9]+(,[0-9]+:[0-9]+)*/'),
 			'field_allowance' => array('required', 'regex:/U|C|[0-9]+/'),
 			'parent_id' => array('exists:models,id'),
 			'expansion' => array('required', 'in:'.implode(',', Config::get('jack.expansions'))),

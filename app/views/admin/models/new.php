@@ -44,12 +44,6 @@ foreach(Config::get('jack.types') as $type) {
 					<?php a($errors->get('name')); ?>
 				</div>
 				<div class="form-group">
-					<label for="points" class="control-label"><?php t('ui.label.points'); ?></label>
-					<input type="text" name="points" id="points" value="<?php echo Input::old('points'); ?>" class="form-control" pattern="[0-9]+:[0-9]+(,[0-9]+:[0-9]+)*" required>
-					<p class="help-block"><?php t('ui.help.points'); ?></p>
-					<?php a($errors->get('points')); ?>
-				</div>
-				<div class="form-group">
 					<label for="field_allowance" class="control-label"><?php t('ui.label.field_allowance'); ?></label>
 					<input type="text" name="field_allowance" id="field_allowance" value="<?php echo Input::old('field_allowance'); ?>" class="form-control" pattern="U|C|[0-9]+" required>
 					<?php a($errors->get('field_allowance')); ?>
