@@ -16,7 +16,9 @@
 			"app/tests/TestCase.php"
 		],
 		"files": [
-			"app/helpers/cross.php"
+			"app/helpers/alert.php",
+			"app/helpers/cross.php",
+			"app/helpers/trans.php"
 		]
 	},
 	"scripts": {

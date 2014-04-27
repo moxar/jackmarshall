@@ -30,7 +30,7 @@ return array(
 	*/
 
 	'custom' => array(
-		'wrong_credentials' => 'Nom ou mot de passe invalide',
+		'wrong_credentials' => 'Identifiant ou mot de passe invalide',
 	),
 
 	/*
@@ -45,10 +45,10 @@ return array(
 	*/
 
 	'attributes' => array(
-		'name' => 'nom',
-		'password' => 'mot de passe',
-		'confirmation' => 'confirmation',
-		'email' => 'email',
+		'login' => 'Identifiant',
+		'password' => 'Mot de passe',
+		'confirmation' => 'Confirmation',
+		'email' => 'Adresse email',
 	),
 
 );

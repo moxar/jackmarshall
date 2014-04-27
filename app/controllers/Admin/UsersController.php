@@ -14,10 +14,6 @@ class UsersController extends Controller {
 		$this->beforeFilter('administrator');
 	}
 
-	public function index() {
-		$this->listing();
-	}
-
 	public function listing() {
 		$this->display('admin.users.listing');
 	}
@@ -38,8 +34,7 @@ class UsersController extends Controller {
 		$validator = Validator::make(Input::all(), array(
 			'login' => array('unique:users,login'),
 			'email' => array('email', 'unique:users,email'),
-			'password' => array('same:confirmation'),
-			'confirmation' => array('same:password')
+			'password' => array('confirmed'),
 		));
 
 		if($validator->fails()) {

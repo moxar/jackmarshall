@@ -25,6 +25,10 @@ function cross($path = null) {
 	return scheme().$chunks[0].'.'.host();
 }
 
+function c() {
+	echo call_user_func_array('cross', func_get_args());
+}
+
 function scheme() {
 	static $scheme = null;
 	if($scheme == null) {

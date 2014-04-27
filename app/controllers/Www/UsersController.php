@@ -21,8 +21,7 @@ class UsersController extends Controller {
 		$validator = Validator::make(Input::all(), array(
 			'login' => array('required', 'unique:users,login'),
 			'email' => array('required', 'email', 'unique:users,email'),
-			'password' => array('required', 'same:confirmation'),
-			'confirmation' => array('required', 'same:password')
+			'password' => array('required', 'confirmed'),
 		));
 
 		if($validator->fails()) {
@@ -51,7 +50,7 @@ class UsersController extends Controller {
  			return Redirect::intended('/');
 		}
 
-		Session::flash('error', true);
+		Session::flash('errors', array(trans('validation.custom.wrong_credentials')));
 		return Redirect::back()->withInput();
 	}
 

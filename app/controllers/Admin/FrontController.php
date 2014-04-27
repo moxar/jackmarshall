@@ -10,10 +10,6 @@ class FrontController extends Controller {
 		$this->beforeFilter('administrator');
 	}
 
-	public function index() {
-		$this->home();
-	}
-
 	public function home() {
 		$this->display('admin.front.home');
 	}

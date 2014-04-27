@@ -31,6 +31,7 @@ class Factions extends Migration {
 	public function down()
 	{
 		Schema::drop('factions');
+		File::cleanDirectory(public_path().'/'.Config::get('jack.paths.factions'));
 	}
 
 }
