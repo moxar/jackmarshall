@@ -14,9 +14,9 @@ class Models extends Migration {
 	{
 		Schema::create('models', function($table) {
 			$table->increments('id');
-			$table->enum('type', Config::get('jack.types'));
 			$table->string('name');
 			$table->string('slug');
+			$table->enum('type', Config::get('jack.types'));
 			$table->string('field_allowance');
 			$table->enum('expansion', Config::get('jack.expansions'));
 

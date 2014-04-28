@@ -19,5 +19,7 @@ Route::get('/user/{user}/delete', 'Admin\UsersController@delete');
 Route::get('/models', 'Admin\ModelsController@listing');
 Route::get('/models/new', 'Admin\ModelsController@make');
 Route::post('/models/new', 'Admin\ModelsController@create');
+Route::get('/model/{model}/edit', 'Admin\ModelsController@edit');
+Route::post('/model/{model}/edit', 'Admin\ModelsController@update');
 
 ?>

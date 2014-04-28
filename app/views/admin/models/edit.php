@@ -5,7 +5,7 @@
 					<select name="faction_id" id="faction_id" class="form-control">
 <?php
 foreach(Faction::all() as $faction) {
-	if(Input::old('faction_id') == $faction->id) {
+	if(Input::old('faction_id', $model->faction_id) == $faction->id) {
 ?>
 						<option value="<?php echo $faction->id; ?>" selected><?php echo $faction->name; ?></option>
 <?php
@@ -24,7 +24,7 @@ foreach(Faction::all() as $faction) {
 					<select name="type" id="type" class="form-control">
 <?php
 foreach(Config::get('jack.types') as $type) {
-	if(Input::old('type') == $type) {
+	if(Input::old('type', $model->type) == $type) {
 ?>
 						<option value="<?php echo $type; ?>" selected><?php t('text.type.'.$type); ?></option>
 <?php
@@ -40,21 +40,21 @@ foreach(Config::get('jack.types') as $type) {
 				</div>
 				<div class="form-group">
 					<label for="name" class="control-label"><?php t('ui.label.name'); ?></label>
-					<input type="text" name="name" id="name" placeholder="<?php t('ui.placeholder.name'); ?>" value="<?php echo Input::old('name'); ?>" class="form-control" required>
+					<input type="text" name="name" id="name" placeholder="<?php t('ui.placeholder.name'); ?>" value="<?php echo Input::old('name', $model->name); ?>" class="form-control">
 					<?php a($errors->get('name')); ?>
 				</div>
 				<div class="form-group">
 					<label for="field_allowance" class="control-label"><?php t('ui.label.field_allowance'); ?></label>
-					<input type="text" name="field_allowance" id="field_allowance" placeholder="<?php  t('ui.placeholder.field_allowance'); ?>" value="<?php echo Input::old('field_allowance'); ?>" class="form-control" pattern="U|C|[0-9]+" required>
+					<input type="text" name="field_allowance" id="field_allowance" placeholder="<?php t('ui.placeholder.field_allowance'); ?>" value="<?php echo Input::old('field_allowance', $model->field_allowance); ?>" class="form-control" pattern="U|C|[0-9]+">
 					<?php a($errors->get('field_allowance')); ?>
 				</div>
 				<div class="form-group">
 					<label for="parent_id" class="control-label"><?php t('ui.label.parent'); ?></label>
 					<select name="parent_id" id="parent_id" class="form-control">
-						<option><?php t('ui.option.none'); ?></option>
+						<option value=""><?php t('ui.option.none'); ?></option>
 <?php
 foreach(Model::all() as $model) {
-	if(Input::old('parent_id') == $model->id) {
+	if(Input::old('parent_id', $model->parent_id) == $model->id) {
 ?>
 						<option value="<?php echo $model->id; ?>" selected><?php echo $model->name; ?></option>
 <?php
@@ -73,7 +73,7 @@ foreach(Model::all() as $model) {
 					<select name="expansion" id="expansion" class="form-control">
 <?php
 foreach(Config::get('jack.expansions') as $expansion) {
-	if(Input::old('expansion') == $expansion) {
+	if(Input::old('expansion', $model->expansion) == $expansion) {
 ?>
 						<option value="<?php echo $expansion; ?>" selected><?php t('text.expansion.'.$expansion); ?></option>
 <?php

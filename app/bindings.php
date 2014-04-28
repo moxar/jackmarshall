@@ -1,5 +1,13 @@
 <?php
 
+Route::bind('model', function($value, $route) {
+	$model = Model::where('slug', $value)->first();
+	if($model == null) {
+		throw new NotFoundException;
+	}
+	return $model;
+});
+
 Route::bind('faction', function($value, $route) {
 	$faction = Faction::where('slug', $value)->first();
 	if($faction == null) {

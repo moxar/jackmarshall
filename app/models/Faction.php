@@ -3,7 +3,7 @@
 class Faction extends Eloquent {
 
 	public $timestamps = false;
-	protected $fillable = array('id', 'name', 'image');
+	protected $fillable = array('name', 'image');
 
 	public static function boot() {
 		parent::boot();

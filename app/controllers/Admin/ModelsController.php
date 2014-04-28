@@ -42,6 +42,31 @@ class ModelsController extends Controller {
 
 		return Redirect::to(cross('/models'));
 	}
+
+	public function edit($model) {
+		$this->display('admin.models.edit', array(
+			'model' => $model,
+		));
+	}
+
+	public function update($model) {
+		$validator = Validator::make(Input::all(), array(
+			'faction_id' => array('exists:factions,id'),
+			'type' => array('in:'.implode(',', Config::get('jack.types'))),
+			'name' => array('unique:models,name,'.$model->id),
+			'field_allowance' => array('regex:/U|C|[0-9]+/'),
+			'parent_id' => array('exists:models,id'),
+			'expansion' => array('in:'.implode(',', Config::get('jack.expansions'))),
+		));
+
+		if($validator->fails()) {
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$model->update(Input::all());
+
+		return Redirect::to(cross('/models'));
+	}
 }
 
 ?>

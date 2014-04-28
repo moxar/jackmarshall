@@ -11,6 +11,12 @@ class Model extends Eloquent {
 		static::creating(function($model) {
 			$model->slug = Str::slug($model->name);
 		});
+
+		static::updating(function($model) {
+			if($model->isDirty('name')) {
+				$model->slug = Str::slug($model->name);
+			}
+		});
 	}
 
 	public function faction() {
