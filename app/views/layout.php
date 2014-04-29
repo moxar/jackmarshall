@@ -36,6 +36,8 @@ if(Auth::check() && Auth::user()->rank == 'administrator') {
 }
 ?>
 						<li class="<?php if(sub() == 'builder') { echo 'active'; } ?>"><a href="<?php c('builder'); ?>"><?php t('menu.builder'); ?></a></li>
+						<li class="<?php if(sub() == 'tournament') { echo 'active'; } ?>"><a href="<?php c('tournament'); ?>"><?php t('menu.tournament'); ?></a></li>
+						<li class="<?php if(sub() == 'league') { echo 'active'; } ?>"><a href="<?php c('league'); ?>"><?php t('menu.league'); ?></a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 <?php

@@ -1,6 +1,6 @@
 <?php
 
-namespace League;
+namespace Tournament;
 
 use BaseController as Controller;
 
@@ -11,8 +11,8 @@ class FrontController extends Controller {
 	}
 
 	public function home() {
-		$this->display('league.front.home');
+		$this->display('tournament.front.home');
 	}
 }
 
-?>
+?> 

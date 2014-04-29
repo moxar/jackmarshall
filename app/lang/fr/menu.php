@@ -12,6 +12,7 @@ return array(
 	'admin' => 'Administration',
 	'builder' => 'Builder',
 	'tournament' => 'Tournaments',
+	'league'	=> 'Leagues',
 );
 
 ?>
