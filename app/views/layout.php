@@ -12,6 +12,7 @@
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script src="<?php c(':/js/bootstrap-select.min.js'); ?>"></script>
 		<script src="<?php c(':/js/stupidtable.min.js'); ?>"></script>
+		<script src="<?php c(':/js/parttable.js'); ?>"></script>
 	</head>
 	<body>
 		<header class="navbar navbar-default navbar-static-top navbar-inverse">

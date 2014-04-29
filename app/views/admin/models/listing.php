@@ -1,5 +1,5 @@
 			<h1><?php t('title.admin.model.listing'); ?></h1>
-			<table class="table table-striped table-hover table-condensed sortable">
+			<table class="table table-striped table-hover table-condensed sortable paginated" data-size="15">
 				<colgroup>
 					<col style="width: 25px;">
 					<col>
@@ -20,7 +20,32 @@
 				</thead>
 				<tfoot>
 					<tr>
-						<td colspan="7"><a href="<?php c('/models/new'); ?>"><?php t('ui.link.new.model'); ?></a></td>
+						<td></td>
+						<td colspan="6"><a href="<?php c('/models/new'); ?>"><?php t('ui.link.new.model'); ?></a></td>
+					</tr>
+					<tr>
+						<td colspan="7">
+							<ul class="pagination">
+								<li class="disabled"><a href="#">&laquo;</a></li>
+								<li class="active"><a href="#">1</a></li>
+<?php
+for($i = 1; $i < ceil(Model::count()/15); $i++) {
+?>
+								<li><a href="#"><?php echo $i + 1; ?></a></li>
+<?php
+}
+if($i == 1) {
+?>
+								<li class="disabled"><a href="#">&raquo;</a></li>
+<?php
+} else {
+?>
+								<li><a href="#">&raquo;</a></li>
+<?php
+}
+?>
+							</ul>
+						</td>
 					</tr>
 				</tfoot>
 				<tbody>

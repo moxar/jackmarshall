@@ -88,6 +88,6 @@ foreach(Config::get('jack.expansions') as $expansion) {
 					<?php a($errors->get('expansion')); ?>
 				</div>
 				<div class="form-group">
-					<input type="submit" value="<?php t('ui.submit.create'); ?>" class="btn btn-default">
+					<input type="submit" value="<?php t('ui.submit.edit'); ?>" class="btn btn-default">
 				</div>
 			</form>
