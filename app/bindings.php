@@ -1,27 +1,23 @@
 <?php
 
-Route::bind('model', function($value, $route) {
-	$model = Model::where('slug', $value)->first();
-	if($model == null) {
-		throw new NotFoundException;
-	}
-	return $model;
-});
+function binder($class, $field) {
+	return function($value, $route) use($class, $field) {
+		$object = call_user_func($class.'::where', $field, $value)->first();
+		if($object == null) {
+			throw new NotFoundException;
+		}
+		return $object;
+	};
+}
 
-Route::bind('faction', function($value, $route) {
-	$faction = Faction::where('slug', $value)->first();
-	if($faction == null) {
-		throw new NotFoundException;
-	}
-	return $faction;
-});
-
-Route::bind('user', function($value, $route) {
-	$user = User::where('login', $value)->first();
-	if($user == null) {
-		throw new NotFoundException;
-	}
-	return $user;
-});
+Route::bind('faction', binder('Faction', 'slug'));
+Route::bind('game', binder('Game', 'slug'));
+Route::bind('league', binder('League', 'slug'));
+Route::bind('model', binder('Model', 'slug'));
+Route::bind('objective', binder('Objective', 'slug'));
+Route::bind('player', binder('Player', 'slug'));
+Route::bind('report', binder('Report', 'slug'));
+Route::bind('round', binder('Round', 'slug'));
+Route::bind('user', binder('User', 'login'));
 
 ?>

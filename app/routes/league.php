@@ -4,14 +4,14 @@
 Route::get('/', 'League\FrontController@index');
 
 // EVENT
-Route::get('leagues', 'League\EventController@table');
-Route::get('leagues/table', 'League\EventController@table');
-Route::get('leagues/create', 'League\EventController@getCreate');
-Route::post('leagues/create', 'League\EventController@postCreate');
+Route::get('leagues', 'League\LeagueController@table');
+Route::get('leagues/table', 'League\LeagueController@table');
+Route::get('leagues/create', 'League\LeagueController@getCreate');
+Route::post('leagues/create', 'League\LeagueController@postCreate');
 
-Route::get('league/{league}/delete', 'League\EventController@delete');
-Route::get('league/{league}/update', 'League\EventController@getUpdate');
-Route::post('league/{league}/update', 'League\EventController@postUpdate');
+Route::get('league/{league}/delete', 'League\LeagueController@delete');
+Route::get('league/{league}/update', 'League\LeagueController@getUpdate');
+Route::post('league/{league}/update', 'League\LeagueController@postUpdate');
 
 // PLAYER
 Route::get('players', 'League\PlayerController@index');
