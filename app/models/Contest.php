@@ -50,8 +50,8 @@ class Contest extends Eloquent {
 			foreach($players as $player) {
 				$score = new Score(array(
 					'contest_id' => $this->id, 
-					'objective_id' => $objective['id'], 
-					'player_id' => $player['id'],
+					'objective_id' => $objective, 
+					'player_id' => $player,
 				));
 				$score->save();
 			}

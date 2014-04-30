@@ -25,6 +25,18 @@ class User extends Eloquent implements UserInterface {
 	public function getRememberTokenName() {
 		return 'remember_token';
 	}
+	
+	public function players() {
+		return $this->hasMany('Player');
+	}
+	
+	public function contests() {
+		return $this->hasMany('Contest');
+	}
+	
+	public function objectives() {
+		return $this->hasMany('Objective');
+	}
 
 }
 

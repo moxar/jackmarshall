@@ -32,6 +32,9 @@ return array(
 	'league' => array(
 		'table'	=> 'Liste des ligues',
 		'home'	=> 'Jack\'Marshall Ligues',
+		'league' => array(
+			'new' => 'Créer une ligue',
+		),
 	),
 	'tournament' => array(
 		'home'	=> 'Jack\'Marshall Tournois',
