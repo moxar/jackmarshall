@@ -6,9 +6,10 @@ class DatabaseSeeder extends Seeder {
 
 	public function run()
 	{
-		$this->call('UsersSeeder');
-		$this->call('FactionsSeeder');
-		$this->call('ModelsSeeder');
+// 		$this->call('UsersSeeder');
+// 		$this->call('FactionsSeeder');
+// 		$this->call('ModelsSeeder');
+		$this->call('PlayersSeeder');
 	}
 
 }
@@ -25,7 +26,7 @@ class UsersSeeder extends Seeder {
 			'login' => 'UchroniesGames',
 			'password' => Hash::make('password'),
 			'email' => 'contact@uchroniesgames.fr',
-			'rank' => 'administrator',
+			'rank' => 'user',
 		));
 
 		User::create(array(
@@ -38,7 +39,7 @@ class UsersSeeder extends Seeder {
 		User::create(array(
 			'login' => 'Moxar',
 			'password' => Hash::make('4SYMPT0TE'),
-			'email' => 'romain.baugue@elwinar.com',
+			'email' => 'alexandre.thomas@outlook.fr',
 			'rank' => 'administrator',
 		));
 	}
@@ -92,5 +93,22 @@ class ModelsSeeder extends Seeder {
 			$model->save();
 		}
 	}
+}
 
+class PlayersSeeder extends Seeder {
+	
+	public function run() {
+	
+		Eloquent::unguard();
+		
+		DB::table('players')->truncate();
+		foreach(User::get() as $user) {
+			$fantom = new Player(array(
+				'name' => Player::FANTOM, 
+				'slug' => Player::FANTOM,
+				'user_id' => $user->id,
+			));
+			$fantom->save();
+		}
+	}
 }

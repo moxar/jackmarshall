@@ -2,12 +2,11 @@
 			<form class="form" role="form" method="POST">
 				<div class="form-group">
 					<label for="name" class="control-label"><?php t('ui.label.name'); ?></label>
-					<input type="text" name="name" id="name" placeholder="<?php t('ui.placeholder.name'); ?>" value="<?php echo Input::old('name'); ?>" class="form-control" required>
-					<?php a($errors->get('name')); ?>
+					<input type="text" name="name" id="name" placeholder="<?php t('ui.placeholder.name'); ?>" class="form-control" required>
 				</div>
 				<div class="form-group">
 <?php
-foreach(Auth::user()->players as $player) {
+foreach(Auth::user()->players()->get() as $player) {
 ?>
 					<label for="name" class="control-label">
 						<input type="checkbox" name="players[<?php echo $player->id; ?>]" />
@@ -20,7 +19,7 @@ foreach(Auth::user()->players as $player) {
 				</div>
 				<div class="form-group">
 <?php
-foreach(Auth::user()->objectives as $objective) {
+foreach(Auth::user()->objectives()->get() as $objective) {
 ?>
 					<label for="name" class="control-label">
 						<input type="checkbox" name="objectives[<?php echo $objective->id; ?>]" />

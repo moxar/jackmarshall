@@ -27,7 +27,11 @@ class User extends Eloquent implements UserInterface {
 	}
 	
 	public function players() {
-		return $this->hasMany('Player');
+		return $this->players()->where('players.slug', '<>', Player::FANTOM);
+	}
+
+	public function fantom() {
+		return $this->players()->where('players.slug', Player::FANTOM);
 	}
 	
 	public function contests() {
