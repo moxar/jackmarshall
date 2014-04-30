@@ -11,7 +11,7 @@ class LeagueController extends Controller {
 	}
 	
 	public function table() {
-		$leagues = Event::leagues()->get();
+		$leagues = Event::leagues()->orderBy('created_at', 'DESC')->get();
 		$this->display('league.league.table', $leagues);
 	}
 
@@ -20,8 +20,11 @@ class LeagueController extends Controller {
 	}
 	
 	public function postCreate() {
-		$league = new League(Input::all());
+		$league = new Event;
+		$league->type = 'league';
+		$league->name = Input::get('name');
 		$league->save();
+		$league->attachScores(Input::get('objectives'), Input::get('players'));
 		return Redirect::to('league/'.$league->id.'/rounds');
 	}
 	
@@ -30,10 +33,9 @@ class LeagueController extends Controller {
 	}
 	
 	public function postUpdate($league) {
-		foreach(Input::all() as $key => $value) {
-			$league->{$key} = $value;
-		}
+		$league->name = Input::get('name');
 		$league->save();
+		$league->attachScores(Input::get('objectives'), Input::get('players'));
 		return Redirect::to('league/'.$league->id.'/rounds');
 	}
 	
