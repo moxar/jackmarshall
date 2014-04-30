@@ -26,6 +26,7 @@ return array(
 		'apotheosis',
 		'superiority',
 		'legends',
+		'MK.II',
 		'wrath',
 		'colossals',
 		'vengeance',
