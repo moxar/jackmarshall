@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Events extends Migration {
+class Contests extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -15,10 +15,12 @@ class Events extends Migration {
 		Schema::create('contests', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->enum('type', array('league', 'tournament'));
 			$table->string('name');
 			$table->string('slug');
+			
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 		});
 	}
 

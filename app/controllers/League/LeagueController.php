@@ -3,6 +3,8 @@
 namespace League;
 
 use BaseController as Controller;
+use Contest;
+use Redirect;
 
 class LeagueController extends Controller {
 
@@ -11,9 +13,7 @@ class LeagueController extends Controller {
 	}
 	
 	public function table() {
-		$leagues = Contest::leagues()->orderBy('created_at', 'DESC');
-		echo $leagues->toSql();exit;//->get();
-		$this->display('league.league.table', $leagues);
+		$this->display('league.league.table');
 	}
 
 	public function getCreate() {

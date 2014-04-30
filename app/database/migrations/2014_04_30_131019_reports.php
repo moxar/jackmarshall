@@ -14,11 +14,18 @@ class Reports extends Migration {
 	{
 		Schema::create('reports', function(Blueprint $table)
 		{
-			$table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
-			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
-			$table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
 			$table->integer('value')->nullable();
 			$table->string('comments')->nullable();
+			
+			$table->integer('game_id')->unsigned();
+			$table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
+			
+			$table->integer('player_id')->unsigned();
+			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+			
+			$table->integer('objective_id')->unsigned();
+			$table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
+			
 			$table->primary(array('game_id', 'player_id', 'objective_id'));
 		});
 	}

@@ -14,12 +14,19 @@ class Scores extends Migration {
 	{
 		Schema::create('scores', function(Blueprint $table)
 		{
-			$table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
-			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
-			$table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
 			$table->integer('value')->nullable();
+			
+			$table->integer('contest_id')->unsigned();
+			$table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
+			
+			$table->integer('player_id')->unsigned();
+			$table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+			
+			$table->integer('objective_id')->unsigned();
+			$table->foreign('objective_id')->references('id')->on('objectives')->onDelete('cascade');
+			
 			$table->primary(array('contest_id', 'player_id', 'objective_id'));
-		}
+		});
 	}
 
 	/**

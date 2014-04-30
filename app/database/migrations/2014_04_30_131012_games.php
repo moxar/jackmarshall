@@ -15,9 +15,11 @@ class Games extends Migration {
 		Schema::create('games', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->foreign('round_id')->references('id')->on('rounds')->onDelete('cascade');
 			$table->string('name');
 			$table->string('slug');
+			
+			$table->integer('round_id')->unsigned();
+			$table->foreign('round_id')->references('id')->on('rounds')->onDelete('cascade');
 		});
 	}
 

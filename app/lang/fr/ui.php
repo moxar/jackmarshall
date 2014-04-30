@@ -45,6 +45,7 @@ return array(
 			'faction' => 'Nouvelle faction',
 			'user' => 'Nouvel utilisateur',
 			'model' => 'Nouveau modèle',
+			'league' => 'Nouvelle ligue',
 		),
 	),
 	'option' => array(

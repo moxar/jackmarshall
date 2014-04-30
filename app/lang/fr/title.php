@@ -29,6 +29,13 @@ return array(
 			'view' => 'Modèle',
 		),
 	),
+	'league' => array(
+		'table'	=> 'Liste des ligues',
+		'home'	=> 'Jack\'Marshall Ligues',
+	),
+	'tournament' => array(
+		'home'	=> 'Jack\'Marshall Tournois',
+	),
 
 );
 

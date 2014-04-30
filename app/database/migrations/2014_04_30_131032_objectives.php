@@ -15,9 +15,11 @@ class Objectives extends Migration {
 		Schema::create('objectives', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->string('name');
 			$table->string('slug');
+			
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 		});
 	}
 
