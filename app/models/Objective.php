@@ -2,13 +2,12 @@
 
 class Objective extends Eloquent {
 
-	public static function boot() {
-		parent::boot();
-		
-		static::deleting(function($objective) {
-			Score::where('objective_id', $objective->id)->delete();
-		});
+	protected $guarded = array('id');
+	
+	public function user() {
+		return $this->belongsTo('User');
 	}
 }
+
 ?> 
  

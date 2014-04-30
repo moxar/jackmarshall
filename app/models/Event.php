@@ -2,24 +2,46 @@
 
 class Event extends Eloquent {
 
-	protected $fillable = array('user_id', 'type', 'name', 'slug');
+	protected $guarded = array('id');
 
-	public static function boot() {
-		parent::boot();
-
-		static::saving(function($event) {
-			if($event->isDirty('name')) {
-				$event->slug = Str::slug($event->name);
-			}
-		});
-		
-		static::deleting(function($event) {
-			Score::where('event_id', $event->id)->delete();
-		});
+	static public function leagues() {
+		return Event::where('type', 'league');
 	}
 
-	public function leagues() {
-		return Event::where('type', 'league');
+	static public function tournaments() {
+		return Event::where('type', 'tournament');
+	}
+	
+	public function rounds() {
+		return $this->hasMany('Round');
+	}
+	
+	public function games() {
+		return $this->hasManyThrough('Game', 'Round');
+	}
+	
+	public function user() {
+		return $this->belongsTo('User');
+	}
+	
+	public function reports() {
+		return $this->games()->join('reports', 'reports.game_id', '=', 'games.id');
+	}
+	
+	public function scores() {
+		return $this->hasMany('Score');
+	}
+	
+	public function players() {
+		return $this->scores()->join('players', 'scores.player_id', '=', 'players.id')
+			->select('players.id as id', 'players.name as name', 'players.slug as slug', 'players.user_id as user_id')
+			->distinct();
+	}
+	
+	public function objectives() {
+		return $this->scores()->join('objectives', 'scores.objective_id', '=', 'objectives.id')
+			->select('objectives.id as id', 'objectives.name as name', 'objectives.slug as slug', 'objectives.user_id as user_id')
+			->distinct();
 	}
 	
 	public function resetScores($objectives, $players) {
@@ -36,4 +58,10 @@ class Event extends Eloquent {
 		}
 	}
 }
+
+Event::saving(function($event) {
+	if($event->isDirty('name')) {
+		$event->slug = Str::slug($event->name);
+	}
+});
 ?> 
