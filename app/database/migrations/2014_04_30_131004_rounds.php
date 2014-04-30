@@ -15,7 +15,7 @@ class Rounds extends Migration {
 		Schema::create('rounds', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+			$table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
 			$table->string('name');
 			$table->string('slug');
 		});

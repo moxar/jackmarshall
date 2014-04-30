@@ -12,7 +12,7 @@ class Events extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('events', function(Blueprint $table)
+		Schema::create('contests', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -29,7 +29,7 @@ class Events extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('events');
+		Schema::drop('contests');
 	}
 
 }

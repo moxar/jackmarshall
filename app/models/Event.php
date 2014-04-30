@@ -1,15 +1,15 @@
 <?php
 
-class Event extends Eloquent {
+class Contest extends Eloquent {
 
 	protected $guarded = array('id');
 
 	static public function leagues() {
-		return Event::where('type', 'league');
+		return self::where('type', 'league');
 	}
 
 	static public function tournaments() {
-		return Event::where('type', 'tournament');
+		return self::where('type', 'tournament');
 	}
 	
 	public function rounds() {
@@ -45,11 +45,11 @@ class Event extends Eloquent {
 	}
 	
 	public function resetScores($objectives, $players) {
-		Score::where('event_id', $this->id)->delete();
+		Score::where('contest_id', $this->id)->delete();
 		foreach($objectives as $objective) {
 			foreach($players as $player) {
 				$score = new Score(array(
-					'event_id' => $this->id, 
+					'contest_id' => $this->id, 
 					'objective_id' => $objective['id'], 
 					'player_id' => $player['id'],
 				));
@@ -59,9 +59,9 @@ class Event extends Eloquent {
 	}
 }
 
-Event::saving(function($event) {
-	if($event->isDirty('name')) {
-		$event->slug = Str::slug($event->name);
+Contest::saving(function($contest) {
+	if($contest->isDirty('name')) {
+		$contest->slug = Str::slug($contest->name);
 	}
 });
 ?> 

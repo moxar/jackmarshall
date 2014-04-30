@@ -4,7 +4,7 @@ class Round extends Eloquent {
 
 	protected $guarded = array('id');
 	
-	public function event() {
+	public function contest() {
 		return $this->belongsTo('Event');
 	}
 	

@@ -11,7 +11,8 @@ class LeagueController extends Controller {
 	}
 	
 	public function table() {
-		$leagues = Event::leagues()->orderBy('created_at', 'DESC')->get();
+		$leagues = Contest::leagues()->orderBy('created_at', 'DESC');
+		echo $leagues->toSql();exit;//->get();
 		$this->display('league.league.table', $leagues);
 	}
 
@@ -20,9 +21,7 @@ class LeagueController extends Controller {
 	}
 	
 	public function postCreate() {
-		$league = new Event;
-		$league->type = 'league';
-		$league->name = Input::get('name');
+		$league = new Contest(Input::all());
 		$league->save();
 		$league->resetScores(Input::get('objectives'), Input::get('players'));
 		return Redirect::to('league/'.$league->id.'/rounds');
