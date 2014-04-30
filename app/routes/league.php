@@ -4,7 +4,7 @@
 Route::get('/', 'League\FrontController@index');
 
 // EVENT
-Route::get('leagues', 'League\LeagueController@table');
+Route::get('leagues', 'League\LeagueController@index');
 Route::get('leagues/table', 'League\LeagueController@table');
 Route::get('leagues/create', 'League\LeagueController@getCreate');
 Route::post('leagues/create', 'League\LeagueController@postCreate');
@@ -34,20 +34,20 @@ Route::get('objective/{objective}/update', 'League\ObjectiveController@getUpdate
 Route::post('objective/{objective}/update', 'League\ObjectiveController@postUpdate');
 
 // ROUND
-Route::get('league/{league}/rounds', 'League\RoundController@table');
-Route::get('league/{league}/rounds/table', 'League\RoundController@table');
-Route::get('league/{league}/rounds/create', 'League\RoundController@getCreate');
-Route::post('league/{league}/rounds/create', 'League\RoundController@postCreate');
+Route::get('league/{league}/rounds', 'League\SeasonController@table');
+Route::get('league/{league}/rounds/table', 'League\SeasonController@table');
+Route::get('league/{league}/rounds/create', 'League\SeasonController@getCreate');
+Route::post('league/{league}/rounds/create', 'League\SeasonController@postCreate');
 
-Route::get('round/{round}/delete', 'League\RoundController@delete');
-Route::get('round/{round}/update', 'League\RoundController@getUpdate');
-Route::post('round/{round}/update', 'League\RoundController@postUpdate');
+Route::get('season/{season}/delete', 'League\SeasonController@delete');
+Route::get('season/{season}/update', 'League\SeasonController@getUpdate');
+Route::post('season/{season}/update', 'League\SeasonController@postUpdate');
 
 // GAME
-Route::get('round/{round}/games', 'League\RoundController@index');
-Route::get('round/{round}/games/table', 'League\RoundController@table');
-Route::get('round/{round}/games/create', 'League\RoundController@getCreate');
-Route::post('round/{round}/games/create', 'League\RoundController@postCreate');
+Route::get('season/{season}/games', 'League\GameController@index');
+Route::get('season/{season}/games/table', 'League\GameController@table');
+Route::get('season/{season}/games/create', 'League\GameController@getCreate');
+Route::post('season/{season}/games/create', 'League\GameController@postCreate');
 
 Route::get('game/{game}/delete', 'League\GameController@delete');
 Route::get('game/{game}/update', 'League\GameController@getUpdate');
