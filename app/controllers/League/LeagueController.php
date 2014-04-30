@@ -24,7 +24,7 @@ class LeagueController extends Controller {
 		$league->type = 'league';
 		$league->name = Input::get('name');
 		$league->save();
-		$league->attachScores(Input::get('objectives'), Input::get('players'));
+		$league->resetScores(Input::get('objectives'), Input::get('players'));
 		return Redirect::to('league/'.$league->id.'/rounds');
 	}
 	
@@ -35,7 +35,7 @@ class LeagueController extends Controller {
 	public function postUpdate($league) {
 		$league->name = Input::get('name');
 		$league->save();
-		$league->attachScores(Input::get('objectives'), Input::get('players'));
+		$league->resetScores(Input::get('objectives'), Input::get('players'));
 		return Redirect::to('league/'.$league->id.'/rounds');
 	}
 	

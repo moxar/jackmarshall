@@ -11,7 +11,6 @@ class Event extends Eloquent {
 			if($event->isDirty('name')) {
 				$event->slug = Str::slug($event->name);
 			}
-			Score::where('event_id', $event->id)->delete();
 		});
 		
 		static::deleting(function($event) {
@@ -23,7 +22,8 @@ class Event extends Eloquent {
 		return Event::where('type', 'league');
 	}
 	
-	public function attachScores($objectives, $players) {
+	public function resetScores($objectives, $players) {
+		Score::where('event_id', $this->id)->delete();
 		foreach($objectives as $objective) {
 			foreach($players as $player) {
 				$score = new Score(array(
