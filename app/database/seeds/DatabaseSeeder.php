@@ -34,6 +34,13 @@ class UsersSeeder extends Seeder {
 			'email' => 'romain.baugue@elwinar.com',
 			'rank' => 'administrator',
 		));
+
+		User::create(array(
+			'login' => 'Moxar',
+			'password' => Hash::make('4SYMPT0TE'),
+			'email' => 'romain.baugue@elwinar.com',
+			'rank' => 'administrator',
+		));
 	}
 
 }
