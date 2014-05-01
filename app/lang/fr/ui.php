@@ -14,6 +14,7 @@ return array(
 		'points' => 'Points',
 		'expansion' => 'Extension',
 		'parent' => 'Parent',
+		'cost' => 'Coût',
 	),
 	'submit' => array(
 		'new' => 'Nouveau',

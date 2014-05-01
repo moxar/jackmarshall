@@ -8,9 +8,9 @@
 			<h1><?php t('title.admin.user.view'); ?> <span class="small"><?php echo $user->login; ?></span></h1>
 			<dl class="dl-horizontal">
 				<dt><?php t('ui.label.login'); ?></dt>
-				<dd><?php echo $user->login; ?>
+				<dd><?php echo $user->login; ?></dd>
 				<dt><?php t('ui.label.email'); ?></dt>
-				<dd><?php echo $user->email; ?>
+				<dd><?php echo $user->email; ?></dd>
 				<dt><?php t('ui.label.rank'); ?></dt>
-				<dd><?php t('text.rank.'.$user->rank); ?>
+				<dd><?php t('text.rank.'.$user->rank); ?></dd>
 			</dl>

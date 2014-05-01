@@ -56,7 +56,7 @@ foreach(Model::all() as $model) {
 						<td data-sort-value="<?php echo $model->faction->name; ?>"><img src="<?php c(':/'.$model->faction->image); ?>"></td>
 						<td><?php echo $model->name; ?></td>
 						<td><?php t('text.type.'.$model->type); ?></td>
-						<td><?php t('text.expansion.'.$model->expansion); ?></td>
+						<td><?php if($model->expansion != null) { echo $model->expansion->name; } else { echo 'N/A'; } ?></td>
 						<td><a href="<?php c('/model/'.$model->slug); ?>" title="<?php t('ui.link.view'); ?>"><span class="glyphicon glyphicon-arrow-right"></span></a></td>
 						<td><a href="<?php c('/model/'.$model->slug.'/edit'); ?>" title="<?php t('ui.link.edit'); ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
 						<td><a href="<?php c('/model/'.$model->slug.'/delete'); ?>" title="<?php t('ui.link.delete'); ?>"><span class="glyphicon glyphicon-remove"></span></a></td>

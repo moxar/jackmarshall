@@ -22,6 +22,14 @@ class Model extends Eloquent {
 	public function faction() {
 		return $this->belongsTo('Faction');
 	}
+
+	public function expansion() {
+		return $this->belongsTo('Expansion');
+	}
+
+	public function costs() {
+		return $this->hasMany('ModelCost');
+	}
 }
 
 ?>

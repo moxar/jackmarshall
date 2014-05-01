@@ -31,14 +31,9 @@ Et si jamais vous avez la chance de posséder un compte sur le site (petit veina
 		'administrator' => 'Administrateur',
 	),
 	'type' => array(
-		'warcaster' => 'Warcaster',
-		'warlock' => 'Warlock',
-		'warjack' => 'Warjack',
-		'warbeast' => 'Warbeast',
-		'unit' => 'Unit',
-		'attachment' => 'Attachment',
-		'solo' => 'Solo',
-		'battle_engine' => 'Battle Engine',
+		'casterlock' => 'Warcaster/Warlock',
+		'jackbeast' => 'Warjack/Warbeast',
+		'warrior' => 'Warrior',
 	),
 	'expansion' => array(
 		'prime' => 'Prime',
@@ -60,6 +55,7 @@ En créant un compte, vous aurez la possibilité d\'organiser vos propres ligues
 
 En créant un compte, vous aurez la possibilité d\'organiser des tournois en suivant la convention SteamRoller en vigueur. Nos *mathémathralls* se chargent d\'organiser les rondes suisses, de calculer les scores de chaque participants et d\'apparailler les joueurs selon leurs résultats. Tout ce qu\'il vous reste à faire, c\'est inscrire vos participants, lire l\'écran et boire une bière!'
 	),
+	'for' => 'pour',
 );
 
 ?>

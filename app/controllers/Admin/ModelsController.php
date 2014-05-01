@@ -43,6 +43,12 @@ class ModelsController extends Controller {
 		return Redirect::to(cross('/models'));
 	}
 
+	public function view($model) {
+		$this->display('admin.models.view', array(
+			'model' => $model,
+		));
+	}
+
 	public function edit($model) {
 		$this->display('admin.models.edit', array(
 			'model' => $model,
