@@ -3,7 +3,7 @@
 class Faction extends Eloquent {
 
 	public $timestamps = false;
-	protected $fillable = array('name', 'image');
+	protected $guarded = array('id', 'slug');
 
 	public static function boot() {
 		parent::boot();
@@ -57,6 +57,10 @@ class Faction extends Eloquent {
 			return public_path().'/'.Config::get('jack.paths.factions').'/'.$this->slug.'.png';
 		}
 		return Config::get('jack.paths.factions').'/'.$this->slug.'.png';
+	}
+
+	public function models() {
+		return $this->hasMany('Model');
 	}
 
 }

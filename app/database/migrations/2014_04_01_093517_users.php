@@ -21,6 +21,8 @@ class Users extends Migration {
 			$table->enum('rank', Config::get('jack.ranks'))->default('user');
 			$table->timestamps();
 			$table->string('remember_token')->nullable();
+
+			$table->unique('login');
 		});
 	}
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Objectives extends Migration {
+class Expansions extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,11 @@ class Objectives extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('objectives', function(Blueprint $table)
-		{
+		Schema::create('expansions', function($table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('slug');
-
-			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->date('release');
 
 			$table->unique('slug');
 		});
@@ -32,7 +29,7 @@ class Objectives extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('objectives');
+		Schema::drop('expansions');
 	}
 
 }

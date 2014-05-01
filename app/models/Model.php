@@ -3,7 +3,7 @@
 class Model extends Eloquent {
 
 	public $timestamps = false;
-	protected $fillable = array('faction_id', 'type', 'name', 'field_allowance', 'parent_id', 'expansion');
+	protected $guarded = array('id', 'slug');
 
 	public static function boot() {
 		parent::boot();

@@ -11,25 +11,9 @@ return array(
 		'administrator',
 	),
 	'types' => array(
-		'warcaster',
-		'warlock',
-		'warjack',
-		'warbeast',
-		'unit',
-		'attachment',
-		'solo',
-		'battle_engine',
-	),
-	'expansions' => array(
-		'prime',
-		'escalation',
-		'apotheosis',
-		'superiority',
-		'legends',
-		'MK.II',
-		'wrath',
-		'colossals',
-		'vengeance',
+		'casterlock',
+		'jackbeast',
+		'warrior',
 	),
 );
 

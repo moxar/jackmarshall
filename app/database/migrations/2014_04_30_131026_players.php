@@ -17,9 +17,11 @@ class Players extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('slug');
-			
+
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+			$table->unique('slug');
 		});
 	}
 

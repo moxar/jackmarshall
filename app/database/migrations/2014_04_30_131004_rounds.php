@@ -17,9 +17,11 @@ class Rounds extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('slug');
-			
+
 			$table->integer('contest_id')->unsigned();
 			$table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
+
+			$table->unique('slug');
 		});
 	}
 

@@ -18,16 +18,20 @@ class Models extends Migration {
 			$table->string('slug');
 			$table->enum('type', Config::get('jack.types'));
 			$table->string('field_allowance');
-			$table->enum('expansion', Config::get('jack.expansions'));
+
+			$table->integer('expansion_id')->unsigned()->nullable();
+			$table->foreign('expansion_id')->references('id')->on('expansions');
 
 			$table->integer('faction_id')->unsigned();
 			$table->foreign('faction_id')->references('id')->on('factions');
 
 			$table->integer('parent_id')->unsigned()->nullable();
 			$table->foreign('parent_id')->references('id')->on('models');
+
+			$table->unique('slug');
 		});
 
-		Schema::create('models_sizes', function($table) {
+		Schema::create('models_costs', function($table) {
 			$table->integer('model_id')->unsigned();
 			$table->foreign('model_id')->references('id')->on('models');
 			$table->integer('quantity');
@@ -44,7 +48,7 @@ class Models extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('models_sizes');
+		Schema::drop('models_costs');
 		Schema::drop('models');
 	}
 
