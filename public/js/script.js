@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('table.sortable').stupidtable();
+	//$('table.sortable').stupidtable();
 
-	$('table.paginated').parttable();
+	//$('table.paginated').parttable();
 });

@@ -1,3 +1,8 @@
+			<nav class="pull-right contextual">
+				<ul class="nav nav-stacked">
+					<li><a href="<?php echo URL::previous(); ?>"><?php t('ui.link.back'); ?></a></li>
+				</ul>
+			</nav>
 			<h1><?php t('title.admin.faction.new'); ?></h1>
 			<form class="form" role="form" method="POST" enctype="multipart/form-data">
 				<div class="form-group">

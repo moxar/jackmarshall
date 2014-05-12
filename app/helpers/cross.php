@@ -60,4 +60,36 @@ function sub() {
 	return $domain;
 }
 
+function sorturl($field) {
+	if(!Input::has('sort')) {
+		$fields = array();
+		$orders = array();
+	} else {
+		$fields = explode(',', Input::get('sort'));
+		$orders = explode(',', Input::get('order'));
+	}
+
+	$index = array_search($field, $fields);
+
+	if($index === false) {
+		$order = 'asc';
+	} else if($index !== 0) {
+		$order = $orders[$index];
+		unset($fields[$index]);
+		unset($orders[$index]);
+	} else {
+		$order = ($orders[$index]=='asc')?'desc':'asc';
+		unset($fields[$index]);
+		unset($orders[$index]);
+	}
+
+	array_unshift($fields, $field);
+	array_unshift($orders, $order);
+
+	$_GET['sort'] = implode(',', $fields);
+	$_GET['order'] = implode(',', $orders);
+
+	return Request::url().'?'.http_build_query($_GET);
+}
+
 ?>

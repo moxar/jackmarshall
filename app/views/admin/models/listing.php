@@ -9,10 +9,10 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th data-sort="string"><!-- Faction --></th>
-						<th data-sort="string"><?php t('ui.label.name'); ?></th>
-						<th data-sort="string"><?php t('ui.label.type'); ?></th>
-						<th data-sort="string"><?php t('ui.label.expansion'); ?></th>
+						<th data-sort="string"><a href="<?php echo sorturl('faction_id'); ?>">F</a></th>
+						<th data-sort="string"><a href="<?php echo sorturl('name'); ?>"><?php t('ui.label.name'); ?></a></th>
+						<th data-sort="string"><a href="<?php echo sorturl('type'); ?>"><?php t('ui.label.type'); ?></a></th>
+						<th data-sort="string"><a href="<?php echo sorturl('expansion_id'); ?>"><?php t('ui.label.expansion'); ?></a></th>
 						<th><!-- View --></th>
 						<th><!-- Edit --></th>
 						<th><!-- Delete --></th>
@@ -25,32 +25,13 @@
 					</tr>
 					<tr>
 						<td colspan="7">
-							<ul class="pagination">
-								<li class="disabled"><a href="#">&laquo;</a></li>
-								<li class="active"><a href="#">1</a></li>
-<?php
-for($i = 1; $i < ceil(Model::count()/15); $i++) {
-?>
-								<li><a href="#"><?php echo $i + 1; ?></a></li>
-<?php
-}
-if($i == 1) {
-?>
-								<li class="disabled"><a href="#">&raquo;</a></li>
-<?php
-} else {
-?>
-								<li><a href="#">&raquo;</a></li>
-<?php
-}
-?>
-							</ul>
+							<?php echo $models->appends(array('sort' => Input::get('sort', 'name'), 'order' => Input::get('order', 'asc')))->links(); ?>
 						</td>
 					</tr>
 				</tfoot>
 				<tbody>
 <?php
-foreach(Model::all() as $model) {
+foreach($models as $model) {
 ?>
 					<tr>
 						<td data-sort-value="<?php echo $model->faction->name; ?>"><img src="<?php c(':/'.$model->faction->image); ?>"></td>

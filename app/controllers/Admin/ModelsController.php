@@ -8,6 +8,7 @@ use Input;
 use Model;
 use Redirect;
 use Validator;
+use Urlstack;
 
 class ModelsController extends Controller {
 
@@ -16,7 +17,17 @@ class ModelsController extends Controller {
 	}
 
 	public function listing() {
-		$this->display('admin.models.listing');
+		$models = Model::select('*');
+		if(Input::has('sort')) {
+			$sorts = explode(',', Input::get('sort'));
+			$orders = explode(',', Input::get('order'));
+			for($i = 0; $i < count($sorts); $i++) {
+				$models = $models->orderBy($sorts[$i], $orders[$i]);
+			}
+		}
+		$this->display('admin.models.listing', array(
+			'models' => $models->paginate(15),
+		));
 	}
 
 	public function make() {
@@ -30,7 +41,7 @@ class ModelsController extends Controller {
 			'name' => array('required', 'unique:models,name'),
 			'field_allowance' => array('required', 'regex:/U|C|[0-9]+/'),
 			'parent_id' => array('exists:models,id'),
-			'expansion' => array('required', 'in:'.implode(',', Config::get('jack.expansions'))),
+			'expansion_id' => array('required', 'exists:expansions,id'),
 		));
 
 		if($validator->fails()) {
@@ -62,16 +73,17 @@ class ModelsController extends Controller {
 			'name' => array('unique:models,name,'.$model->id),
 			'field_allowance' => array('regex:/U|C|[0-9]+/'),
 			'parent_id' => array('exists:models,id'),
-			'expansion' => array('in:'.implode(',', Config::get('jack.expansions'))),
+			'expansion_id' => array('exists:expansions,id'),
 		));
 
 		if($validator->fails()) {
+			Urlstack::rewind(2);
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
 		$model->update(Input::all());
 
-		return Redirect::to(cross('/models'));
+		return Redirect::to(Urlstack::top(3));
 	}
 }
 

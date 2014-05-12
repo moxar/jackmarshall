@@ -15,4 +15,8 @@ View::composer('layout', function($layout) use ($domain) {
 	}
 });
 
+Route::get('/stack', function() {
+	print_r(Urlstack::get());
+});
+
 ?>

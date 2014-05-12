@@ -110,6 +110,7 @@ return array(
 		'Elwinar\Babel\BabelServiceProvider',
 		'Elwinar\Laravel4Validator\ValidatorServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
+		'Elwinar\Urlstack\UrlstackServiceProvider',
 
 	),
 
@@ -180,6 +181,7 @@ return array(
 		'Markdown'        => 'Elwinar\Babel\Facades\Markdown',
 		'Textile'         => 'Elwinar\Babel\Facades\Textile',
 		'Image'           => 'Intervention\Image\Facades\Image',
+		'Urlstack'        => 'Elwinar\Urlstack\Facades\Urlstack',
 
 	),
 

@@ -1,3 +1,8 @@
+			<nav class="pull-right contextual">
+				<ul class="nav nav-stacked">
+					<li><a href="<?php echo URL::previous(); ?>"><?php t('ui.link.back'); ?></a></li>
+				</ul>
+			</nav>
 			<h1><?php t('title.admin.model.new'); ?></h1>
 			<form class="form" role="form" method="POST" enctype="multipart/form-data">
 				<div class="form-group">
@@ -69,17 +74,17 @@ foreach(Model::all() as $model) {
 					<?php a($errors->get('parent_id')); ?>
 				</div>
 				<div class="form-group">
-					<label for="expansion" class="control-label"><?php t('ui.label.expansion'); ?></label>
-					<select name="expansion" id="expansion" class="form-control">
+					<label for="expansion_id" class="control-label"><?php t('ui.label.expansion'); ?></label>
+					<select name="expansion_id" id="expansion_id" class="form-control">
 <?php
-foreach(Config::get('jack.expansions') as $expansion) {
-	if(Input::old('expansion', $model->expansion) == $expansion) {
+foreach(Expansion::all() as $expansion) {
+	if(Input::old('expansion', $model->expansion) == $expansion->id) {
 ?>
-						<option value="<?php echo $expansion; ?>" selected><?php t('text.expansion.'.$expansion); ?></option>
+						<option value="<?php echo $expansion->id; ?>" selected><?php echo $expansion->name; ?></option>
 <?php
 	} else {
 ?>
-						<option value="<?php echo $expansion; ?>"><?php t('text.expansion.'.$expansion); ?></option>
+						<option value="<?php echo $expansion->id; ?>"><?php echo $expansion->name; ?></option>
 <?php
 	}
 }
