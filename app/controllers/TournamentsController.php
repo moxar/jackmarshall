@@ -35,7 +35,7 @@ class TournamentsController extends BaseController {
 	public function getCreate() {
 				
 		$this->display(array('tournaments.create', 'players.management'), array(
-			'players' => Auth::user()->playersButFantom()->get(),
+			'players' => Auth::user()->playersButFantom()->orderBy('name')->get(),
 			'tournament' => new Tournament,
 			'tournamentPlayers' => array()
 		));
