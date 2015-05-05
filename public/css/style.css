@@ -58,3 +58,9 @@ header a {
 	text-align: center;
 	cursor: pointer;
 }
+
+.cell.checker{
+	white-space: nowrap;
+	overflow: hidden;
+  text-overflow: ellipsis;
+}
