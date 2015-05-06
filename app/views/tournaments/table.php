@@ -1,41 +1,46 @@
 			<section class="container">
-				<nav>Tournois</nav>
+				<nav><a href="<?= action("TournamentsController@listing"); ?>">Tournois</a></nav>
 				<h1>Tournois</h1>
-				<table class="table table-striped table-condensed table-hover">
-					<thead>
-						<tr>
-							<th>Nom</th>
-							<th>Date</th>
-							<th>Participants</th>
-							<th><!-- DEL --></th>
-						</tr>
-					</thead>
-					<tbody>
+				<form action="<?= action("TournamentsController@continuous"); ?>">
+					<input type="submit" class="btn btn-default" value="Tournois continu"/>
+					<table class="table table-striped table-condensed table-hover">
+						<thead>
+							<tr>
+								<th colspan=2>Nom</th>
+								<th>Date</th>
+								<th>Participants</th>
+								<th><!-- DEL --></th>
+							</tr>
+						</thead>
+						<tbody>
 <?php
-foreach($tournaments as $tournament)
-{
+$tournaments->each(function($t) {
 ?>
-						<tr>
-							<td>
-								<a href="tournaments/<?php echo $tournament->id; ?>"><?php echo $tournament->name; ?></a>								
-							</td>
-							<td><?php echo $tournament->created_at; ?></td>
-							<td>
-								<?php echo count($tournament->playersButFantom); ?>
-								<a href="tournaments/<?php echo $tournament->id; ?>/update">(Contrôler)</a>
-							</td>
-							<td>
-								<a href="tournaments/<?php echo $tournament->id; ?>/delete">
-									<span class="glyphicon glyphicon-remove"></span>
-								</a>
-							</td>
-						</tr>
+							<tr>
+								<td>
+									<input type="checkbox" name="tournaments[<?= $t->id; ?>]" />
+								</td>
+								<td>
+									<a href="tournaments/<?= $t->id; ?>"><?= $t->name; ?></a>								
+								</td>
+								<td><?= $t->created_at; ?></td>
+								<td>
+									<?= $t->playersButFantom->count(); ?>
+									<a href="tournaments/<?= $t->id; ?>/update">(Contrôler)</a>
+								</td>
+								<td>
+									<a href="tournaments/<?= $t->id; ?>/delete">
+										<span class="glyphicon glyphicon-remove"></span>
+									</a>
+								</td>
+							</tr>
 <?php
-}
+});
 ?>
-						<tr>
-							<td colspan="6"><a href="tournaments/create"><span class="glyphicon glyphicon-plus"></span> Nouveau tournois</a></td>
-						</tr>
-					</tbody>
-				</table>
+							<tr>
+								<td colspan="6"><a href="tournaments/create"><span class="glyphicon glyphicon-plus"></span> Nouveau tournois</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
 			</section>

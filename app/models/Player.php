@@ -1,6 +1,10 @@
 <?php
 
 class Player extends Eloquent {
+
+	const BASE_POW = 0.9;
+
+	public $ts = 0;
 	
 	public function tournaments() {
 	
@@ -62,6 +66,10 @@ class Player extends Eloquent {
 			->where('player', '=', $this->id)
 			->where('tournament', '=', $tournament->id)
 			->update(array('sos' => $sos));
+	}
+	
+	public function addTournamentScore($ranking) {
+		$this->ts += pow(self::BASE_POW, $ranking);
 	}
 }
  

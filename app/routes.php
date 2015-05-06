@@ -83,6 +83,7 @@ Route::group(array('before' => 'guest'), function() {
 Route::get('/', 'TournamentsController@listing');
 Route::get('tournaments', 'TournamentsController@listing');
 Route::get('tournaments/listing', 'TournamentsController@listing');
+Route::get('tournaments/continuous', 'TournamentsController@continuous');
 Route::get('tournaments/{tournament}', 'TournamentsController@show');
 
 Route::get('validate/signin', 'ValidationsController@validateSignin');

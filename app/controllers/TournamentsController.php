@@ -8,10 +8,12 @@ class TournamentsController extends BaseController {
 	}
 	
 	public function listing() {
-				
-		$this->display('tournaments.table', array(
-			'tournaments' => Tournament::get()
-		));
+		
+		$tournaments = Tournament::orderBy("created_at", "DESC")->get();
+		
+		$this->display('tournaments.table', [
+			'tournaments' => $tournaments,
+		]);
 	}
 	
 	public function ranking($tournament) {
@@ -48,6 +50,28 @@ class TournamentsController extends BaseController {
 		$tournament->user = Auth::user()->id;
 		
 		return App::make('TournamentsController')->postUpdate($tournament);
+	}
+	
+	public function continuous() {
+	
+		$ids = array_keys(Input::get('tournaments'));
+		$tournaments = Tournament::WhereIn('id', $ids)->get();
+		$players = Player::all();
+		
+		$tournaments->each(function($t) use(&$players) {
+			foreach($t->orderedPlayers()->get() as $ranking => $player) {
+				$players->find($player->id)->addTournamentScore($ranking);
+			}
+		});
+		
+		$players = $players->filter(function($player) {
+			return $player->ts > 0;
+		})->sortByDesc('ts');
+		
+		$this->display('tournaments.continuous', [
+			'players' => $players,
+		]);
+		
 	}
 	
 	public function getUpdate($tournament) {
