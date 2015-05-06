@@ -1,9 +1,26 @@
 			<section class="container">
-				<script type="text/javascript" src="js/players.create.js"></script>
-				<form method="POST" id="#tournamentCreateForm">
+				<form method="POST" id="tournamentCreateForm">
 					<fieldset>
-						<label>Nom du tournois<input type="text" name="name" value="<?php echo $tournament->name; ?>" class="form-control"/></label>
-						<input type="submit" value="Valider" class="btn btn-default"/>
+						<div class="row">
+							<label>Nom du tournois</label>
+						</div>
+						<div class="row">
+							<div class="input-group">
+								<input type="text" name="name" value="<?php echo $tournament->name; ?>" class="form-control"/>
+								<input type="submit" value="Valider" class="btn btn-default"/>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="row">
+							<label>New player<label>
+						</div>
+						<div class="row">
+							<div class="input-group">
+								<input type="text" id="addPlayerText"  class="form-control"/></label>
+								<input type="button" value="Add player" id="addPlayerButton" class="btn btn-default"/>
+							</div>
+						</div>
 					</fieldset>
 					<fieldset id="registeredPlayersFieldset">
 <?php
@@ -35,10 +52,6 @@ while($pt < count($players)) {
 	}
 }
 ?>
-					</fieldset>
-					<fieldset>
-						<label>New player<input type="text" id="addPlayerText"  class="form-control"/></label>
-						<input type="button" value="Add player" id="addPlayerButton" class="btn btn-default"/>
 					</fieldset>
 					<fieldset id="newPlayersFieldset">
 					</fieldset>

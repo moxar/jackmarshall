@@ -1,6 +1,4 @@
 			<section class="container">
-				<script type="text/javascript" src="js/rounds.create.js"></script>
-
 				<nav>
 					<a href="tournaments/<?php echo $tournament->id; ?>"><?php echo $tournament->name; ?></a>
 					&gt; Ronde - <?php echo $round->number; ?>

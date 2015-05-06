@@ -3,7 +3,6 @@
 					<a href="tournaments/<?php echo $round->tournament()->id; ?>"><?php echo $round->tournament()->name; ?></a>
 					&gt; Ronde - <?php echo $round->number; ?>
 				</nav>
-				<script type="text/javascript" src="js/reports.update.js"></script>
 				<h1>Rapports de partie</h1>
 				<form method="POST">
 					<input type="hidden" name="number" value="<?php echo $round->number; ?>" />
