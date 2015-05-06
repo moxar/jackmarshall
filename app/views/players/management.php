@@ -1,59 +1,55 @@
 			<section class="container">
-				<form method="POST" id="tournamentCreateForm">
-					<fieldset>
-						<div class="row">
+				<section class="view tournament-create">
+					<form method="POST">
+						<div>
 							<label>Nom du tournois</label>
 						</div>
-						<div class="row">
+						<div>
 							<div class="input-group">
-								<input type="text" name="name" value="<?php echo $tournament->name; ?>" class="form-control"/>
+								<input type="text" name="name" value="<?= $tournament->name; ?>" class="form-control"/>
 								<input type="submit" value="Valider" class="btn btn-default"/>
 							</div>
 						</div>
-					</fieldset>
-					<fieldset>
-						<div class="row">
-							<label>New player<label>
-						</div>
-						<div class="row">
-							<div class="input-group">
-								<input type="text" id="addPlayerText"  class="form-control"/></label>
-								<input type="button" value="Add player" id="addPlayerButton" class="btn btn-default"/>
+						<div>
+							<div>
+								<label>Nouveau joueur<label>
+							</div>
+							<div class="group-add-player input-group">
+								<input type="text" class="form-control"/></label>
+								<input type="button" value="Ajouter" class="btn btn-default"/>
 							</div>
 						</div>
-					</fieldset>
-					<fieldset id="registeredPlayersFieldset">
+						
+						<hr/>
+						
+						<div class="row">
+							<div class="col-md-6 players-pool">
+								<h3>Joueurs existants</h3>
+								<ul class="list-group">
 <?php
-$pt = 0;
-while($pt < count($players)) {		
-	for($ct = 0; $ct < 6; $ct++)
-	{
-		if(!isset($players[$pt])) break 2;
-		$player = $players[$pt];
-		if(in_array($player->id, $tournamentPlayers))
-		{
+$players->each(function($player) {
 ?>
-							<section class="cell checker registeredPlayer active">
-								<span><?php echo $player->name; ?></span>
-								<input type="hidden" name="players[<?php echo $player->id; ?>]"/>
-							</section>
+									<li class="list-group-item" data-id="<?= $player->id; ?>" data-name="<?= $player->name; ?>">
+										<i class="btn btn-link fa fa-plus btn-add-player"></i> 
+										<?= $player->name; ?>
+									</li>				
 <?php
-		}
-		else
-		{
+});
 ?>
-							<section class="cell checker registeredPlayer inactive">
-								<span><?php echo $player->name; ?></span>
-								<input type="hidden" name="players[<?php echo $player->id; ?>]" disabled="disabled"/>
-							</section>
-<?php
-		}
-		$pt++;
-	}
-}
-?>
-					</fieldset>
-					<fieldset id="newPlayersFieldset">
-					</fieldset>
-				</form>
-			</section>
+								</ul>
+							</div>
+							<div class="col-md-6 players-registered">
+								<h3>Joueurs inscrits</h3>
+								<ul class="list-group">
+								</ul>
+								<div class="template">
+									<li class="player list-group-item">
+										<i class="btn btn-link btn-remove fa fa-times"></i>
+										<span></span>
+										<input type="hidden" />
+									</li>
+								</div>
+							</div>
+						</form>
+					</section>
+				</section>

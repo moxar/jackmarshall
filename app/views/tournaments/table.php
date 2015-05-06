@@ -6,13 +6,21 @@
 					<table class="table table-striped table-condensed table-hover">
 						<thead>
 							<tr>
+								<td colspan="6"><a href="tournaments/create"><span class="glyphicon glyphicon-plus"></span> Nouveau tournois</a></td>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<td colspan="6"><a href="tournaments/create"><span class="glyphicon glyphicon-plus"></span> Nouveau tournois</a></td>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
 								<th colspan=2>Nom</th>
 								<th>Date</th>
 								<th>Participants</th>
 								<th><!-- DEL --></th>
 							</tr>
-						</thead>
-						<tbody>
 <?php
 $tournaments->each(function($t) {
 ?>
@@ -37,9 +45,6 @@ $tournaments->each(function($t) {
 <?php
 });
 ?>
-							<tr>
-								<td colspan="6"><a href="tournaments/create"><span class="glyphicon glyphicon-plus"></span> Nouveau tournois</a></td>
-							</tr>
 						</tbody>
 					</table>
 				</form>

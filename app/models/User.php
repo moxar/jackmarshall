@@ -5,7 +5,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	const GHOST = "fantôme";
+	const GHOST = "Fantôme";
 	protected $hidden = array('password');
 
 	public function getAuthIdentifier() {

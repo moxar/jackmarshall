@@ -106,27 +106,22 @@ class TournamentsController extends BaseController {
 		
 		$tournament->players()->detach();
 		
-		if(is_array(Input::get('players'))) {
+		$ids = Input::get('players.ids', []);
+		$names = Input::get('players.names', []);
 		
-			foreach(Input::get('players') as $key => $value) {
-			
-				$tournament->players()->attach($key);
-			}
+		foreach($ids as $key => $value) {
+			$tournament->players()->attach($key);
+		}		
+		
+		foreach($names as $name => $void) {
+			$player = new Player;
+			$player->name = $name;
+			$player->user = Auth::user()->id;
+			$player->save();
+			$tournament->players()->attach($player->id);
 		}
 		
-		if(is_array(Input::get('newPlayers'))) {
-		
-			foreach(Input::get('newPlayers') as $name) {
-			
-				$player = new Player;
-				$player->name = $name;
-				$player->user = Auth::user()->id;
-				$player->save();
-				$tournament->players()->attach($player->id);
-			}
-		}
-		
-		if(count(Input::get('newPlayers')) + count(Input::get('players')) % 2 != 0) {
+		if(count($names) + count($ids) % 2 != 0) {
 			$tournament->players()->attach(User::fantom()->id);
 		}
 		
