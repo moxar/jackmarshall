@@ -4,11 +4,11 @@ class GamesController extends BaseController {
 
 	public function createMultiple($round) {
 	
-		foreach(Input::get('games') as $game) {
+		foreach(Input::get('players') as $k => $game) {
 			
 			$g = new Game;
 			$g->round = $round->id;
-			$g->slug = $game['slug'];
+			$g->slug = "game ".$k;
 			$g->save();
 			
 			App::make('ReportsController')->createMultiple($g, $game);

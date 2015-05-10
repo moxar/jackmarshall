@@ -39,7 +39,7 @@ class ReportsController extends BaseController {
 	public function createMultiple($object, $game) {
 			
 			
-		foreach($game['players'] as $player) {
+		foreach($game as $player) {
 	
 			$report = new Report;
 			$report->game = $object->id;
