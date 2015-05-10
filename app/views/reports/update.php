@@ -1,11 +1,11 @@
 			<section class="container">
 				<nav>
-					<a href="tournaments/<?php echo $round->tournament()->id; ?>"><?php echo $round->tournament()->name; ?></a>
-					&gt; Ronde - <?php echo $round->number; ?>
+					<a href="tournaments/<?= $round->tournament()->id; ?>"><?= $round->tournament()->name; ?></a>
+					&gt; Ronde - <?= $round->number; ?>
 				</nav>
 				<h1>Rapports de partie</h1>
 				<form method="POST">
-					<input type="hidden" name="number" value="<?php echo $round->number; ?>" />
+					<input type="hidden" name="number" value="<?= $round->number; ?>" />
 					<table class="table table-striped table-condensed table-hover">
 						<thead>
 							<tr>
@@ -30,7 +30,7 @@ foreach($games as $game) {
 ?>
 							<tr>
 								<td>
-									<p><?php echo $game->slug; ?></p>
+									<p><?= $game->slug; ?></p>
 								</td>
 <?php
 
@@ -40,17 +40,17 @@ foreach($games as $game) {
 		$report = $player->report;
 ?>
 								<td>
-									<input type="hidden" name="games[<?php echo $game->id; ?>][players][<?php echo $pt; ?>]" value="<?php echo $player->id; ?>" />
-									<?php echo $player->name."\n"; ?>
+									<input type="hidden" name="games[<?= $game->id; ?>][players][<?= $pt; ?>]" value="<?= $player->id; ?>" />
+									<?= $player->name."\n"; ?>
 								</td>
 								<td>
-									<input class="scoreInput" type="text" data-id="<?php echo $report->id; ?>" data-score="victory" value="<?php echo $report->victory; ?>" />
+									<input class="scoreInput" type="text" data-id="<?= $report->id; ?>" data-score="victory" value="<?= $report->victory; ?>" />
 								</td>
 								<td>
-									<input class="scoreInput" type="text" data-id="<?php echo $report->id; ?>" data-score="control" value="<?php echo $report->control; ?>" />
+									<input class="scoreInput" type="text" data-id="<?= $report->id; ?>" data-score="control" value="<?= $report->control; ?>" />
 								</td>
 								<td>
-									<input class="scoreInput" type="text" data-id="<?php echo $report->id; ?>" data-score="destruction" value="<?php echo $report->destruction; ?>" />
+									<input class="scoreInput" type="text" data-id="<?= $report->id; ?>" data-score="destruction" value="<?= $report->destruction; ?>" />
 								</td>
 <?php
 	}
@@ -60,8 +60,8 @@ foreach($games as $game) {
 }
 ?>
 							<tr>
-								<td colspan="<?php echo 1+count($games[0]->players)*4; ?>">
-									<a href="rounds/<?php echo $round->tournament()->id; ?>/create"><span class="glyphicon glyphicon-plus"></span> Nouvelle ronde</a>
+								<td colspan="<?= 1+count($games[0]->players)*4; ?>">
+									<a href="rounds/<?= $round->tournament()->id; ?>/create"><span class="glyphicon glyphicon-plus"></span> Nouvelle ronde</a>
 								</td>
 							</tr>
 						</tbody>

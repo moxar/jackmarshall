@@ -1,0 +1,41 @@
+.players-pool {
+	margin-bottom:  @grid-gutter-width;
+	
+	.cell {
+		margin: @grid-gutter-width / 6;
+		padding: @table-condensed-cell-padding;
+		border: solid @btn-default-color 1px;
+		
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		
+		&:not(.alert-danger) {
+			background-color: white;
+		}
+		
+		&:first-child {
+			margin-left: @grid-gutter-width / 2;
+		}
+		
+		&:not(.th) {
+			cursor: pointer;
+		}
+		
+		&.th {
+			text-align: center;
+			font-weight: bold;
+			border: none;
+		}
+		
+		&.reciever {
+			.alert-info;
+			border: solid @btn-default-color 1px;
+		}
+		
+		&.clone {
+			z-index: 1000;
+			border: solid @btn-default-color 1px;
+		}
+	}
+}

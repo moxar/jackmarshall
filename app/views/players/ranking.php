@@ -16,11 +16,11 @@ foreach($players as $player)
 {
 ?>
 					<tr>
-						<td><?php echo $player->name; ?></td>
-						<td><?php echo $player->victory; ?></td>
-						<td><?php echo $player->control; ?></td>
-						<td><?php echo $player->destruction; ?></td>
-						<td><?php echo $player->sos; ?></td>
+						<td><?= $player->name; ?></td>
+						<td><?= $player->victory; ?></td>
+						<td><?= $player->control; ?></td>
+						<td><?= $player->destruction; ?></td>
+						<td><?= $player->sos; ?></td>
 					</tr>
 <?php
 }

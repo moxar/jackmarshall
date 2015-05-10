@@ -13,12 +13,10 @@ class RoundsController extends BaseController {
 		
 		$players = $tournament->orderedPlayers()->get();
 		
-		
 		$this->display(array('rounds.create', 'players.ranking'), array(
 			'tournament' => $tournament,
 			'round' => $round,
 			'players' => $players,
-			'ppg' => 2,
 		));
 	}
 	

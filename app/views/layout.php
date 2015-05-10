@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<base href="<?php echo Request::root(); ?>/">
+		<base href="<?= Request::root(); ?>/">
 		<title>Jack'Marshall</title>
 		<meta name="author" content="Moxar">
 		
@@ -42,13 +42,13 @@ else
 <?php
 if(!is_array($content)) {
 ?>
-			<?php echo $content; ?>
+			<?= $content; ?>
 <?php
 }
 else {
 	foreach($content as $view) {
 ?>
-			<?php echo $view; ?>
+			<?= $view; ?>
 <?php
 	}
 }

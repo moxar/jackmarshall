@@ -1,49 +1,58 @@
 			<section class="container">
 				<nav>
-					<a href="tournaments/<?php echo $tournament->id; ?>"><?php echo $tournament->name; ?></a>
-					&gt; Ronde - <?php echo $round->number; ?>
+					<a href="tournaments/<?= $tournament->id; ?>"><?= $tournament->name; ?></a>
+					&gt; Ronde - <?= $round->number; ?>
 				</nav>
 				<h1>Nouvelle ronde</h1>
-				<form method="POST">
-					<input type="hidden" name="number" value="<?php echo $round->number; ?>" />
-					<section id="playerPool">
-						<section class="row">
-							<section class="cell th">Ronde <?php echo $round->number; ?></section><!--
-<?php				
-for($ct = 1; $ct <= $ppg; $ct++) {
-?>
-							--><section class="cell th">Joueur <?php echo $ct; ?></section><!--
+				<section class="view round-create">
+					<form method="POST">
+						<section class="players-pool has-error">
+							<div class="row">
+								<p class="col-sm-2 cell th">Ronde <?= $round->number; ?></p>
+								<p class="col-sm-2 cell th">Joueur 1</p>
+								<p class="col-sm-2 cell th">Joueur 2</p>
+							</div>
 <?php
-}
+$it = 0; 
+$players->each(function(&$p) use($tournament, &$it) {
+	$it++;
+	$p->name = $it.". ".$p->name;
+	$game = ceil($it / 2);
+	switch($it % 2) {
+		case 1:
 ?>
-						--></section>
+							<div class="row">
+								<p class="col-sm-2 cell th">Partie <?= $game; ?></p>
+								<p class="col-sm-2 cell" 
+									data-id="<?= $p->id; ?>" 
+									data-name="<?= $p->name; ?>" 
+									data-opponents="<?= $p->opponents($tournament)->get()->implode('id', ',') ?>">
+									<span><?= $p->name; ?></span>
+									<input type="hidden" name="players[<?= $game; ?>][1]" value="<?= $p->id; ?>"/>
+								</p>
 <?php
-$pt = 0;
-for($rt = 1; $rt <= ($players->count() / $ppg); $rt++) {
+			break;
+		case 0:
 ?>
-						<section class="row">
-							<input type="hidden" name="games[<?php echo $rt; ?>][slug]" value="T <?php echo $rt; ?>" />
-							<section class="cell th">Partie <?php echo $rt; ?></section><!--
+								<p class="col-sm-2 cell" 
+									data-id="<?= $p->id; ?>" 
+									data-name="<?= $p->name; ?>" 
+									data-opponents="<?= $p->opponents($tournament)->get()->implode('id', ',') ?>">
+									<span><?= $p->name; ?></span>
+									<input type="hidden" name="players[<?= $game; ?>][2]" value="<?= $p->id; ?>"/>
+								</p>
+							</div>
 <?php
-	for($ct = 1; $ct <= $ppg; $ct++) {
-?>
-							--><section class="cell">
-								<span><?php echo $players[$pt]->name; ?></span>
-								<input type="hidden" name="games[<?php echo $rt; ?>][players][<?php echo $ct; ?>]" value="<?php echo $players[$pt]->id; ?>" />
-							</section><!--
-<?php
-		$pt++;
+			break;
 	}
+});
 ?>
-						--></section>
-<?php
-}
-?>
-					</section>
-					<fieldset>
+						
+						
+						</section>
+						<input type="hidden" name="number" value="<?= $round->number; ?>" />
 						<input type="submit" value="Créer" class="btn btn-default"/>
-						<input type="button" value="Mélanger" id="shuffleButton" class="btn btn-default" />
-						<input type="button" value="Classement automatique" id="orderButton" class="btn btn-default" />
-					</fieldset>
-				</form>
+						<input type="button" value="Mélanger" class="btn btn-default btn-shuffle" />
+					</form>
+				</section>
 			
