@@ -19,12 +19,14 @@
 				<ul class="nav navbar-nav">
 					<li><a href="tournaments">Tournois</a></li>
 					<li><a href="maps">Tables</a></li>
+					<li><a href="scenarii">Scenarii</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 <?php
 if(Auth::check())
 {
 ?>
+					<li><a><?= Auth::user()->name; ?></a></li>
 					<li><a href="logout">Déconnexion</a></li>
 <?php
 }

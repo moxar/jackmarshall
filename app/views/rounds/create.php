@@ -29,6 +29,20 @@ $players->each(function(&$p) use($tournament, &$it, &$maps) {
 										<span><?= $map->name;?></span>
 										<input type="hidden" name="games[<?= $game; ?>][slug]" value="game <?= $game; ?>"/>
 										<input type="hidden" name="games[<?= $game; ?>][map]" value="<?= $map->id; ?>"/>
+										<span>(
+<?php										
+	$map->scenarii($tournament)->get()->each(function($scenario) {
+?>
+											<a data-toggle="tooltip" 
+											data-original-title="<?= $scenario->name; ?>"
+											data-placement="top" 
+											data-container="body"
+											><?= $scenario->reference; ?></a>
+<?php
+	});
+?>
+										)
+										</span>
 								</p>
 								<p class="col-sm-2 cell" 
 									data-id="<?= $p->id; ?>" 

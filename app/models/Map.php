@@ -11,7 +11,12 @@ class Map extends Eloquent {
 	
 	public function maps() {
 	
- 		return $this->belongsToMany('Tournament', 'tournaments_maps', 'tournament', 'map');
+ 		return $this->belongsToMany('Tournament', 'tournaments_maps', 'map', 'tournament');
+	}
+	
+	public function scenarii(Tournament $tournament) {
+	
+		return $this->belongsToMany('Scenario', 'scenarii_maps', 'map', 'scenario')->where('tournament', $tournament->id);
 	}
 }
  
