@@ -61,7 +61,7 @@ class TournamentsController extends BaseController {
 	
 	public function continuous() {
 	
-		$ids = array_keys(Input::get('tournaments'));
+		$ids = array_keys(Input::get('tournaments', []));
 		$tournaments = Tournament::WhereIn('id', $ids)->get();
 		$players = Player::all();
 		
