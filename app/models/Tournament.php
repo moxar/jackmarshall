@@ -67,6 +67,10 @@ class Tournament extends Eloquent {
 		}
 		return $this->reports()->whereIn('reports.player', $ids);
 	}
+	
+	public function scenarii() {
+		return $this->belongsToMany('Scenario', 'scenarii_maps', 'tournament', 'scenario');
+	}
 }
 
 Tournament::deleting(function($tournament) {
@@ -77,6 +81,7 @@ Tournament::deleting(function($tournament) {
 	}
 	$tournament->players()->detach();
 	$tournament->maps()->detach();
+	$tournament->scenarii()->detach();
 });
 
 

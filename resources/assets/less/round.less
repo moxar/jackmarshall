@@ -1,6 +1,16 @@
 .players-pool {
 	margin-bottom:  @grid-gutter-width;
 	
+	.row {
+		&:not(:first-child) {
+			.cell {
+				&:first-child {
+					text-align: left;
+				}
+			}
+		}
+	}
+	
 	.cell {
 		margin: @grid-gutter-width / 6;
 		padding: @table-condensed-cell-padding;
@@ -26,6 +36,13 @@
 			text-align: center;
 			font-weight: bold;
 			border: none;
+			
+			span:last-child {
+				font-weight: normal;
+				a {
+					cursor: pointer;
+				}
+			}
 		}
 		
 		&.reciever {

@@ -14,7 +14,7 @@ foreach($maps as $map)
 {
 ?>
 					<tr>
-						<td><a href="maps/<?= $map->id; ?>/update"><?= $map->name; ?></a></td>
+						<td><?= $map->name; ?></td>
 						<td><a href="maps/<?= $map->id; ?>/delete"><span class="glyphicon glyphicon-remove"></span></a></td>
 					</tr>
 <?php

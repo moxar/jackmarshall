@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Database\Eloquent\Collection;
+use Carbon\Carbon;
+
 class TournamentsController extends BaseController {
 
 	public function index() {
@@ -112,6 +115,15 @@ class TournamentsController extends BaseController {
 			$tournament->players()->attach($player);
 		}
 		
+		$scenarii = new Collection();
+		$tournament->maps->each(function($map) use(&$scenarii, $tournament) {
+			if($scenarii->count() < 2) {
+					$scenarii = Scenario::where('season', Carbon::now()->year)->get()->shuffle();
+			}
+			$map->scenarii($tournament)->attach($scenarii->pop()->id, ['tournament' => $tournament->id]);
+			$map->scenarii($tournament)->attach($scenarii->pop()->id, ['tournament' => $tournament->id]);
+		});
+		
 		foreach($names as $name) {
 			$player = new Player;
 			$player->name = $name;
@@ -138,4 +150,3 @@ class TournamentsController extends BaseController {
 }
 
 ?>
- 

@@ -1,5 +1,7 @@
 $(function() {	
 	
+		$('[data-toggle="tooltip"]').tooltip();
+	
 		/*
 		 * Shuffles the player order in round
 		 */
@@ -83,7 +85,7 @@ $(function() {
 												'data-id': id,
 												'data-name': name,
 										});
-										$(this).find('span').text(name);
+										$(this).find('span:first-child').text(name);
 										$(this).find('input[type=hidden]').val(id);
 										availables.splice(availables.indexOf(id), 1);
 										
@@ -113,7 +115,7 @@ $(function() {
 												'data-id': id,
 												'data-name': name,
 										});
-										$(this).find('span').text(name);
+										$(this).find('span:first-child').text(name);
 										$(this).find('input[type=hidden]').val(id);
 										availables.splice(availables.indexOf(id), 1);
 										
@@ -140,7 +142,7 @@ $(function() {
 										'data-id': id,
 										'data-name': name,
 								});
-								$(this).find('span').text(name);
+								$(this).find('span:first-child').text(name);
 								$(this).find('input[type=hidden]').val(id);
 								$(this).addClass('alert-warning');
 								availables.splice(availables.indexOf(id), 1);
@@ -187,7 +189,7 @@ $(function() {
 function swap(newCell, oldCell) {
 		
 		var s = newCell.clone();
-		newCell.find('span').text(oldCell.attr('data-name'));
+		newCell.find('span:first-child').text(oldCell.attr('data-name'));
 		newCell.find('input[type=hidden]').attr('value', oldCell.attr('data-id'));
 		newCell.attr({
 			'data-id': oldCell.attr('data-id'),
@@ -196,7 +198,7 @@ function swap(newCell, oldCell) {
 			'data-maps': oldCell.attr('data-maps'),
 		});
 		
-		oldCell.find('span').text(s.attr('data-name'));
+		oldCell.find('span:first-child').text(s.attr('data-name'));
 		oldCell.find('input[type=hidden]').attr('value', s.attr('data-id'));
 		oldCell.attr({
 			'data-id': s.attr('data-id'),

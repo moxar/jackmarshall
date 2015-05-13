@@ -53,6 +53,20 @@ Route::bind('map', function($key, $route)
 });
 
 
+Route::bind('scenario', function($key, $route)
+{
+	$round = Scenario::find($key);
+	if($round == null)
+	{
+		App::abort(404);
+	}
+	else
+	{
+		return $round;
+	}
+});
+
+
 Route::bind('report', function($key, $route)
 {
 	$report = Report::find($key);
@@ -86,6 +100,11 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('rounds/{round}/update', 'RoundsController@getUpdate');
 	Route::post('rounds/{round}/update', 'RoundsController@postUpdate');
 	Route::get('rounds/{round}/delete', 'RoundsController@delete');
+	
+	Route::get('scenarii', 'ScenariiController@listing');
+	Route::get('scenarii/create', 'ScenariiController@getCreate');
+	Route::post('scenarii/create', 'ScenariiController@postCreate');
+// 	Route::get('scenarii/{scenario}/delete', 'ScenariiController@delete');
 
 	Route::get('reports/{report}/update', 'ReportsController@getUpdate');
 	Route::post('reports/{report}/update', 'ReportsController@postUpdate');
