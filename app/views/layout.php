@@ -18,6 +18,7 @@
 				<a href="./" class="navbar-brand">Jack'Marshall</a>
 				<ul class="nav navbar-nav">
 					<li><a href="tournaments">Tournois</a></li>
+					<li><a href="maps">Tables</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 <?php

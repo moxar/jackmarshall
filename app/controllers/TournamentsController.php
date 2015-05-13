@@ -43,10 +43,13 @@ class TournamentsController extends BaseController {
 				->orderBy('name')
 				->get();
 				
-		$this->display(array('tournaments.create', 'players.management'), array(
+                $maps = Auth::user()->maps;
+				
+		$this->display(array('tournaments.create'), array(
 			'players' => $players,
 			'tournament' => new Tournament,
-			'tournamentPlayers' => array()
+			'tournamentPlayers' => array(),
+			'maps' => $maps,
 		));
 		
 	}
@@ -102,26 +105,39 @@ class TournamentsController extends BaseController {
 		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
 	
 		$tournament->name = Input::get('name');
+		$maps = array_keys(Input::get('maps', []));
+		$players = array_keys(Input::get('players.ids', []));
+		$names = array_keys(Input::get('players.names', []));
+		if(is_null($tournament->name)) {
+                        return Redirect::back();
+		}
+		
+		$total = count($names) + count($players);
+		if(ceil($total / 2) != count($maps)) {
+                        return Redirect::back();
+		}
+		
 		$tournament->save();
+		$tournament->maps()->detach();
+		foreach($maps as $map) {
+			$tournament->maps()->attach($map);
+		}
 		
 		$tournament->players()->detach();
+		foreach($players as $player) {
+			$tournament->players()->attach($player);
+		}
 		
-		$ids = Input::get('players.ids', []);
-		$names = Input::get('players.names', []);
-		
-		foreach($ids as $key => $value) {
-			$tournament->players()->attach($key);
-		}		
-		
-		foreach($names as $name => $void) {
+		foreach($names as $name) {
 			$player = new Player;
 			$player->name = $name;
 			$player->user = Auth::user()->id;
 			$player->save();
+			
 			$tournament->players()->attach($player->id);
 		}
 		
-		if(count($names) + count($ids) % 2 != 0) {
+		if($total % 2 != 0) {
 			$tournament->players()->attach(User::fantom()->id);
 		}
 		

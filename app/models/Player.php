@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\Collection;
+
 class Player extends Eloquent {
 
 	const BASE_POW = 0.9;
@@ -66,6 +68,26 @@ class Player extends Eloquent {
 			->where('player', '=', $this->id)
 			->where('tournament', '=', $tournament->id)
 			->update(array('sos' => $sos));
+	}
+	
+	public function maps($tournament) 
+	{
+                $maps = new Collection;
+                $this->reports($tournament)
+                    ->get()
+                    ->each(function($report) use(&$maps) {
+                        $maps->push(Map::find($report->map));
+                });
+                
+                return $maps;
+	}
+	
+	public function reports($tournament)
+	{
+                return $this->hasMany('Report', 'player')
+                    ->join('games', 'games.id', '=', 'reports.game')
+                    ->join('rounds', 'rounds.id', '=', 'games.round')
+                    ->where('rounds.tournament', $tournament->id);
 	}
 	
 	public function addTournamentScore($ranking) {

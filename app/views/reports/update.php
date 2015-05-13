@@ -44,13 +44,13 @@ foreach($games as $game) {
 									<?= $player->name."\n"; ?>
 								</td>
 								<td>
-									<input class="scoreInput" type="text" data-id="<?= $report->id; ?>" data-score="victory" value="<?= $report->victory; ?>" />
+									<input class="scoreInput form-control" type="text" data-id="<?= $report->id; ?>" data-score="victory" value="<?= $report->victory; ?>" />
 								</td>
 								<td>
-									<input class="scoreInput" type="text" data-id="<?= $report->id; ?>" data-score="control" value="<?= $report->control; ?>" />
+									<input class="scoreInput form-control" type="text" data-id="<?= $report->id; ?>" data-score="control" value="<?= $report->control; ?>" />
 								</td>
 								<td>
-									<input class="scoreInput" type="text" data-id="<?= $report->id; ?>" data-score="destruction" value="<?= $report->destruction; ?>" />
+									<input class="scoreInput form-control" type="text" data-id="<?= $report->id; ?>" data-score="destruction" value="<?= $report->destruction; ?>" />
 								</td>
 <?php
 	}

@@ -12,6 +12,11 @@ class Tournament extends Eloquent {
  		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
 	}
 	
+	public function maps() {
+	
+ 		return $this->belongsToMany('Map', 'tournaments_maps', 'map', 'tournament');
+	}
+	
 	public function orderedPlayers() {
 	
 		return $this->players()
@@ -71,6 +76,7 @@ Tournament::deleting(function($tournament) {
 		$round->delete();
 	}
 	$tournament->players()->detach();
+	$tournament->maps()->detach();
 });
 
 

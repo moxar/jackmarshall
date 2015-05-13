@@ -39,6 +39,20 @@ Route::bind('round', function($key, $route)
 });
 
 
+Route::bind('map', function($key, $route)
+{
+	$round = Map::find($key);
+	if($round == null)
+	{
+		App::abort(404);
+	}
+	else
+	{
+		return $round;
+	}
+});
+
+
 Route::bind('report', function($key, $route)
 {
 	$report = Report::find($key);
@@ -60,6 +74,13 @@ Route::group(array('before' => 'auth'), function() {
 	Route::get('tournaments/{tournament}/update', 'TournamentsController@getUpdate');
 	Route::post('tournaments/{tournament}/update', 'TournamentsController@postUpdate');
 	Route::get('tournaments/{tournament}/delete', 'TournamentsController@delete');
+	
+	Route::get('maps', 'MapsController@listing');
+	Route::get('maps/create', 'MapsController@getCreate');
+	Route::post('maps/create', 'MapsController@postCreate');
+	Route::get('maps/{map}/update', 'MapsController@getUpdate');
+	Route::post('maps/{map}/update', 'MapsController@postUpdate');
+	Route::get('maps/{map}/delete', 'MapsController@delete');
 
 	Route::get('rounds/{tournament}/create', 'RoundsController@getCreate');
 	Route::post('rounds/{tournament}/create', 'RoundsController@postCreate');
