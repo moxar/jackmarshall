@@ -19,7 +19,7 @@ function ReportsUpdater(selector) {
 			case 'destruction':
 				data = {'destruction': node.val()}; break;
 		}
-		console.log(data);
+		
 		$.post('reports/' + node.attr('data-id') + '/update' , data, function(response){
 			var prev = $('#rankingSection').prev()
 			$('#rankingSection').remove();

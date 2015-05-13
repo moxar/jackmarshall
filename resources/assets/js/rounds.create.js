@@ -37,10 +37,126 @@ $(function() {
 								cells.addClass("alert-danger");
 						}
 				});
+				
+				$(this).trigger('maps.check');
 		});
 		
-		$(document).on('order', '.players-pool', function() {
-				order();
+		/*
+		 * Reorganize the maps to avoid players using the same twice
+		 */
+		$(document).on('maps.check', '.players-pool', function() {
+				var availables = [];
+				var tables = [];
+				
+				$(this).find('.cell').removeClass('alert-warning');
+				$(this).find('.row:not(:first-child) .cell:first-child').each(function() {
+						var id = $(this).attr('data-id');
+						var name = $(this).attr('data-name');
+						availables.push(id);
+						tables[id] = name;
+						$(this).data('asigned', false);
+				});
+				
+				while(availables.length != 0) {
+					
+						// retrieve each unasigned map
+						var lines = $(this).find('.row:not(:first-child) .cell:first-child').filter(function() {
+								return typeof($(this).data('asigned')) == "undefined" || !$(this).data('asigned');
+						});
+						
+						var asigned = false;
+						
+						// for each line, retrieve the potentials maps
+						// allocate table if only one option is available 
+						lines.each(function() {
+								var maps = [];
+								$(this).siblings('.cell:not(:first-child)').each(function() {
+										maps = maps.concat($(this).attr('data-maps').split(','));
+								});
+								var potentials = $(availables).not(maps);
+								
+								if(potentials.length == 1) {
+										var id = potentials[0];
+										var name = tables[id];
+										
+										$(this).attr({
+												'data-id': id,
+												'data-name': name,
+										});
+										$(this).find('span').text(name);
+										$(this).find('input[type=hidden]').val(id);
+										availables.splice(availables.indexOf(id), 1);
+										
+										asigned = true;
+										$(this).data('asigned', true);
+										return false;
+								}
+						});
+						if(asigned) {
+								continue;
+						}
+						
+						
+						// allocate table if many option are available 
+						lines.each(function() {
+								var maps = [];
+								$(this).siblings('.cell:not(:first-child)').each(function() {
+										maps = maps.concat($(this).attr('data-maps').split(','));
+								});
+								var potentials = $(availables).not(maps).get();
+								
+								if(potentials.length > 1) {
+										var id = potentials[0];
+										var name = tables[id];
+										
+										$(this).attr({
+												'data-id': id,
+												'data-name': name,
+										});
+										$(this).find('span').text(name);
+										$(this).find('input[type=hidden]').val(id);
+										availables.splice(availables.indexOf(id), 1);
+										
+										asigned = true;
+										$(this).data('asigned', true);
+										return false;	
+								}
+						});
+						if(asigned) {
+								continue;
+						}
+						
+						// allocate table if no option is available 
+						lines.each(function() {
+								var maps = [];
+								$(this).siblings('.cell:not(:first-child)').each(function() {
+										maps = maps.concat($(this).attr('data-maps').split(','));
+								});
+								
+								var id = availables[0];
+								var name = tables[id];
+										
+								$(this).attr({
+										'data-id': id,
+										'data-name': name,
+								});
+								$(this).find('span').text(name);
+								$(this).find('input[type=hidden]').val(id);
+								$(this).addClass('alert-warning');
+								availables.splice(availables.indexOf(id), 1);
+								
+								$(this).siblings('.cell:not(:first-child)').filter(function() {
+										return $.inArray(id, $(this).attr('data-maps').split(',')) != -1;
+								}).addClass('alert-warning');
+								
+								asigned = true;
+								$(this).data('asigned', true);
+								return false;
+						});
+						if(asigned) {
+								continue;
+						}
+				}
 		});
 		
 		/*
@@ -65,7 +181,7 @@ $(function() {
 		/*
 		 * Checks validity on page load
 		 */
-		$(document).find('.players-pool .row:not(:first-child)').trigger('status.check');
+		$(document).find('.players-pool').trigger('status.check');
 });
 		
 function swap(newCell, oldCell) {
