@@ -24,11 +24,11 @@ $players->each(function(&$p) use($tournament, &$it, &$maps) {
 ?>
 							<div class="row">
 								<p class="col-sm-2 cell th"
-                                                                    data-id="<?= $map->id; ?>"
-                                                                    data-name="<?= $map->name; ?>">
-                                                                        <span><?= $map->name;?></span>
-                                                                        <input type="hidden" name="games[<?= $game; ?>][slug]" value="game <?= $game; ?>"/>
-                                                                        <input type="hidden" name="games[<?= $game; ?>][map]" value="<?= $map->id; ?>"/>
+									data-id="<?= $map->id; ?>"
+									data-name="<?= $map->name; ?>">
+										<span><?= $map->name;?></span>
+										<input type="hidden" name="games[<?= $game; ?>][slug]" value="game <?= $game; ?>"/>
+										<input type="hidden" name="games[<?= $game; ?>][map]" value="<?= $map->id; ?>"/>
 								</p>
 								<p class="col-sm-2 cell" 
 									data-id="<?= $p->id; ?>" 
@@ -47,6 +47,7 @@ $players->each(function(&$p) use($tournament, &$it, &$maps) {
 									data-id="<?= $p->id; ?>" 
 									data-name="<?= $p->name; ?>" 
 									data-opponents="<?= $p->opponents($tournament)->get()->implode('id', ',') ?>"
+									data-maps="<?= $p->maps($tournament)->implode('id', ','); ?>"
 									>
 									<span><?= $p->name; ?></span>
 									<input type="hidden" name="games[<?= $game; ?>][players][2]" value="<?= $p->id; ?>"/>
