@@ -193,6 +193,7 @@ function swap(newCell, oldCell) {
 			'data-id': oldCell.attr('data-id'),
 			'data-name': oldCell.attr('data-name'),
 			'data-opponents': oldCell.attr('data-opponents'),
+			'data-maps': oldCell.attr('data-maps'),
 		});
 		
 		oldCell.find('span').text(s.attr('data-name'));
@@ -201,5 +202,6 @@ function swap(newCell, oldCell) {
 			'data-id': s.attr('data-id'),
 			'data-name': s.attr('data-name'),
 			'data-opponents': s.attr('data-opponents'),
+			'data-maps': s.attr('data-maps'),
 		});
 }
