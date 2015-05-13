@@ -84,22 +84,6 @@ class TournamentsController extends BaseController {
 		
 	}
 	
-	public function getUpdate($tournament) {
-	
-		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');
-		
-		$tournamentPlayers = array();
-		foreach($tournament->players as $player) {
-			$tournamentPlayers[] = $player->id;
-		}
-				
-		$this->display(array('tournaments.update', 'players.management'), array(
-			'players' => Auth::user()->playersButFantom()->get(),
-			'tournament' => $tournament,
-			'tournamentPlayers' => $tournamentPlayers
-		));
-	}
-	
 	public function postUpdate($tournament) {
 	
 		if($tournament->user != Auth::user()->id) return Redirect::to('tournaments');

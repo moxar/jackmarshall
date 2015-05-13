@@ -34,7 +34,6 @@ $tournaments->each(function($t) {
 								<td><?= $t->created_at; ?></td>
 								<td>
 									<?= $t->playersButFantom->count(); ?>
-									<a href="tournaments/<?= $t->id; ?>/update">(Contrôler)</a>
 								</td>
 								<td>
 									<a href="tournaments/<?= $t->id; ?>/delete">
