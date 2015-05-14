@@ -39,6 +39,7 @@ class ScenariiController extends BaseController {
 		$scenario->name = Input::get('name');
 		$scenario->reference = Input::get('reference');
 		$scenario->season = Input::get('season');
+		$scenario->url = Input::get('url');
 		$scenario->save();
 		
 		return Redirect::to('scenarii');

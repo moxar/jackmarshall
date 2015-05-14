@@ -33,7 +33,9 @@ $players->each(function(&$p) use($tournament, &$it, &$maps) {
 <?php										
 	$map->scenarii($tournament)->get()->each(function($scenario) {
 ?>
-											<a data-toggle="tooltip" 
+											<a href="<?= $scenario->url; ?>" 
+											target="_blank"
+											data-toggle="tooltip" 
 											data-original-title="<?= $scenario->name; ?>"
 											data-placement="top" 
 											data-container="body"
