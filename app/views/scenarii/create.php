@@ -30,6 +30,15 @@
 						
 						<div class="row">
 							<div class="col-md-1">
+								<label class="control-label">URL</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" name="url" placeholder="http://jackmarshall.fr/uploads/xxx" class="form-control">
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-1">
 								<input type="submit" class="btn btn-primary" value="Créer">
 							</div>
 						</div>

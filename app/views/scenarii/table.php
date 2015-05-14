@@ -15,16 +15,16 @@ foreach($scenarii as $scenario)
 {
 ?>
 					<tr>
-						<td><?= $scenario->reference.'. '.$scenario->name; ?></td>
+						<td><a href="<?= $scenario->url; ?>" target="_blank"><?= $scenario->reference.'. '.$scenario->name; ?></a></td>
 						<td><?= $scenario->season; ?></td>
 <!-- 						<td><a href="scenarii/<?= $scenario->id; ?>/delete"><span class="glyphicon glyphicon-remove"></span></a></td> -->
 					</tr>
 <?php
 }
 ?>
-					<tr>
+<!--					<tr>
 						<td colspan=100%><a href="scenarii/create"><span class="glyphicon glyphicon-plus"></span> Nouveau scenario</a></td>
-					</tr>
+					</tr>-->
 					</tbody>
 				</table>
 			</section>
