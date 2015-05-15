@@ -1,6 +1,27 @@
-.scoreInput {
+.score {
 
         &.form-control {
             width: 50px;
         }
+        
+        &.empty {
+			background-color: @brand-warning;
+        }
+}
+
+a.disabled {
+		&:hover, &:focus {
+			cursor: not-allowed;
+			color: @gray-light;
+			text-decoration: none;
+			outline: none;
+		}
+		
+		color: @gray-light;
+}
+
+.fa-spinner {
+	&:not(.fa-spin) {
+		display: none;
+	}
 }

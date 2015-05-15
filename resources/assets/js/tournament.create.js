@@ -34,7 +34,9 @@ $(function() {
 		 * Removes a player from the registered list when clicking the remove btn
 		 */
 		$(document).on('click', '.players-registered .btn-remove', function() {
+				var pool = $(this).parents('.players-registered');
 				$(this).parents('li').remove();
+				$('.players-registered h3 span').text("(" + pool.find('ul li').length + ")");
 		});
 		
 		/*
@@ -83,6 +85,7 @@ $(function() {
 						});
 				});
 				
+				$('.players-registered h3 span').text("(" + names.length + ")");
 				$('.players-registered ul').empty();
 				$.each(players, function(k, p) {
 						var input = $('.players-registered').find('.template .player').clone();

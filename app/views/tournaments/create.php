@@ -61,7 +61,7 @@ $players->each(function($player) {
                                                             </ul>
                                                         </div>
                                                         <div class="col-md-6 players-registered">
-                                                            <h3>Joueurs inscrits</h3>
+                                                            <h3>Joueurs inscrits <span></span></h3>
                                                             <ul class="list-group">
                                                             </ul>
                                                             <div class="template">

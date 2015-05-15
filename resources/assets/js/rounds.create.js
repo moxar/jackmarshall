@@ -12,7 +12,7 @@ $(function() {
 						players.push({
 								id: 		$(this).attr('data-id'),
 								name: 		$(this).attr('data-name'),
-								opponents:	$(this).attr('data-opponents')
+								opponents:	$(this).attr('data-opponents'),
 						});
 				});
 				players.shuffle();

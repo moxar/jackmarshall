@@ -14,20 +14,20 @@ class ReportsController extends BaseController {
 		));
 	}
 	
-	public function postUpdate($report) {
-		
-		if(!is_null(Input::get('victory'))) $report->victory = Input::get('victory');
-		if(!is_null(Input::get('control'))) $report->control = Input::get('control');
-		if(!is_null(Input::get('destruction'))) $report->destruction = Input::get('destruction');
-		$report->save();
-		
-		if(Request::ajax()) {
-			return App::make('TournamentsController')->ranking($report->tournament());
+	public function postUpdate() {
+	
+		$reports = Input::get('reports');
+		if(is_null($reports)) {
+				Redirect::back();
 		}
-		else
-		{
-			return Redirect::to('rounds/'.$report->round()->id.'/update');
+		
+		foreach($reports as $r) {
+				$report = Report::findOrFail($r)->first();
+				$report->fill($r);
+				$report->save();
 		}
+		
+		return App::make('TournamentsController')->ranking(Tournament::findOrFail(Input::get('tournament')));
 	}
 	
 	public function delete($report) {
@@ -36,13 +36,11 @@ class ReportsController extends BaseController {
 		return Redirect::back();
 	}
 	
-	public function createMultiple($object, $game) {
+	public function createMultiple($gameModel, $gameInputs) {
 			
-			
-		foreach($game as $player) {
-	
+		foreach($gameInputs as $player) {
 			$report = new Report;
-			$report->game = $object->id;
+			$report->game = $gameModel->id;
 			$report->player = $player;
 			$report->save();
 		}
