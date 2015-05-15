@@ -2,9 +2,11 @@
 
 class Report extends Eloquent {
 
+	protected $guarded = ['report'];
+
 	public function player() {
 	
-		return $this->belongsTo('Player', 'player')->first();
+		return $this->belongsTo('Player', 'player')->firstOrFail();
 	}
 
 	public function tournament() {

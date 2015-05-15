@@ -106,8 +106,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::post('scenarii/create', 'ScenariiController@postCreate');
 // 	Route::get('scenarii/{scenario}/delete', 'ScenariiController@delete');
 
-	Route::get('reports/{report}/update', 'ReportsController@getUpdate');
-	Route::post('reports/{report}/update', 'ReportsController@postUpdate');
+	Route::post('reports/update', 'ReportsController@postUpdate');
 	Route::get('reports/{report}/delete', 'ReportsController@delete');
 });
 
