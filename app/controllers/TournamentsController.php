@@ -67,9 +67,10 @@ class TournamentsController extends BaseController {
 	
 	public function continuous() {
 	
-		$ids = array_keys(Input::get('tournaments', []));
-		$tournaments = Tournament::WhereIn('id', $ids)->get();
 		$players = Player::all();
+		$from = Input::get('from');
+		$to = Input::get('to');
+		$tournaments = Tournament::where('updated_at', '>=', Carbon::parse($from))->where('updated_at', '<=', Carbon::parse($to))->get();
 		
 		$tournaments->each(function($t) use(&$players) {
 			foreach($t->orderedPlayers()->get() as $ranking => $player) {
@@ -83,6 +84,8 @@ class TournamentsController extends BaseController {
 		
 		$this->display('tournaments.continuous', [
 			'players' => $players,
+			'from' => $from,
+			'to' => $to,
 		]);
 		
 	}
