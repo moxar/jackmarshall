@@ -73,12 +73,12 @@ class TournamentsController extends BaseController {
 		
 		$tournaments->each(function($t) use(&$players) {
 			foreach($t->orderedPlayers()->get() as $ranking => $player) {
-				$players->find($player->id)->addTournamentScore($ranking);
+				$players->find($player->player)->addTournamentScore($ranking);
 			}
 		});
 		
 		$players = $players->filter(function($player) {
-			return $player->ts > 0;
+			return $player->ts > 0 && $player->name != User::GHOST;
 		})->sortByDesc('ts');
 		
 		$this->display('tournaments.continuous', [
