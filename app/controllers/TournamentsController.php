@@ -12,7 +12,7 @@ class TournamentsController extends BaseController {
 	
 	public function listing() {
 		
-		$tournaments = Tournament::orderBy("created_at", "DESC")->get();
+		$tournaments = Tournament::orderBy("created_at", "DESC")->paginate();
 		
 		$this->display('tournaments.table', [
 			'tournaments' => $tournaments,
