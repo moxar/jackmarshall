@@ -71,6 +71,10 @@ class Tournament extends Eloquent {
 	public function scenarii() {
 		return $this->belongsToMany('Scenario', 'scenarii_maps', 'tournament', 'scenario');
 	}
+	
+	public function hasCompleteAccess() {
+		return Auth::check() && Auth::user() == $this->user();
+	}
 }
 
 Tournament::deleting(function($tournament) {
