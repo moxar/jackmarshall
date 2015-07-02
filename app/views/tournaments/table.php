@@ -17,7 +17,15 @@
 							<th>Nom</th>
 							<th>Date</th>
 							<th>Participants</th>
+<?php
+if(Auth::check()) {
+?>							
+							<th>PAF</th>
+							<th>Cagnotte</th>
 							<th><!-- DEL --></th>
+<?php
+}
+?>							
 						</tr>
 <?php
 $tournaments->each(function($t) {
@@ -30,11 +38,19 @@ $tournaments->each(function($t) {
 							<td>
 								<?= $t->playersButFantom->count(); ?>
 							</td>
+<?php							
+	if($t->hasCompleteAccess()) {
+?>							
+							<td><?= $t->paf; ?></td>
+							<td><?= $t->remnant; ?></td>
 							<td>
 								<a href="tournaments/<?= $t->id; ?>/delete">
 									<span class="glyphicon glyphicon-remove"></span>
 								</a>
 							</td>
+<?php							
+	}
+?>							
 						</tr>
 <?php
 });
