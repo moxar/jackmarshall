@@ -16,7 +16,7 @@
 $it = 0; 
 $players->each(function(&$p) use($tournament, &$it, &$maps) {
 	$it++;
-	$p->name = $it.". ".$p->name;
+	$name = $it.". ".$p->name;
 	$game = ceil($it / 2);
 	switch($it % 2) {
 		case 1:
@@ -48,11 +48,11 @@ $players->each(function(&$p) use($tournament, &$it, &$maps) {
 								</p>
 								<p class="col-sm-2 cell" 
 									data-id="<?= $p->id; ?>" 
-									data-name="<?= $p->name; ?>" 
+									data-name="<?= $name; ?>" 
 									data-opponents="<?= $p->opponents($tournament)->get()->implode('id', ',') ?>"
 									data-maps="<?= $p->maps($tournament)->implode('id', ','); ?>"
 									>
-									<span><?= $p->name; ?></span>
+									<span><?= $name; ?></span>
 									<input type="hidden" name="games[<?= $game; ?>][players][1]" value="<?= $p->id; ?>"/>
 								</p>
 <?php
@@ -61,11 +61,11 @@ $players->each(function(&$p) use($tournament, &$it, &$maps) {
 ?>
 								<p class="col-sm-2 cell" 
 									data-id="<?= $p->id; ?>" 
-									data-name="<?= $p->name; ?>" 
+									data-name="<?= $name; ?>" 
 									data-opponents="<?= $p->opponents($tournament)->get()->implode('id', ',') ?>"
 									data-maps="<?= $p->maps($tournament)->implode('id', ','); ?>"
 									>
-									<span><?= $p->name; ?></span>
+									<span><?= $name; ?></span>
 									<input type="hidden" name="games[<?= $game; ?>][players][2]" value="<?= $p->id; ?>"/>
 								</p>
 							</div>
