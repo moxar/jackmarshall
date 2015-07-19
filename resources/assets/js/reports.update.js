@@ -5,8 +5,6 @@ $(function() {
 		$(document).on('click', '.reports-update .btn-save', function() {
 				var reports = [];
 				
-				console.log($(this).parents('.reports-update').find('input[type=text][value=""]').length);
-				
 				$(this).parents('.reports-update').find('tbody tr').each(function() {
 						reports.push({
 							report: $(this).find('[name=report]').first().val(),
