@@ -5,25 +5,26 @@
 						<tr>
 							<th>Joueur</th>
 							<th>VP</th>
+							<th>SOS</th>
 							<th>CP</th>
 							<th>DP</th>
-							<th>SOS</th>
 						</tr>
 					</thead>
 					<tbody>
 <?php
-foreach($players as $player)
-{
+$it = 0;
+$players->each(function($player) use(&$it) {
+	$it++;
 ?>
 					<tr>
-						<td><?= $player->name; ?></td>
+						<td><?= $it.". ".$player->name; ?></td>
 						<td><?= $player->victory; ?></td>
+						<td><?= $player->sos; ?></td>
 						<td><?= $player->control; ?></td>
 						<td><?= $player->destruction; ?></td>
-						<td><?= $player->sos; ?></td>
 					</tr>
 <?php
-}
+});
 ?>
 					</tbody>
 				</table>
