@@ -22,7 +22,7 @@ class ReportsController extends BaseController {
 		}
 		
 		foreach($reports as $r) {
-				$report = Report::findOrFail($r)->first();
+				$report = Report::findOrFail($r['report']);
 				$report->fill($r);
 				$report->save();
 		}
