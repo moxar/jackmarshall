@@ -14,6 +14,13 @@
 						<span class="glyphicon form-control-feedback"></span>
 						<p class="help-block"></p>
 					</fieldset>
+
+					<fieldset class="form-group has-feedback">
+					    	<label for="remember_me">Voulez-vous rester connecté ?</label>
+					    	<input type="checkbox" id="remember_me" name="remember_me" checked />
+						<span class="glyphicon form-control-feedback"></span>
+						<p class="help-block"></p>
+					</fieldset>
 					
 					<fieldset class="form-group">
 						<input class="btn btn-default" type="submit" value="Connexion"/>
