@@ -9,10 +9,6 @@ class User extends Eloquent implements UserInterface {
 	const GHOST = "Fantôme";
 	protected $hidden = array('password');
 
-	public function getAuthIdentifier() {
-		return $this->getKey();
-	}
-
 	public function players() {
 	
 		return $this->hasMany('Player', 'user');

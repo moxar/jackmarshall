@@ -4,6 +4,10 @@ trait UserTrait {
 	{
 		return $this->password;
 	}
+
+	public function getAuthIdentifier() {
+		return $this->getKey();
+	}
 	
 	public function getRememberToken()
 	{
