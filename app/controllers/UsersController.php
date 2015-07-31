@@ -9,7 +9,10 @@ class UsersController extends BaseController {
 	
 	public function postLogin() {
 	
-		if(Auth::attempt(Input::only('name', 'password'), Input::has('remember_me')))
+		if(Auth::attempt(array(
+			'name' => Input::get('name'),
+			'password' => Input::get('password')
+		)))
 		{					
  			return Redirect::intended('/');
 		}
