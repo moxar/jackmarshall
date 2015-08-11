@@ -8,6 +8,7 @@
 							<th>SOS</th>
 							<th>CP</th>
 							<th>DP</th>
+							<th>rank</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -22,6 +23,7 @@ $players->each(function($player) use(&$it) {
 						<td><?= $player->sos; ?></td>
 						<td><?= $player->control; ?></td>
 						<td><?= $player->destruction; ?></td>
+						<td><?= $player->rank; ?></td>
 					</tr>
 <?php
 });
