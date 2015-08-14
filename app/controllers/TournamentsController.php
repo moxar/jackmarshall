@@ -22,6 +22,12 @@ class TournamentsController extends BaseController {
 	public function ranking($tournament) {
 		
 		$players = $tournament->orderedPlayers()->get();
+		$it = 0;
+		$this->display(array(
+			$it++,
+			'rank' => $it,
+		)
+		);
 		
 		return View::make('players.ranking', array('players' => $players));
 	}
