@@ -19,7 +19,7 @@ class Round extends Eloquent {
 	
 	public function user() {
 	
-		return $this->tournament()->user()->first();
+		return $this->tournament()->user();
 	}
 	
 	public function assignPlayersToGames() {
