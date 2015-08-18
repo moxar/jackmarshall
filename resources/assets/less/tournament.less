@@ -5,5 +5,14 @@
 	
 	.list-group-item {
 		padding: @table-condensed-cell-padding;
+		
+		&.scenario, &.scenario * {
+			cursor: pointer;
+		}
+		
+		&.reciever {
+			.alert-info;
+			border: solid @btn-default-color 1px;
+		}
 	}
 }

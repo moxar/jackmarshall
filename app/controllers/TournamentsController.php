@@ -46,13 +46,15 @@ class TournamentsController extends BaseController {
 				->orderBy('name')
 				->get();
 				
-                $maps = Auth::user()->maps;
+		$maps = Auth::user()->maps;
+		$scenarii = Scenario::all();
 				
 		$this->display(array('tournaments.create'), array(
 			'players' => $players,
 			'tournament' => new Tournament,
 			'tournamentPlayers' => array(),
 			'maps' => $maps,
+			'scenarii' => $scenarii,
 		));
 		
 	}
