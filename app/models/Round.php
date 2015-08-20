@@ -2,14 +2,16 @@
 
 class Round extends Eloquent {
 
+			// ======== RELATIONS ======== //
+
 	public function tournament() {
 		
-		return $this->belongsTo('Tournament', 'tournament')->first();
+		return $this->belongsTo('tournament');
 	}
 
 	public function games() {
 		
-		return $this->hasMany('Game', 'round');
+		return $this->hasMany('round');
 	}
 	
 	public function reports() {
@@ -19,9 +21,11 @@ class Round extends Eloquent {
 	
 	public function user() {
 	
-		return $this->tournament()->user()->first();
+		return $this->tournament()->user();
 	}
 	
+			// ======== FIN RELATIONS ======== //
+
 	public function assignPlayersToGames() {
 	
 		$tournament = $this->tournament();

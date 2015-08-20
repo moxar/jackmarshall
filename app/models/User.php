@@ -9,10 +9,24 @@ class User extends Eloquent implements UserInterface {
 	const GHOST = "Fantôme";
 	protected $hidden = array('password');
 
+			// ======== RELATIONS ======== //
+
 	public function players() {
 	
-		return $this->hasMany('Player', 'user');
+		return $this->hasMany('user');
 	}
+	
+	public function tournaments() {
+	
+		return $this->hasMany('user');
+	}
+	
+	public function maps() {
+	
+		return $this->hasMany('user');
+	}
+
+			// ======== FIN RELATIONS ======== //
 	
 	public function playersButFantom() {
 	
@@ -22,16 +36,6 @@ class User extends Eloquent implements UserInterface {
 	public static function fantom() {
 	
 		return Player::where('name', '=', User::GHOST)->where('user', '=', Auth::user()->id)->first();
-	}
-	
-	public function tournaments() {
-	
-		return $this->hasMany('Tournament', 'user');
-	}
-	
-	public function maps() {
-	
-		return $this->hasMany('Map', 'user');
 	}
 
 }
