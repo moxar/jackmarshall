@@ -2,6 +2,8 @@
 
 class Round extends Eloquent {
 
+			// ======== RELATIONS ======== //
+
 	public function tournament() {
 		
 		return $this->belongsTo('tournament');
@@ -22,6 +24,8 @@ class Round extends Eloquent {
 		return $this->tournament()->user();
 	}
 	
+			// ======== FIN RELATIONS ======== //
+
 	public function assignPlayersToGames() {
 	
 		$tournament = $this->tournament();

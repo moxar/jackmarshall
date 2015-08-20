@@ -8,11 +8,15 @@ class Player extends Eloquent {
 
 	public $ts = 0;
 	
+			// ======== RELATIONS ======== //
+
 	public function tournaments() {
 	
-		return $this->belongsToMany('Tournament', 'players_tournaments', 'player', 'tournament');
+		return $this->belongsToMany('Tournament');
 	}
 		
+			// ======== FIN RELATIONS ======== //
+
 	public function opponents($tournament) {
 		
 		return $players = Player::select(array('*','players.id AS id'))
@@ -94,5 +98,3 @@ class Player extends Eloquent {
 		$this->ts += pow(self::BASE_POW, $ranking);
 	}
 }
- 
-

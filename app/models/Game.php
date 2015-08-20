@@ -2,6 +2,8 @@
 
 class Game extends Eloquent {
 
+			// ======== RELATIONS ======== //
+
 	public function tournament() {
 	
 		return $this->round()->tournament();
@@ -19,6 +21,7 @@ class Game extends Eloquent {
 	
 	public function user() {
 	
-		return $this->tournament()->user();
+		return $this->round()->tournament()->user();
 	}
 }
+			// ======== FIN RELATIONS ======== //

@@ -4,6 +4,8 @@ class Report extends Eloquent {
 
 	protected $guarded = ['report'];
 
+			// ======== RELATIONS ======== //
+
 	public function player() {
 	
 		return $this->belongsTo('player');
@@ -26,9 +28,11 @@ class Report extends Eloquent {
 	
 	public function user() {
 		
-		return $this->tournament()->user();
+		return $this->game()->round()->tournament()->user();
 	}
 	
+			// ======== FIN RELATIONS ======== //
+
 	public function reset() {
 		
 		$this->victory = 0;

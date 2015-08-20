@@ -2,6 +2,8 @@
 
 class Tournament extends Eloquent {
 	
+			// ======== RELATIONS ======== //
+
 	public function user() {
 	
 		return $this->belongsTo('user');
@@ -9,14 +11,30 @@ class Tournament extends Eloquent {
 	
 	public function players() {
 	
- 		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player');
+ 		return $this->belongsToMany('Player');
 	}
 	
 	public function maps() {
 	
- 		return $this->belongsToMany('Map', 'tournaments_maps', 'map', 'tournament');
+ 		return $this->belongsToMany('Map');
 	}
 	
+	public function rounds() {
+		
+		return $this->hasMany('tournament');
+	}
+	
+	public function games() {
+	
+        	return $this->hasManyThrough('Game', 'Round', 'tournament', 'round');
+	}
+	
+	public function scenarii() {
+		return $this->belongsToMany('Scenario');
+	}
+	
+			// ======== FIN RELATIONS ======== //
+
 	public function orderedPlayers() {
 	
 		return $this->players()
@@ -34,16 +52,6 @@ class Tournament extends Eloquent {
 	public function playersButFantom() {
 	
  		return $this->belongsToMany('Player', 'players_tournaments', 'tournament', 'player')->where('players.name', '<>', User::GHOST);
-	}
-	
-	public function rounds() {
-		
-		return $this->hasMany('tournament');
-	}
-	
-	public function games() {
-	
-        return $this->hasManyThrough('Game', 'Round', 'tournament', 'round');
 	}
 	
 	public function reports() {
@@ -68,10 +76,6 @@ class Tournament extends Eloquent {
 		return $this->reports()->whereIn('reports.player', $ids);
 	}
 	
-	public function scenarii() {
-		return $this->belongsToMany('Scenario', 'scenarii_maps', 'tournament', 'scenario');
-	}
-	
 	public function hasCompleteAccess() {
 		return Auth::check() && Auth::user() == $this->user();
 	}
@@ -86,7 +90,4 @@ Tournament::deleting(function($tournament) {
 	$tournament->players()->detach();
 	$tournament->maps()->detach();
 	$tournament->scenarii()->detach();
-});
-
-
-		
+});	
