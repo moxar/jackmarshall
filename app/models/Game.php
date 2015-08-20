@@ -9,12 +9,12 @@ class Game extends Eloquent {
 	
 	public function round() {
 	
-		return $this->belongsTo('Round', 'round')->first();
+		return $this->belongsTo('round');
 	}
 	
 	public function reports() {
 	
-		return $this->hasMany('Report', 'game');
+		return $this->hasMany('game');
 	}
 	
 	public function user() {
@@ -22,4 +22,3 @@ class Game extends Eloquent {
 		return $this->tournament()->user();
 	}
 }
- 

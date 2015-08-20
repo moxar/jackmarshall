@@ -6,7 +6,7 @@ class Report extends Eloquent {
 
 	public function player() {
 	
-		return $this->belongsTo('Player', 'player')->firstOrFail();
+		return $this->belongsTo('player');
 	}
 
 	public function tournament() {
@@ -21,7 +21,7 @@ class Report extends Eloquent {
 	
 	public function game() {
 		
-		return $this->belongsTo('Game', 'game')->first();
+		return $this->belongsTo('game');
 	}
 	
 	public function user() {

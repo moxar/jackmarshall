@@ -10,4 +10,3 @@ class Scenario extends Eloquent {
 		return $this->belongsToMany('Map', 'scenarii_maps', 'scenario', 'map')->where('tournament', $tournament->id);
 	}
 }
- 

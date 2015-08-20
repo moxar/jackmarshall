@@ -4,7 +4,7 @@ class Tournament extends Eloquent {
 	
 	public function user() {
 	
-		return $this->belongsTo('User', 'user')->first();
+		return $this->belongsTo('user');
 	}
 	
 	public function players() {
@@ -38,7 +38,7 @@ class Tournament extends Eloquent {
 	
 	public function rounds() {
 		
-		return $this->hasMany('Round', 'tournament');
+		return $this->hasMany('tournament');
 	}
 	
 	public function games() {

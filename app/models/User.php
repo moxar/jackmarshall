@@ -11,7 +11,7 @@ class User extends Eloquent implements UserInterface {
 
 	public function players() {
 	
-		return $this->hasMany('Player', 'user');
+		return $this->hasMany('user');
 	}
 	
 	public function playersButFantom() {
@@ -26,12 +26,12 @@ class User extends Eloquent implements UserInterface {
 	
 	public function tournaments() {
 	
-		return $this->hasMany('Tournament', 'user');
+		return $this->hasMany('user');
 	}
 	
 	public function maps() {
 	
-		return $this->hasMany('Map', 'user');
+		return $this->hasMany('user');
 	}
 
 }

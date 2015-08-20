@@ -4,12 +4,12 @@ class Round extends Eloquent {
 
 	public function tournament() {
 		
-		return $this->belongsTo('Tournament', 'tournament')->first();
+		return $this->belongsTo('tournament');
 	}
 
 	public function games() {
 		
-		return $this->hasMany('Game', 'round');
+		return $this->hasMany('round');
 	}
 	
 	public function reports() {

@@ -6,7 +6,7 @@ class Map extends Eloquent {
 	
 	public function user() {
 	
-		return $this->belongsTo('User', 'user')->first();
+		return $this->belongsTo('user');
 	}
 	
 	public function maps() {
@@ -19,4 +19,3 @@ class Map extends Eloquent {
 		return $this->belongsToMany('Scenario', 'scenarii_maps', 'map', 'scenario')->where('tournament', $tournament->id);
 	}
 }
- 
