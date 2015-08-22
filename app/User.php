@@ -4,32 +4,50 @@ namespace Jackmarshall;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Auth;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract 
 {
-    use Authenticatable, CanResetPassword;
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['name', 'email', 'password'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token'];
+    use Authenticatable;
+    
+    // Constant name of the ghost player for this user.
+    // TODO: rename it afther the User name
+	const GHOST = "Fantôme";
+	
+	protected $hidden = ['password', 'remember_token'];
+	
+	public function players() 
+	{
+			return $this->hasMany('Jackmarshall/Player', 'user');
+	}
+	
+	public function playersButFantom() 
+	{
+	 		return $this->hasMany('Jackmarshall/Player', 'user')->where('players.name', '<>', User::GHOST);
+	}
+	
+	public static function fantom() 
+	{
+			return Player::where('name', '=', User::GHOST)->where('user', '=', Auth::user()->id)->first();
+	}
+	
+	public function tournaments() 
+	{
+			return $this->hasMany('Jackmarshall/Tournament', 'user');
+	}
+	
+	public function maps() 
+	{
+			return $this->hasMany('Jackmarshall/Map', 'user');
+	}
 }
+
+User::deleting(function(User $user) 
+{
+	$tournaments = $user->tournaments()->get();
+	foreach($tournaments as $tournament) {
+		$tournament->delete();
+	}
+	$user->players()->delete();
+});
