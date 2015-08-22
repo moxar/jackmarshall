@@ -2,9 +2,9 @@
 
 namespace Jackmarshall;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Auth;
 
 class Tournament extends Model 
 {
