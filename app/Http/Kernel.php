@@ -29,5 +29,6 @@ class Kernel extends HttpKernel
         'auth' => \Jackmarshall\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Jackmarshall\Http\Middleware\RedirectIfAuthenticated::class,
+        'permission' => \Jackmarshall\Http\Middleware\RedirectIfHasNoPermission::class,
     ];
 }

@@ -3,6 +3,7 @@
 namespace Jackmarshall;
 
 use Auth;
+use Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -23,10 +24,9 @@ class Tournament extends Model
  		return $this->belongsToMany('Jackmarshall\Map', 'tournaments_maps', 'map', 'tournament');
 	}
 	
-	public function orderedPlayers() 
+	public function scopeOrdered($query) 
 	{
-		return $this->players()
-			->select('*')
+		return $query->select('*')
 			->addSelect('victory')
 			->addSelect('control')
 			->addSelect('destruction')
@@ -35,6 +35,11 @@ class Tournament extends Model
 			->orderBy('sos', 'DESC')
 			->orderBy('control', 'DESC')
 			->orderBy('destruction', 'DESC');
+	}
+	
+	public function scopeRange($query, $from, $to)
+	{
+		return $query->whereBetween('date', [Carbon::parse($from), Carbon::parse($to)]);
 	}
 	
 	public function playersButFantom() 
@@ -82,6 +87,11 @@ class Tournament extends Model
 	public function hasCompleteAccess() 
 	{
 		return Auth::check() && Auth::user() == $this->user();
+	}
+	
+	public function lastRound()
+	{
+		return $this->rounds()->orderBy('number', 'DESC')->first();
 	}
 }
 Tournament::deleting(function(Tournament $tournament) 

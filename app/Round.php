@@ -17,7 +17,12 @@ class Round extends Model
 	
 	public function reports() 
 	{
-	        return $this->hasManyThrough('Jackmarshall\Report', 'Jackmarshall\Game', 'round', 'game');
+		return $this->hasManyThrough('Jackmarshall\Report', 'Jackmarshall\Game', 'round', 'game');
+	}
+	
+	public function scopeOfPlayer($query, Player $player)
+	{
+		return $query->select(['*', 'reports.id AS id')]->where('reports.player', '=', $player->id);
 	}
 	
 	public function user() 

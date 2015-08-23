@@ -1,4 +1,4 @@
 <?php
 
-Route::post('report/update', 			['as' => 'report.update', 	'uses' =>  'ReportController@update', 	'middleware' => 'auth']);
-Route::get('report/{report}/delete', 	['as' => 'report.delete', 	'uses' =>  'ReportController@delete', 	'middleware' => 'auth']);
+Route::post('report/batch-update', 		['as' => 'report.batchUpdate', 	'uses' => 'ReportController@batchUpdate', 	'middleware' => 'permission']);
+Route::get('report/{report}/delete', 	['as' => 'report.delete', 		'uses' => 'ReportController@delete', 		'middleware' => 'permission']);

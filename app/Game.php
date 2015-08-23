@@ -8,21 +8,21 @@ class Game extends Model
 {
 	public function tournament() 
 	{
-			return $this->round()->tournament();
+		return $this->round()->tournament();
 	}
 	
 	public function round() 
 	{
-			return $this->belongsTo('Jackmarshall/Round', 'round')->first();
+		return $this->belongsTo('Jackmarshall/Round', 'round')->first();
 	}
 	
 	public function reports() 
 	{
-			return $this->hasMany('Jackmarshall/Report', 'game');
+		return $this->hasMany('Jackmarshall/Report', 'game');
 	}
 	
 	public function user() 
 	{
-			return $this->tournament()->user();
+		return $this->tournament()->user();
 	}
 }
